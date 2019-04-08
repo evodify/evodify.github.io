@@ -26,7 +26,9 @@ description: For genotype calling in non-model organisms, modifications of the G
 
 <p>Before the analysis, it is a good practice to check the quality of the sequence data and make sure that there is nothing wrong with it. I recommend using <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">FASTQC</a> for this purpose. There is a graphical interface, but I prefer to use the command line:</p>
 
-<pre><code class="codebox">fastqc input.fq.gz</code></pre>
+```bash
+fastqc input.fq.gz
+```
 
 <p><img class="aligncenter wp-image-1233" src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/fastqc_per_base_quality.jpeg" alt="FASTQC: Per base quality"/></p>
 
@@ -41,7 +43,9 @@ Some researchers trim low-quality sequence tails using tools like <a href="http:
 
 <p>The first step is to prepare the reference genome:</p>
 
-<pre><code class="codebox">stampy.py -G REF reference_genome.fasta.gz &amp;&amp; stampy.py -g REF -H REF</code></pre>
+```bash
+stampy.py -G REF reference_genome.fasta.gz &amp;&amp; stampy.py -g REF -H REF
+```
 
 <p>Next, map reads to a reference with account for divergence (0.025 in this case):</p>
 
@@ -59,16 +63,20 @@ Some researchers trim low-quality sequence tails using tools like <a href="http:
 
 <p>The step above produces an aliment in a SAM format. SAM files are tab-delimited text files that are usually very large in size. To save space and make it easy for software to hand large aliments, SAM is usually converted to a binary format BAM. <a href="https://broadinstitute.github.io/picard/" target="_blank">Picard Tools</a> is a recommended software for the conversion as it also allows simultaneous sorting of aligned reads in a file:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar picard.jar SortSam \
+```bash
+java -Xmx8g -jar picard.jar SortSam \
   INPUT=aligned_reads.sam \ 
   OUTPUT=sorted_reads.bam \ 
-  SORT_ORDER=coordinate</code></pre>
+  SORT_ORDER=coordinate
+```
 
 <p>In some cases Picard Tools fails to perform the conversion. Using <a href="http://samtools.sourceforge.net/" target="_blank">SAMtools</a> is an alternative way to proceed then:</p>
 
-<pre><code class="codebox">samtools view -bS -@ 8 SE14_stampy0.025_DNA.sam &gt; SE14_stampy0.025_DNA.bam
+```bash
+samtools view -bS -@ 8 SE14_stampy0.025_DNA.sam &gt; SE14_stampy0.025_DNA.bam
 samtools sort -@ 8 SE14_stampy0.025_DNA.bam SE14_stampy0.025_DNA_sorted
-samtools index SE14_stampy0.025_DNA_sorted.bam</code></pre>
+samtools index SE14_stampy0.025_DNA_sorted.bam
+```
 
 <p>After BAM files are obtained, SAM files can be deleted. <strong>Note! Before deleting any files, make sure that all conversions have been successful.</strong> Otherwise, you will have to repeat mapping step which is quite time consuming.</p>
 
@@ -76,7 +84,9 @@ samtools index SE14_stampy0.025_DNA_sorted.bam</code></pre>
 
 <p>Mapping quality can also be assessed on SAM files, but I prefer to analyze BAM files as they are less space consuming. For this analysis, I prefer to use <a href="http://qualimap.bioinfo.cipf.es/" target="_blank">Qualimap</a>. It is reasonably fast and produces very thorough summary with essential graphics.</p>
 
-<pre><code class="codebox">qualimap bamqc -nt 8 -bam file.bam -outdir results_folder</code></pre>
+```bash
+qualimap bamqc -nt 8 -bam file.bam -outdir results_folder
+```
 
 <p><img class="aligncenter wp-image-1254" src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/Qualimap-genome-coverage-across-reference.jpeg" alt="Qualimap: coverage across reference" /></p>
 
@@ -87,11 +97,13 @@ Distributions of coverage, nucleotide content and mapping quality across the ref
 
 <p>Potential PCR duplicates need to be marked with <a href="https://broadinstitute.github.io/picard/command-line-overview.html" target="_blank">Picard Tools</a>:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar picard.jar MarkDuplicates \ 
+```bash
+java -Xmx8g -jar picard.jar MarkDuplicates \ 
   INPUT=sorted_reads.bam \ 
   OUTPUT=sorted_reads_duplMarked.bam \
   METRICS_FILE=sorted_reads_duplMarked.metrics \
-  MAX_FILE_HANDLES=15000 </code></pre>
+  MAX_FILE_HANDLES=15000 
+```
 
 <p>MAX_FILE_HANDLES should be little smaller than the output of this command <code>ulimit -n</code></p>
 
@@ -101,32 +113,40 @@ Distributions of coverage, nucleotide content and mapping quality across the ref
 
 <p>The GATK requires read group information in BAM files. It is used to differentiate samples and to detect artifacts associated with sequencing techniques. To add read groups, use <a href="https://broadinstitute.github.io/picard/command-line-overview.html" target="_blank">Picard Tools</a>:</p>
 
-<pre><code class="codebox">java -Xmx4g -jar <code class="codebox">picard.jar</code> AddOrReplaceReadGroups I=sorted_reads_duplMarked.bam O=sorted_reads_duplMarked_readgroup.bam RGLB=library RGPL=illumina RGPU=barcode RGSM=sample</code></pre>
+```bash
+java -Xmx4g -jar <code class="codebox">picard.jar</code> AddOrReplaceReadGroups I=sorted_reads_duplMarked.bam O=sorted_reads_duplMarked_readgroup.bam RGLB=library RGPL=illumina RGPU=barcode RGSM=sample
+```
 
 <p>Index the resulting BAM file:</p>
 
-<pre><code class="codebox">samtools index SE14_stampy025_DNA_sorted_DuplMarked_readgroup.bam</code></pre>
+```bash
+samtools index SE14_stampy025_DNA_sorted_DuplMarked_readgroup.bam
+```
 
 <h3>Realign Indels</h3>
 
 <p>Create a Realigner Target (multi-threading is supported with the <em>-nt</em> option):</p>
 
-<pre><code class="codebox">java -Xmx4g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx4g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T RealignerTargetCreator \
 -nt 16 \
 -R ~/reference/Crubella_183.fa \
 -I sorted_reads_duplMarked_readgroup.bam \
 -o sorted_reads_duplMarked_readgroup.intervals \
--log sorted_reads_duplMarked_readgroup.intervals.log</code></pre>
+-log sorted_reads_duplMarked_readgroup.intervals.log
+```
 
 <p>Perform realignment (multi-threading isn't supported):</p>
 
-<pre><code class="codebox">java -Xmx4g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx4g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T IndelRealigner \
 -R reference_genome.fasta \
 -I sorted_reads_duplMarked_readgroup.bam \
 -targetIntervals sorted_reads_duplMarked_readgroup.intervals \
--o sorted_reads_duplMarked_readgroup_realigned.bam</code></pre>
+-o sorted_reads_duplMarked_readgroup_realigned.bam
+```
 
 <h3>Recalibrate Base Quality Score</h3>
 
@@ -146,7 +166,8 @@ Distributions of coverage, nucleotide content and mapping quality across the ref
 
 <p>Run HaplotypeCaller in GVCF mode on each file:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T HaplotypeCaller \
 -nct 16 \
 -R reference_genome.fasta \
@@ -154,7 +175,8 @@ Distributions of coverage, nucleotide content and mapping quality across the ref
 -ERC GVCF \
 -hets 0.015 \
 -indelHeterozygosity 0.01 \
--o sorted_reads_duplMarked_readgroup_realigned.g.vcf</code></pre>
+-o sorted_reads_duplMarked_readgroup_realigned.g.vcf
+```
 
 <p>If your study organism is not human, the heterozygosity level may need some adjustment. The default value is 0.001. If your heterozygosity differs specify it with <em>-hets</em> and <em>-indelHeterozygosity</em>. You can estimate it from any previously generated data:</p>
 
@@ -162,14 +184,17 @@ Distributions of coverage, nucleotide content and mapping quality across the ref
 
 <p>You can calculate the <em>average number of homozygous genotypes per site</em> with this code:</p>
 
-<pre><code class="codebox">awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' Indels.vcf
-awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.vcf</code></pre>
+```bash
+awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' Indels.vcf
+awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.vcf
+```
 
 <h3>Verify HaplotypeCaller assembly</h3>
 
 <p>This is an optional step. HaplotypeCaller performs local reassembly of reads and then genotypes sites. You can produce a BAM file with these localy reassembled fragments and assess the quality in <a href="http://software.broadinstitute.org/software/igv/" target="_blank">IGV</a>:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T HaplotypeCaller \
 -R reference_genome.fasta \
 -I sorted_reads_duplMarked_readgroup_realigned.bam \
@@ -178,7 +203,8 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 -indelHeterozygosity 0.01 \
 -L scaffold_1 \
 -bamout sorted_reads_duplMarked_readgroup_realigned_scaffold_1.g.vcf.bam \
--o sorted_reads_duplMarked_readgroup_realigned_scaffold_1.g.vcf</code></pre>
+-o sorted_reads_duplMarked_readgroup_realigned_scaffold_1.g.vcf
+```
 
 <div class="image">
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/haplotypeCallerAssembly.jpeg" alt="HaplotypeCaller re-assembly" /><figcaption class="aligncenter"> IGV: Original mapping (above) and HaplotypeCaller re-assembly (below)</figcaption>
@@ -189,7 +215,8 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 
 <p>Run the GATK on all GVCF files:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T GenotypeGVCFs \
 -nt 16 \
 -R reference_genome.fasta \
@@ -207,7 +234,8 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 -indelHeterozygosity 0.01 \
 -stand_call_conf 30.0 \
 -allSites \
--o GVCFall.vcf</code></pre>
+-o GVCFall.vcf
+```
 
 <p>You can adjust <em>-stand_call_conf</em> or add any other filers depending on your needs.</p>
 
@@ -217,21 +245,25 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 
 <p>Select SNPs:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T SelectVariants \
 -R reference_genome.fasta \
 -V GVCFall.vcf \
 -selectType SNP \
--o GVCFall_SNPs.vcf</code></pre>
+-o GVCFall_SNPs.vcf
+```
 
 <p>Select Indels:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T SelectVariants \
 -R reference_genome.fasta \
 -V GVCFall.vcf \
 -selectType INDEL \
--o GVCFall_INDELs.vcf</code></pre>
+-o GVCFall_INDELs.vcf
+```
 
 <h2>Filter Variants</h2>
 
@@ -243,23 +275,27 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 
 <p>For SNPs:</p>
 
-<pre><code class="codebox">java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T VariantsToTable \
 -R reference_genome.fasta \
 -V GVCFall_SNPs.vcf \
 -F CHROM -F POS -F QUAL -F QD -F DP -F MQ -F MQRankSum -F FS -F ReadPosRankSum -F SOR \
 --allowMissingData \
--o GVCFall_SNPs.table</code></pre>
+-o GVCFall_SNPs.table
+```
 
 <p>For Indels:</p>
 
-<pre><code class="codebox">java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 -T VariantsToTable \
 -R reference_genome.fasta \
 -V GVCFall_INDELs.vcf \
 -F CHROM -F POS -F QUAL -F QD -F DP -F MQ -F MQRankSum -F FS -F ReadPosRankSum -F SOR \
 --allowMissingData \
--o GVCFall_INDELs.table</code></pre>
+-o GVCFall_INDELs.table
+```
 
 <p>These scores will be used to build distributions and define filtering cutoffs.</p>
 
@@ -267,7 +303,7 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 
 <p>Run this R code:</p>
 
-<pre><code class="codebox">
+```bash
 library('gridExtra')
 library('ggplot2')
 
@@ -305,7 +341,8 @@ ReadPosRankSum &lt;- ggplot(VCF, aes(x=ReadPosRankSum, fill=Variant)) + geom_den
 svg("Co_10accessions_FromStephen.svg", height=20, width=15)
 theme_set(theme_gray(base_size = 18))
 grid.arrange(QD, DP, FS, MQ, MQRankSum, SOR, ReadPosRankSum, nrow=4)
-dev.off()</code></pre>
+dev.off()
+```
 
 <p>It will produce these plots:
 <a href="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/GATK_scores.jpeg"><img class="aligncenter size-full wp-image-1340" src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/GATK_scores.jpeg" alt="GATK scores distributions" width="800" height="1067" /></a></p>
@@ -325,7 +362,7 @@ dev.off()</code></pre>
 
 <p>To filter SNPs:</p>
 
-<pre><code class="codebox">
+```bash
 java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
@@ -335,11 +372,11 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -o GVCFall_SNPs_filter.vcf
 
 grep -E '^#|PASS' GVCFall_SNPs_filter.vcf &gt; GVCFall_SNPs_filterPASSED.vcf
-</code></pre>
+```
 
 <p>To filter Indels:</p>
 
-<pre><code class="codebox">
+```bash
 java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
@@ -349,7 +386,7 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -o GVCFall_INDELs_filter.vcf
 
 grep -E '^#|PASS' GVCFall_INDELs_filter.vcf &gt; GVCFall_INDELs_filterPASSED.vcf
-</code></pre>
+```
 
 <h3>Check the Variants filtering results</h3>
 
@@ -357,21 +394,24 @@ grep -E '^#|PASS' GVCFall_INDELs_filter.vcf &gt; GVCFall_INDELs_filterPASSED.vcf
 
 <p>This is the number of sites before filtering:</p>
 
-<pre><code class="codebox">grep -c -v "^#" GVCFall_INDELs.vcf
+```bash
+grep -c -v "^#" GVCFall_INDELs.vcf
 grep -vc "^#" GVCFall_SNPs.vcf
-</code></pre>
+```
 
 <p>This is the number of sites retained after filtering:</p>
 
-<pre><code class="codebox">grep -vc "^#" GVCFall_SNPs_filterPASSED.vcf
+```bash
+grep -vc "^#" GVCFall_SNPs_filterPASSED.vcf
 grep -c -v "^#" GVCFall_INDELs_filterPASSED.vcf
-</code></pre>
+```
 
 <p>It is also important to check if any filers failed. I observed filters failing often.
 Generate scores table for filtered data as in the step "Extract Quality Scores" above.
 You should get 0 for all filters when you run this R code:</p>
 
-<pre><code class="codebox"># SNPs
+```bash
+# SNPs
 VCFsnps &lt;- read.csv('GVCFall_SNPs_filterPASSED.table', header = T, na.strings=c("","NA"), sep = "\t") 
 head(VCFsnps)
 sum(na.omit(VCFsnps$QD) &lt; 2)
@@ -391,7 +431,7 @@ sum(na.omit(VCFindel$MQ) &lt; 40)
 sum(na.omit(VCFindel$SOR) &gt; 10)
 sum(na.omit(VCFindel$ReadPosRankSum) &lt; -20)
 sum(na.omit(VCFindel$ReadPosRankSum) &gt; 20)
-</code></pre>
+```
 
 <p>If some of the filters failed, try to change their order in <em>--filterExpression</em>.</p>
 
@@ -404,26 +444,29 @@ GATK provides several annotation scores for genotypes, but they cannot be used e
 
 <p>I usually assess this information only for the whole genome VCF.</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantsToTable \
  -R reference_genome.fasta \
  -V GVCFall.vcf \
  -F CHROM -F POS -GF GT -GF DP \
  -o GVCFall.DP.table
-</code></pre>
+```
 
 <h3>Visualize the extracted information</h3>
 
 <p>The file GVCFall.DP.table is usually too big for R, so I split it by samples and keep only positions that have been genotyped (!="./."):</p>
 
-<pre><code class="codebox">for ((i=3; i&lt;=21; i +=2)); do cut -f $i,$((i+1)) GVCFall.DP.table | awk '$1 != "./." {print $2}' &gt; $i.DP; done
-</code></pre>
+```bash
+for ((i=3; i&lt;=21; i +=2)); do cut -f $i,$((i+1)) GVCFall.DP.table | awk '$1 != "./." {print $2}' &gt; $i.DP; done
+```
 
 <p>where 3-21 is odd numbers for 10 samples. This numbering is required because every sample is represented by two columns (GT, DP).</p>
 
 <p>Plot DP distribution and define cut-off (edit number for your sample size):</p>
 
-<pre><code class="codebox"># define the file names list (10 samples here) 
+```bash
+# define the file names list (10 samples here) 
 nameList &lt;- c()
 for (i in 3:21) { # 21 - odd number for 10 samples 
   if (i %% 2 ==1) nameList &lt;- append(nameList, paste(i, ".DP"))
@@ -445,7 +488,7 @@ for (i in 1:31) {
 dev.off()
 
 write.table(qlist, "GVCFall.DP.percentiles.txt")
-</code></pre>
+```
 <div class="image">
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/dp.jpeg" alt="Plot of DP  scores" /><figcaption class="aligncenter"> Example of the DP distributions</figcaption>
 </figure></div>
@@ -455,7 +498,8 @@ write.table(qlist, "GVCFall.DP.percentiles.txt")
 
 <p>Mark filtered genotypes:</p>
 
-<pre><code class="codebox">java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall.vcf \
@@ -478,11 +522,12 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -G_filter "DP &lt; 6 || DP &gt; 100" \
  -G_filterName "DP_6-100" \
  -o GVCFall_Indels_filterPASSED_DPfilter.vcf
-</code></pre>
+```
 
 <p>Set filtered sites to no call:</p>
 
-<pre><code class="codebox">java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T SelectVariants \
  -R reference_genome.fasta \
  -V GVCFall_DPfilter.vcf \
@@ -502,13 +547,14 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -V GVCFall_Indels_filterPASSED_DPfilter.vcf \
  --setFilteredGtToNocall \
  -o GVCFall_Indels_filterPASSED_DPfilterNoCall.vcf
-</code></pre>
+```
 
 <h2>VCF to Tab</h2>
 
 <p>When all filters have been applied, I do not need the annotation information any more, so I only keep the high confidence genotypes:</p>
 
-<pre><code class="codebox">java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
+```bash
+java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantsToTable \
  -R reference_genome.fasta \
  -V GVCFall_DPfilterNoCall.vcf \
@@ -528,20 +574,22 @@ java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -V GVCFall_Indels_filterPASSED_DPfilterNoCall.vcf \
  -F CHROM -F POS -GF GT \
  -o Indels.table
-</code></pre>
+```
 
 <p>I also usually convert two-character coded to single-character coded genotypes. More details <a href="https://github.com/evodify/genotype-files-manipulations" target="_blank">here</a>.</p>
 
-<pre><code class="codebox">python vcfTab_to_callsTab.py -i whole_Genome.table -o whole_Genome.tab
+```bash
+python vcfTab_to_callsTab.py -i whole_Genome.table -o whole_Genome.tab
 python vcfTab_to_callsTab.py -i SNPs.table -o SNPs.tab
-</code></pre>
+```
 
 <h3>Merge the whole genome and SNPs files (optional)</h3>
 
 <p>Depending on your analyses, you may also want to merge SNPs and whole genome files. These two files were filtered differently, with more stringency on SNP file. So, some of the genotypes in the whole genome file are more likely to be false positives. To eliminate such genotypes, you can remove polymorphic sites in the whole genome file if they are not present in the SNPs file. This can be done with my <a href="https://github.com/evodify/genotype-files-manipulations/blob/master/merge_SNP_wholeGenome_TabFiles.py" target="_blank">merge_SNP_wholeGenome_TabFiles.py</a> script. Note, you first need to convert two-character coded genotypes to single-character coded genotypes as I have just mentioned above:</p>
 
-<pre><code class="codebox">python merge_SNP_wholeGenome_TabFiles.py -g whole_Genome.tab -s SNPs.tab -o merged.tab
-</code></pre>
+```bash
+python merge_SNP_wholeGenome_TabFiles.py -g whole_Genome.tab -s SNPs.tab -o merged.tab
+```
 
 <h2>What is next?</h2>
 

@@ -39,15 +39,21 @@ description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of
 
 <p>First, install <a href="https://jupyter.org/" target="_blank">Jupyter Notebook</a>. You can install it from your package manager by searching for the <code>jupyter</code> or by using <code>pip</code>:</p>
 
-<pre class="wp-block-code"><code>python -m pip install jupyter</code></pre>
+```bash
+python -m pip install jupyter
+```
 
 <p>Second, install <a href="https://rpy2.bitbucket.io/" target="_blank">an R interface for Jupyter</a> from your package manager by searching for <code>rpy2</code> package or by using <code>pip</code>:</p>
 
-<pre class="wp-block-code"><code>pip install rpy2</code></pre>
+```bash
+pip install rpy2
+```
 
 <p>Third, load <code>rpy2</code> in your Jupyter Notebook: </p>
 
-<pre class="wp-block-code"><code>%load_ext rpy2.ipython</code></pre>
+```bash
+%load_ext rpy2.ipython
+```
 
 <p>In my case, it complained that I had to install <code>pandas</code> as a dependency of <code>rpy2.</code> When I installed it, everything worked correctly.</p>
 
@@ -66,15 +72,19 @@ description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of
 
 <p>To install <a href="https://github.com/takluyver/bash_kernel" target="_blank">a Jupyter kernel for Bash,</a> execute:</p>
 
-<pre class="wp-block-code"><code>pip install ipykernel
+```bash
+pip install ipykernel
 pip install bash_kernel
-python -m bash_kernel.install</code></pre>
+python -m bash_kernel.install
+```
 
 <p>To install <a aria-label="To install an R kernel for Jupyter, you need to install
  (opens in a new tab)" href="https://github.com/IRkernel/IRkernel" target="_blank">an R kernel for Jupyter</a>, you need to run this code inside R:</p>
 
-<pre class="wp-block-code"><code>install.packages('IRkernel')
-IRkernel::installspec()</code></pre>
+```bash
+install.packages('IRkernel')
+IRkernel::installspec()
+```
 
 <p>Now, you should be able to select a particular Jupyter kernel and create a Jupyter Notebook in either Python, Bash or R.</p>
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/jupyter_R_bash_kernels.jpeg" alt="" class="wp-image-1505" />

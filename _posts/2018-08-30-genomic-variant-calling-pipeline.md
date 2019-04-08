@@ -56,16 +56,22 @@ description: An automated genomic variant calling pipeline becomes essential whe
 
 <p>To run it, you need a list of FASTQ files with R1 only names. You can obtained such a list by listing the content of the folder with your FASTQ files:</p>
 
-<pre><code>ls -l fastq/*.fastq.gz | grep R1 | sed 's/ \+/ /g' | cut -d " " -f 9 &gt; R1.txt</code></pre>
+```bash
+ls -l fastq/*.fastq.gz | grep R1 | sed 's/ \+/ /g' | cut -d " " -f 9 &gt; R1.txt
+```
 
 <p>Next, you run the <em>reads-to-VCF.py</em> script using <em>R1.txt</em> as an input.</p>
 
-<pre><code>python reads-to-VCF.py -i R1.txt -r canFam3.fa -p snic2017 -n 20 -t 5-00:00:00 -l \$SNIC_TMP -a BWA -m 4 -k "dogs.557.publicSamples.ann.chrAll.PASS.vcf.gz,00-All_chrAll.vcf.gz"
-</code></pre>
+```bash
+python reads-to-VCF.py -i R1.txt -r canFam3.fa -p snic2017 -n 20 -t 5-00:00:00 -l \$SNIC_TMP -a BWA -m 4 -k "dogs.557.publicSamples.ann.chrAll.PASS.vcf.gz,00-All_chrAll.vcf.gz"
+
+```
 
 <p>You can see the description of each option by running:</p>
 
-<pre><code>python reads-to-VCF.py -h</code></pre>
+```bash
+python reads-to-VCF.py -h
+```
 
 <p>I only would like to mention that you can use either <code>BWA</code> or <code>stampy</code> aligners for the mapping step (option <code>-a</code>). In case of <code>stampy</code>, you can also specify the per base pair divergence form the reference (<code>-d</code>).</p>
 
@@ -79,14 +85,17 @@ description: An automated genomic variant calling pipeline becomes essential whe
 
 <p>Assuming the content of <code>R1.txt</code> is the following</p>
 
-<pre><code>WCRO84_S23_L005_R1_test.fastq.gz
+```bash
+WCRO84_S23_L005_R1_test.fastq.gz
 WCRO84_S23_L006_R1_test.fastq.gz
 WCRO86_S21_L005_R1_test.fastq.gz
-WCRO86_S21_L007_R1_test.fastq.gz</code></pre>
+WCRO86_S21_L007_R1_test.fastq.gz
+```
 
 <p>The script <em>reads-to-VCF.py</em> will generate these files:</p>
 
-<pre><code>GVCF_all.sbatch
+```bash
+GVCF_all.sbatch
 WCRO84_L005_map.sh
 WCRO84_L006_map.sh
 WCRO84_gVCF.sh
@@ -97,13 +106,16 @@ WCRO86_L007_map.sh
 WCRO86_gVCF.sh
 WCRO86_mergeMarkDuplBQSR.sh
 WCRO86_qualimap.sh
-reads-to-VCF_wolf.sbatch</code></pre>
+reads-to-VCF_wolf.sbatch
+```
 
 <p>All <code>*.sh</code> files contain commands to execute jobs. The file is <em>reads-to-VCF.sbatch</em> contains the BASH script to submit these jobs to the cluster with the dependencies between jobs.</p>
 
 <p>You place all these files in the same directory and submit all the jobs with:</p>
 
-<pre><code>sh reads-to-VCF.sbatch</code></pre>
+```bash
+sh reads-to-VCF.sbatch
+```
 
 <p>If everything worked fine, you will see this output:</p>
 <div class="image">
@@ -115,7 +127,9 @@ reads-to-VCF_wolf.sbatch</code></pre>
 </figure></div>
 <p>Following the job IDs, you can see that, for instance, the job <em>WCRO84_mergeMarkDuplBQSR</em> won't start until the two mapping jobs <em>WCRO84_L005_map</em> and <em>WCRO84_L006_map</em> are not finished successfully. When all these jobs finish, you will get a set of <a href="https://gatkforums.broadinstitute.org/gatk/discussion/11004/gvcf-genomic-variant-call-format" target="_blank">gVCF</a> files, which you can merge and jointly genotype with <em>GVCF_all.sbatch</em>:</p>
 
-<pre><code>sbatch GVCF_all.sbatch</code></pre>
+```bash
+sbatch GVCF_all.sbatch
+```
 
 <p><strong>Thus, you run only 4 commands and you get from a set if FASTQ files to one VCF file.</strong></p>
 
@@ -125,13 +139,17 @@ reads-to-VCF_wolf.sbatch</code></pre>
 
 <p>To check if any job failed, run (assuming you use Slurm):</p>
 
-<pre><code>finishedjobinfo | grep FAILED</code></pre>
+```bash
+finishedjobinfo | grep FAILED
+```
 
 <p>Then investigate why it failed. If it is not your mistake and it failed due to node failure, restart failed jobs by extracting and executing the code for the failed jobs from <em>reads-to-VCF.sbatch</em>.</p>
 
 <p>I also suggest to list all the final BAM and gVCF files and check their size before executing <em>GVCF_all.sbatch</em>:</p>
 
-<pre><code>ls -l *.gz *.bam</code></pre>
+```bash
+ls -l *.gz *.bam
+```
 
 <p>If some samples have extremely large or extremely small files, check their <code>*.fastq, *.sh *.err</code> and <code>*.out</code> files to figure out what the problem is.</p>
 
@@ -147,7 +165,9 @@ reads-to-VCF_wolf.sbatch</code></pre>
 
 <p>The very first step of this genomic variant calling pipeline is to map all reads to the reference genome. Many of my samples were sequenced on different lanes. So, to control for this factor and to make the mapping process faster, I perform mapping of each lane separately. An example command of the BWA mapping with subsequent sorting and converting to BAM by Samtools looks like this:</p>
 
-<pre><code>bwa mem -t 20 -M -R '@RG\tID:WCRO84_L005\tPL:illumina\tLB:WCRO84\tSM:WCRO84' canFam3.fa WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz | samtools sort -O bam -@ 20 -m 4G &gt; WCRO84_L005.bam</code></pre>
+```bash
+bwa mem -t 20 -M -R '@RG\tID:WCRO84_L005\tPL:illumina\tLB:WCRO84\tSM:WCRO84' canFam3.fa WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz | samtools sort -O bam -@ 20 -m 4G &gt; WCRO84_L005.bam
+```
 
 <p>where <code>WCRO84</code> is the sample name, and <code>L005</code> is the lane number. These names are changed by the <em>reads-to-VCF.py</em> script. You can read about the options of BWA and Samtools in the documentation of these programs.</p>
 
@@ -155,7 +175,8 @@ reads-to-VCF_wolf.sbatch</code></pre>
 
 <p>If you choose to map with Stampy, the mapping command will look like this:</p>
 
-<pre><code>stampy.py -g canFam3 -h canFam3 --substitutionrate=0.002 -t 20 -o $SNIC_TMP/WCRO84_L005_stampy.bam --readgroup=ID:WCRO84_L005  -M WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz
+```bash
+stampy.py -g canFam3 -h canFam3 --substitutionrate=0.002 -t 20 -o $SNIC_TMP/WCRO84_L005_stampy.bam --readgroup=ID:WCRO84_L005  -M WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz
 samtools sort -O bam -@ 20 -m 4G $SNIC_TMP/WCRO84_L005_stampy.bam &gt; $SNIC_TMP/WCRO84_L005.bam
 
 java -Xmx4G -jar picard.jar AddOrReplaceReadGroups \
@@ -165,7 +186,8 @@ RGID=WCRO84_S23_L005 \
 RGLB=WCRO84 \
 RGPL=illumina \
 RGPU=WCRO84_S23_L005 \
-RGSM=WCRO84</code></pre>
+RGSM=WCRO84
+```
 
 <p>The last commands adds read-group tags. I was not able to past these tag correctly with <code>--read-group</code> option in stampy. So, I added this extra step.</p>
 
@@ -181,9 +203,11 @@ RGSM=WCRO84</code></pre>
 
 <p>The BAM files of different lanes are then merged for each samples:</p>
 
-<pre><code>ls WCRO84_L00?.bam | sed 's/  / /g;s/ /\n/g' &gt; WCRO84_bam.list
+```bash
+ls WCRO84_L00?.bam | sed 's/  / /g;s/ /\n/g' &gt; WCRO84_bam.list
 samtools merge -b WCRO84_bam.list $SNIC_TMP/WCRO84_merged.bam
-xargs -a WCRO84_bam.list rm</code></pre>
+xargs -a WCRO84_bam.list rm
+```
 
 <p>The first line creates a list of BAM files to merge. The second line performs the merging. The last line removed the BAM files that have been merged to free some disk space. The file <em>WCRO84_bam.list</em> can be checked to make sure all the BAM files were included during the merging step.</p>
 
@@ -191,14 +215,16 @@ xargs -a WCRO84_bam.list rm</code></pre>
 
 <p>This step identifies reads that are likely artificial duplicates originated during sequencing workflow. These reads are not removed but they will be ignored by default during the variant calling process.</p>
 
-<pre><code>java -Xmx4G -Djava.io.tmpdir=$SNIC_TMP -jar picard.jar MarkDuplicates \
+```bash
+java -Xmx4G -Djava.io.tmpdir=$SNIC_TMP -jar picard.jar MarkDuplicates \
 VALIDATION_STRINGENCY=LENIENT \
 METRICS_FILE=WCRO84_merged_markDupl_metrix.txt \
 MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=15000 \
 INPUT=$SNIC_TMP/WCRO84_merged.bam \
 OUTPUT=$SNIC_TMP/WCRO84_merged_markDupl.bam
 
-rm $SNIC_TMP/WCRO84_merged.bam</code></pre>
+rm $SNIC_TMP/WCRO84_merged.bam
+```
 
 <p>The <code>rm</code> cleans unneeded files.</p>
 
@@ -208,20 +234,25 @@ rm $SNIC_TMP/WCRO84_merged.bam</code></pre>
 
 <p>You need a good reference database of SNPs and indels for this step. I have used some of the files which I cannot share, but if you also run this genomic variant calling pipeline for dog data, you can download these two publicly available variant files:</p>
 
-<pre><code>wget ftp://ftp.ebi.ac.uk/pub/databases/eva/PRJEB24066/dogs.557.publicSamples.ann.vcf.gz*
+```bash
+wget ftp://ftp.ebi.ac.uk/pub/databases/eva/PRJEB24066/dogs.557.publicSamples.ann.vcf.gz*
 wget ftp://ftp.ncbi.nih.gov/snp/organisms/archive/dog_9615/VCF/00-All.vcf.gz*
-</code></pre>
+
+```
 
 <p>I also removed all filtered positions, because BQSR needs only the high confidence sites:</p>
 
-<pre><code>zcat 00-All.vcf | awk '{if (/^#/) {print $0} else {print "chr"$0}}' | bgzip &gt; 00-All_chrAll.vcf
+```bash
+zcat 00-All.vcf | awk '{if (/^#/) {print $0} else {print "chr"$0}}' | bgzip &gt; 00-All_chrAll.vcf
 zcat dogs.557.publicSamples.ann.vcf.gz | awk '{if (/^#/) {print $0} else if ($7=="PASS") {print "chr"$0}}' | bgzip &gt; dogs.557.publicSamples.ann.chrAll.PASS.vcf
 tabix 00-All_chrAll.vcf &amp; tabix dogs.557.publicSamples.ann.chrAll.PASS.vcf
-</code></pre>
+
+```
 
 <p>To perform BQSR, you run these commands:</p>
 
-<pre><code># Generate the first pass BQSR table file
+```bash
+# Generate the first pass BQSR table file
 gatk --java-options "-Xmx4G"  BaseRecalibrator \
 -R canFam3.fa \
 -I $SNIC_TMP/WCRO84_merged_markDupl.bam \
@@ -250,7 +281,8 @@ gatk --java-options "-Xmx4G"  BaseRecalibrator \
 gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 -before WCRO84_merged_markDupl_BQSR.table \
 -after WCRO84_merged_markDupl_BQSR2.table \
--plots WCRO84_merged_markDupl_BQSR.pdf</code></pre>
+-plots WCRO84_merged_markDupl_BQSR.pdf
+```
 
 <p>As I have mentioned it in my <a href="http://evodify.com/gatk-the-best-practice-for-genotype-calling-in-a-non-model-organism/"> GATK: the best practice for non-model organisms</a>, the BQSR can actually hurt if your variant reference database is not good enough. So, check the plots in <em>WCRO84_merged_markDupl_BQSR.pdf</em> to make sure your recalibration worked correctly. Mine worked fine and it looked like this:</p>
 <div class="image">
@@ -262,13 +294,17 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 
 <p>The command is the following:</p>
 
-<pre><code>qualimap bamqc -nt 20 --java-mem-size=4G -bam WCRO84_merged_markDupl_BQSR.bam -outdir WCRO84_qualimap</code></pre>
+```bash
+qualimap bamqc -nt 20 --java-mem-size=4G -bam WCRO84_merged_markDupl_BQSR.bam -outdir WCRO84_qualimap
+```
 <div class="image">
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-qualimap.jpeg" alt="Qualimap plot showing coverage" /><figcaption class="aligncenter"> One of the Qualimap plots</figcaption>
 </figure></div>
 <p>The report will be in an HTML file which you can view in your browser. For really many samples, you can also batch-process the TXT files with results. For example, to extract the mean coverage information, run</p>
 
-<pre><code>grep "mean coverageData" */genome_results.txt</code></pre>
+```bash
+grep "mean coverageData" */genome_results.txt
+```
 
 <p>At this stage the work with BAM files is finished and the pipeline proceeds to the genotyping steps.</p>
 
@@ -276,7 +312,8 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 
 <p>This step runs the GATK HaplotypeCaller in GVCF mode:</p>
 
-<pre><code>gatk --java-options "-Xmx4G" HaplotypeCaller \
+```bash
+gatk --java-options "-Xmx4G" HaplotypeCaller \
 -R canFam3.fa \
 -ERC GVCF \
 -I WCRO84_merged_markDupl_BQSR.bam \
@@ -285,7 +322,8 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 tabix WCRO84_merged_markDupl_BQSR.g.vcf.gz
 
 mkdir WCRO84
-mv WCRO84_* WCRO84</code></pre>
+mv WCRO84_* WCRO84
+```
 
 <p>This enables to generate intermediate files, which are then used for joint genotyping in an efficient way. <code>tabix</code> is necessary to index the compressed file for the GATK compatability in the next steps.</p>
 
@@ -297,24 +335,28 @@ mv WCRO84_* WCRO84</code></pre>
 
 <p>This step merges all gVCF files from multiple samples:</p>
 
-<pre><code>gatk --java-options "-Xmx4g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true" CombineGVCFs \
+```bash
+gatk --java-options "-Xmx4g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true" CombineGVCFs \
 -R canFam3.fa \
 -V WCRO84/WCRO84_merged_markDupl_BQSR.g.vcf.gz \
 -V WCRO86/WCRO86_merged_markDupl_BQSR.g.vcf.gz \
 -O GVCF_merged_markDupl_BQSR.g.vcf.gz
 
-tabix GVCF_merged_markDupl_BQSR.g.vcf.gz</code></pre>
+tabix GVCF_merged_markDupl_BQSR.g.vcf.gz
+```
 
 <p><em>In the example command above, I provide only 2 samples to keep it simple. Obviously, there will be more samples in a real run.</em></p>
 
 <p>The final command performs joint-call of SNPs and indels:</p>
 
-<pre><code>gatk --java-options "-Xmx4g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true" GenotypeGVCFs \
+```bash
+gatk --java-options "-Xmx4g -DGATK_STACKTRACE_ON_USER_EXCEPTION=true" GenotypeGVCFs \
 -R reference/canFam3.fa \
 -V GVCF_merged_markDupl_BQSR.g.vcf.gz \
 -O GVCF_merged_markDupl_BQSR.vcf.gz
 
-tabix GVCF_merged_markDupl_BQSR.vcf.gz</code></pre>
+tabix GVCF_merged_markDupl_BQSR.vcf.gz
+```
 
 <p>The file name of the script that includes both these commands is <em>GVCF_all.sbatch</em>.</p>
 
@@ -322,7 +364,8 @@ tabix GVCF_merged_markDupl_BQSR.vcf.gz</code></pre>
 
 <p>All the job described above are submitted by executing this script (2 samples example):</p>
 
-<pre><code>#!/bin/sh
+```bash
+#!/bin/sh
 
 WCRO84_L005=$(sbatch -A snic2017 -p core -n 20 -t 5-00:00:00 -J WCRO84_L005_map -e WCRO84_L005_map.err -o WCRO84_L005_map.out WCRO84_L005_map.sh | cut -d " " -f 4)
 echo "WCRO84_L005_map.sh under the ID $WCRO84_L005 has been submitted"
@@ -352,7 +395,8 @@ WCRO86_gVCF=$(sbatch --dependency=afterok:$WCRO86_mergeMarkDuplBQSR -A snic2017 
 echo "WCRO86_gVCF.sh under the ID $WCRO86_gVCF has been submitted"
 
 WCRO86_qualimap=$(sbatch --dependency=afterok:$WCRO86_mergeMarkDuplBQSR -A snic2017 -p core -n 1 -t 5-00:00:00 -J WCRO86_qualimap -e WCRO86_qualimap.err -o WCRO86_qualimap.out WCRO86_qualimap.sh | cut -d " " -f 4)
-echo "WCRO86_qualimap.sh under the ID $WCRO86_qualimap has been submitted"</code></pre>
+echo "WCRO86_qualimap.sh under the ID $WCRO86_qualimap has been submitted"
+```
 
 <p><em>Again, I assume and describe a cluster system with the Slurm Workload Manager, if your cluster is different, you may need to modify this script.</em></p>
 
@@ -362,7 +406,9 @@ echo "WCRO86_qualimap.sh under the ID $WCRO86_qualimap has been submitted"</code
 
 <p>Most of the variables of this genomic variant calling pipeline  can be changed with the command line options of <em>reads-to-VCF.py.</em> Let me remind you that you can see the available options with:</p>
 
-<pre><code>python reads-to-VCF.py -h</code></pre>
+```bash
+python reads-to-VCF.py -h
+```
 
 <p>However, a few parts are hardcoded and you may need to modify them.</p>
 
@@ -370,7 +416,9 @@ echo "WCRO86_qualimap.sh under the ID $WCRO86_qualimap has been submitted"</code
 
 <p>1. You may need to modify the functions <code>writeMapBWAJob</code> and <code>writeMapStampyJob</code> if your FASTQ files don't follow this structure:</p>
 
-<pre><code>WCRO84_S1_L005_R1_001.fastq.gz</code></pre>
+```bash
+WCRO84_S1_L005_R1_001.fastq.gz
+```
 
 <p>Alternatively, you can rename your files to fit this structure.</p>
 
