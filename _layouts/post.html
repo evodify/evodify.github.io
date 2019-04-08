@@ -3,7 +3,13 @@ layout: default
 ---
 
 <article class="post">
+  <img src="{{ site.baseurl }}{{ page.image }}">
   <h1>{{ page.title }}</h1>
+  
+  <hr/>
+  <em>{{ page.description }}</em>
+  <hr/>
+
 
   <div class="entry">
     {{ content }}
