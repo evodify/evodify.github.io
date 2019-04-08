@@ -1,1 +1,3 @@
-The source code of <a href="http://evodify.com/" target="_blank">evodify.com</a>
+The source code of [evodify.com](http://evodify.com/).
+
+The website is built with [Jekyll](https://github.com/jekyll/jekyll) using [Jekyll Now](https://github.com/barryclark/jekyll-now) template.
