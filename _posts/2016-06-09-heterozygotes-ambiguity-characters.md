@@ -10,11 +10,7 @@ description: Ambiguity characters are often used to code heterozygotes. However,
 ---
 
 
-<hr/>
-
-<p><em>Ambiguity characters are often used to code heterozygous genotypes. However, using heterozygotes as ambiguity characters may bias many estimates because most software would use such genotypes as uncertainty. This problem is very obvious but according to my experience, it frequently stays unnoticed.</em></p>
-
-<hr/>
+The problem is that most software would use such heterozygous genotypes as uncertainty. This problem is very obvious but according to my experience, it frequently stays unnoticed. Let me elaborate little more below,
 
 
 <h2>IUPAC nucleotide code</h2>
@@ -75,7 +71,7 @@ description: Ambiguity characters are often used to code heterozygotes. However,
 
 <p>As far as I know all phylogenetic programs usually do not use ambiguity characters as heterozygotes because there is yet no proper model to do so. So, depending on the distribution of heterozygosity in your data, this may have a substantial effect or may have no influence.</p>
 
-<p>In my Master's thesis (see <a href="http://evodify.com/publications/">Publications</a>), I did a phylogenetic analysis of <em>Heliconius</em> butterflies, and I observed that one of the species had very long branch length. However, when I pseudo-phased the data by random assignment of one of the alleles from heterozygous genotypes and thus allowed a phylogenetic program to use the information previously masked in the heterozygous sites, the branch length of this species was not that long anymore.</p>
+<p>In my Master's thesis (see <a href="{{ site.baseurl }}/publications/">Publications</a>), I did a phylogenetic analysis of <em>Heliconius</em> butterflies, and I observed that one of the species had very long branch length. However, when I pseudo-phased the data by random assignment of one of the alleles from heterozygous genotypes and thus allowed a phylogenetic program to use the information previously masked in the heterozygous sites, the branch length of this species was not that long anymore.</p>
 
 <p><a href="{{ site.baseurl }}/assets/posts/2016-06-09-heterozygotes-ambiguity-characters/Heliconius-tree-pseudo-phasing.jpeg"><img class="aligncenter wp-image-811" src="{{ site.baseurl }}/assets/posts/2016-06-09-heterozygotes-ambiguity-characters/Heliconius-tree-pseudo-phasing.jpeg" alt="Heliconius tree. An example of pseudo-phasing" /></a></p>
 
@@ -83,7 +79,7 @@ description: Ambiguity characters are often used to code heterozygotes. However,
 
 <h2>Software</h2>
 
-<p>Unfortunately, I cannot provide an extensive list of software which can or cannot use ambiguity characters as heterozygotes. Maybe I will make such a list later. For this post, I have only looked at the programs listed on the Wikipedia page about <a href="https://en.wikipedia.org/wiki/Nucleotide_diversity">nucleotide diversity</a>.</p>
+<p>Unfortunately, I cannot provide an extensive list of software which can or cannot use ambiguity characters as heterozygotes. Maybe I will make such a list later. For this post, I have only looked at the programs listed on the Wikipedia page about <a href="https://en.wikipedia.org/wiki/Nucleotide_diversity" target="_blank">nucleotide diversity</a>.</p>
 
 <p>Among these programs, MEGA5 and VariScan discard ambiguity characters. Arlequin can handle heterozygous genotypes, but it requires that you provide actual haplotypes (real or pseudo-phased), and this is different from using ambiguity characters. DnaSP is the only program that correctly uses ambiguity characters as heterozygotes. You just need to use the option "Open Unphase/Genotype Data Files" during data loading.</p>
 

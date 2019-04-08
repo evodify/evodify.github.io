@@ -9,13 +9,6 @@ _focus_key_word: genomic variant calling pipeline
 description: An automated genomic variant calling pipeline becomes essential when a project scales to hundreds of genomes. Here is my genomic variant calling pipeline.
 ---
 
-<hr/>
-
-<p><em>I would like to share with you my automatic genomic variant calling pipeline. Using such genomic variant calling pipeline becomes essential when a project scales to dozens and hundreds of genomes.
-</em></p>
-
-<hr/>
-
 <p>As probably any beginner, I used to process my genomic data with manual interference at every step. So, I would submit mapping jobs for all samples on a computing cluster, when they all done I would submit mark duplicates jobs etc. Moreover, I would also manually write sbatch scripts (my cluster <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> uses the Slurm Workload Manager). It was not efficient.</p>
 
 <p>Well, I used replacements (with <code>sed</code>) and loops (with <code>for i in x; do ...</code>) to reduce the amount of work, but there were many manual steps. I managed to process 24-31 small <em>Capsella</em> genomes (~200Mb) this way during my PhD projects. Now, I work with the dog genome which is much bigger (~2.5Gb) and I also need to analyze many more samples (82 genomes at the moment). So, I had to write this genomic variant calling pipeline to make my workflow as automatic as possible.</p>

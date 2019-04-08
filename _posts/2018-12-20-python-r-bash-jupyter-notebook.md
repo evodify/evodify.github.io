@@ -9,12 +9,6 @@ _focus_key_word: Python, R, Bash in one Jupyter Notebook
 description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of the workflow easier, simplifies sharing and makes you more efficient and professional.
 ---
 
-<hr/>
-
-<p><em>Combining Python, R, Bash in one Jupyter Notebook makes tracking of the workflow easier, simplifies sharing and makes you more efficient and professional.</em></p>
-
-<hr/>
-
 <h2>Why Jupyter Notebooks?</h2>
 
 <p>If you read <a href="http://evodify.com/genomic-spark-tutorial/">my Big Data tutorial</a>, you are already familiar with Databricks notebooks. These notebooks allow combining code from many different programming languages (Scala, Python etc.) in one notebook. I thought it would be great to set up a similar notebook environment locally on my computer to manage my workflows.</p>
