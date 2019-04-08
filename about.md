@@ -39,4 +39,4 @@ I also have a strong passion for open-source software and Linux OS. I make Linux
 
 ## Stay in touch
 
-If you are interested in my research, please stay in touch by [subscribing to blog updates](/feed). Also, feel free to connect with me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, <a href="https://uppsala.academia.edu/DKryvokhyzha" target="_blank">Github</a>, <a href="https://www.researchgate.net/profile/Dmytro_Kryvokhyzha" target="_blank">Researchgate</a>, and <a href="https://se.linkedin.com/in/evodify" target="_blank">LinkedIn</a>.
+If you are interested in my research, feel free to connect with me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, <a href="https://uppsala.academia.edu/DKryvokhyzha" target="_blank">Github</a>, <a href="https://www.researchgate.net/profile/Dmytro_Kryvokhyzha" target="_blank">Researchgate</a>, and <a href="https://se.linkedin.com/in/evodify" target="_blank">LinkedIn</a>. You can also [reach me by email](mailto:dmytro.kryvokhyzha@evobio.eu).
