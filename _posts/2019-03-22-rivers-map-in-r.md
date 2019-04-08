@@ -11,7 +11,7 @@ description: R is great tool to make maps including maps with rivers. I would li
 
 <p>I recently needed to create a map for a publication where we study fish species. So, showing sampling locations on a map with rivers was a requirement. An obvious solution for that was of course to use R. And although making a map with rivers in R turned out to be easy, I spent half the day searching for a solution.</p>
 
-<p>I use R to create maps for <a href="http://evodify.com/publications/">all my publications</a>. It is a free, simple, and precise way to plot points on a nice-looking map. If I need to add more things to the map, I save it in SVG format and edit it in <a href="https://inkscape.org/" target="_blank">Inkscape</a>, an open-source editor for vector graphics.</p>
+<p>I use R to create maps for <a href="{{ site.baseurl }}/publications/">all my publications</a>. It is a free, simple, and precise way to plot points on a nice-looking map. If I need to add more things to the map, I save it in SVG format and edit it in <a href="https://inkscape.org/" target="_blank">Inkscape</a>, an open-source editor for vector graphics.</p>
 
 <!--more-->
 

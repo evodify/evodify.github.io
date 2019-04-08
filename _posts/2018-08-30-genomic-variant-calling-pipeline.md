@@ -15,7 +15,7 @@ description: An automated genomic variant calling pipeline becomes essential whe
 
 <!--more-->
 
-<p>This genomic variant calling pipeline was written for the dog data, but you can modified it for any other organism with a reference genome (see below). If you work with non-model organisms, I recommend you also check my <a href="http://evodify.com/gatk-in-non-model-organism/">GATK tutorial for non-model organisms</a>.</p>
+<p>This genomic variant calling pipeline was written for the dog data, but you can modified it for any other organism with a reference genome (see below). If you work with non-model organisms, I recommend you also check my <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">GATK tutorial for non-model organisms</a>.</p>
 
 <h2>Requirements</h2>
 
@@ -185,7 +185,7 @@ RGSM=WCRO84
 
 <p>The last commands adds read-group tags. I was not able to past these tag correctly with <code>--read-group</code> option in stampy. So, I added this extra step.</p>
 
-<p>Mapping with Stampy, is preferable if you <a href="http://evodify.com/gatk-in-non-model-organism/">map reads that are divergent from the reference</a>. For example, I use Stampy to map wolf reads to the dog reference genome with the account for divergence from the reference (<code>-d 0.002</code>).</p>
+<p>Mapping with Stampy, is preferable if you <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">map reads that are divergent from the reference</a>. For example, I use Stampy to map wolf reads to the dog reference genome with the account for divergence from the reference (<code>-d 0.002</code>).</p>
 
 <p>There are separate files generated for each mapping job. The example above would be named as <em>WCRO84_L005_map.sh</em>.</p>
 
@@ -278,7 +278,7 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 -plots WCRO84_merged_markDupl_BQSR.pdf
 ```
 
-<p>As I have mentioned it in my <a href="http://evodify.com/gatk-the-best-practice-for-genotype-calling-in-a-non-model-organism/"> GATK: the best practice for non-model organisms</a>, the BQSR can actually hurt if your variant reference database is not good enough. So, check the plots in <em>WCRO84_merged_markDupl_BQSR.pdf</em> to make sure your recalibration worked correctly. Mine worked fine and it looked like this:</p>
+<p>As I have mentioned it in my <a href="{{ site.baseurl }}/gatk-the-best-practice-for-genotype-calling-in-a-non-model-organism/"> GATK: the best practice for non-model organisms</a>, the BQSR can actually hurt if your variant reference database is not good enough. So, check the plots in <em>WCRO84_merged_markDupl_BQSR.pdf</em> to make sure your recalibration worked correctly. Mine worked fine and it looked like this:</p>
 <div class="image">
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-BQSR.jpeg" alt="Some of the BQSR plots" /><figcaption class="aligncenter"> Some of the BQSR plots</figcaption>
 </figure></div>
@@ -426,4 +426,4 @@ WCRO84_S1_L005_R1_001.fastq.gz
 
 <p>I hope you will use this genomic variant calling pipeline in your workflow. In my case of 82 dog samples with the mean coverage of x30, running the whole pipeline took little more than a week. Given that it is automatic and I was able to do some other work during this time, it is not a lot.</p>
 
-<p>I know that such a pipeline can be made even more efficient and reliable with <a href="https://www.nextflow.io/" target="_blank">Nextflow</a> and <a href="https://snakemake.readthedocs.io/en/stable/" target="_blank">SnakeMake</a>. But I found out about these workflow management system after I wrote this pipeline. Moreover, I first though to write this genomic variant calling pipeline in <a href="http://evodify.com/processing-genomic-data-apache-spark-big-data-tutorial/">Apache Spark</a>, but Spark is not mainstream yet and Spark version of the GATK is still in beta. So, I hope I will update this pipeline with to a more advanced framework in the future.</p>
+<p>I know that such a pipeline can be made even more efficient and reliable with <a href="https://www.nextflow.io/" target="_blank">Nextflow</a> and <a href="https://snakemake.readthedocs.io/en/stable/" target="_blank">SnakeMake</a>. But I found out about these workflow management system after I wrote this pipeline. Moreover, I first though to write this genomic variant calling pipeline in <a href="{{ site.baseurl }}/processing-genomic-data-apache-spark-big-data-tutorial/">Apache Spark</a>, but Spark is not mainstream yet and Spark version of the GATK is still in beta. So, I hope I will update this pipeline with to a more advanced framework in the future.</p>

@@ -15,7 +15,7 @@ description: For genotype calling in non-model organisms, modifications of the G
 
 <!--more-->
 
-<p><strong>Update: this pipeline can be more automated.</strong> For details read <a href="http://evodify.com/genomic-variant-calling-pipeline/">this post</a>.</p>
+<p><strong>Update: this pipeline can be more automated.</strong> For details read <a href="{{ site.baseurl }}/genomic-variant-calling-pipeline/">this post</a>.</p>
 
 <h2>Check sequences quality</h2>
 
