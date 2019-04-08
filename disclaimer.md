@@ -12,5 +12,5 @@ date: 2019-01-28 09:33:51 +01:00
 
 <p>I may link to other resources on this website, but I am not responsible for the content and Privacy Policy of the resources I link to.</p>
 
-<p><em>If you have any questions, you can always reach me at my <a href="{{ site.baseurl }}/contact/">Contact</a> page.</em></p>
+<p><em>If you have any questions, you can always <a href="mailto:dmytro.kryvokhyzha@evobio.eu">email me</a>.</em></p>
 
