@@ -8,16 +8,14 @@ _focus_key_word: map with rivers in R
 description: R is great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R with the simplest code possible.
 ---
 
-<hr/>
-
-<p><em>There are many great libraries to create geographic maps in R. However, making a map with rivers in R is not trivial. I was not able to find an R library with a rivers map, but I found a simple way to add rivers to a map.</em></p>
+There are many great libraries to create geographic maps in R. However, making a map with rivers in R is not trivial. I was not able to find an R library with a rivers map, but I found a simple way to add rivers to a map.
 
 <hr/>
-
 
 <p>I recently needed to create a map for a publication where we study fish species. So, showing sampling locations on a map with rivers was a requirement. An obvious solution for that was of course to use R. And although making a map with rivers in R turned out to be easy, I spent half the day searching for a solution.</p>
 
 <p>I use R to create maps for <a href="http://evodify.com/publications/">all my publications</a>. It is a free, simple, and precise way to plot points on a nice-looking map. If I need to add more things to the map, I save it in SVG format and edit it in <a href="https://inkscape.org/" target="_blank">Inkscape</a>, an open-source editor for vector graphics.</p>
+
 <!--more-->
 
 <h2>Make a map plot in R</h2>
@@ -26,19 +24,20 @@ description: R is great tool to make maps including maps with rivers. I would li
 
 <p>Usually, I would use the code like the one below.</p>
 
-<pre class="wp-block-code"><code>library(maps)
+```r
+library(maps)
 library(rworldmap) # to plot axes
 
-newmap &lt;- getMap(resolution = "hight")
+newmap <- getMap(resolution = "hight")
 
-lat1 &lt;- runif(5,  35, 55)
-long1 &lt;- runif(5,  0, 50)
-lat2 &lt;- runif(5,  35, 55)
-long2 &lt;- runif(5,  0, 50)
+lat1 <- runif(5,  35, 55)
+long1 <- runif(5,  0, 50)
+lat2 <- runif(5,  35, 55)
+long2 <- runif(5,  0, 50)
 
 svg("map_Europe.svg", height=4, width=6)
 par(mar=c(3, 3, 2, 2))
-waterColor &lt;- 'cadetblue1'
+waterColor <- 'cadetblue1'
 plot(newmap, xlim = c(0, 50), ylim = c(35, 70),
      asp = 1,lty=2, lwd=1,
      bg=waterColor, col="#ffffff",
@@ -48,7 +47,8 @@ points(x=long1, y=lat1, pch= 15, col="black", cex=1.2)
 points(x=long2, y=lat2, pch= 17, col="red", cex=1.2)
 legend("topright", bg="white", pt.cex = 1.2,
        legend = c('group1', 'group2'), col=c('black', 'red'), pch = c(15, 17))
-dev.off()</code></pre>
+dev.off()
+```
 
 <p>It produces a map of Europe with random points representing two tentative groups.</p>
 <div class="wp-block-image">
@@ -56,7 +56,7 @@ dev.off()</code></pre>
 </div>
 
 <p>You can modify this code to make any map you need by providing your coordinates of the points and changing colors, lines etc. For example, I used this code with some post-editing in Inkscape to create a map for <a href="https://doi.org/10.1371/journal.pgen.1007949" target="_blank">our recent publication in PLOS Genetics</a>.</p>
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/journal.pgen_.1007949.g001.jpeg" alt="The map of sampling points plotted in R, with the distribution ranges added in Inkscape." class="wp-image-1602" />
+<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/journal.pgen.1007949.g001.jpeg" alt="The map of sampling points plotted in R, with the distribution ranges added in Inkscape." class="wp-image-1602" />
 <figcaption class="aligncenter">The map and sampling points are plotted in R, and the distribution ranges are added in Inkscape.</figcaption>
 </figure>
 
@@ -70,9 +70,11 @@ dev.off()</code></pre>
 
 <p>I download the <em>Europe_Hydrography.rar</em> file, extracted it, loaded it to R and added rivers to my previous map with this code:</p>
 
-<pre class="wp-block-code"><code>library(rgdal)
-riversData &lt;- readOGR("Europe_Hydrography") # load the shapefile
-plot(riversData, col=waterColor, add=T) # plot rivers</code></pre>
+```r
+library(rgdal)
+riversData <- readOGR("Europe_Hydrography") # load the shapefile
+plot(riversData, col=waterColor, add=T) # plot rivers
+```
 
 <p>This is the map of Europe with rivers I obtained.</p>
 <div class="wp-block-image">
@@ -85,21 +87,22 @@ plot(riversData, col=waterColor, add=T) # plot rivers</code></pre>
 
 <p>Here is the whole code to make this rivers map of Europe.</p>
 
-<pre class="wp-block-code"><code>library(maps)
+```r
+library(maps)
 library(rworldmap) # to plot axes
 library(rgdal) # to load the shapefile
 
-newmap &lt;- getMap(resolution = "hight")
-riversData &lt;- readOGR("Europe_Hydrography") # load the shapefile
+newmap <- getMap(resolution = "hight")
+riversData <- readOGR("Europe_Hydrography") # load the shapefile
 
-lat1 &lt;- runif(5,  35, 55)
-long1 &lt;- runif(5,  0, 50)
-lat2 &lt;- runif(5,  35, 55)
-long2 &lt;- runif(5,  0, 50)
+lat1 <- runif(5,  35, 55)
+long1 <- runif(5,  0, 50)
+lat2 <- runif(5,  35, 55)
+long2 <- runif(5,  0, 50)
 
 svg("map_Europe.svg", height=4, width=6)
 par(mar=c(3, 3, 2, 2))
-waterColor &lt;- 'cadetblue1'
+waterColor <- 'cadetblue1'
 plot(newmap, xlim = c(0, 50), ylim = c(35, 70),
      asp = 1,lty=2, lwd=1,
      bg=waterColor, col="#ffffff",
@@ -110,7 +113,8 @@ points(x=long1, y=lat1, pch= 15, col="black", cex=1.2)
 points(x=long2, y=lat2, pch= 17, col="red", cex=1.2)
 legend("topright", bg="white", pt.cex = 1.2,
        legend = c('group1', 'group2'), col=c('black', 'red'), pch = c(15, 17))
-dev.off()</code></pre>
+dev.off()
+```
 
 <p>Actually,  this is the code I used with some modification to make the rivers map with sampling locations for our upcoming publication. I also added the names of major rivers and migration arrows using Inkscape. You have seen the final image at the top of this post.</p>
 <div class="wp-block-image">
