@@ -46,7 +46,7 @@ It has Windows/Mac/Mobile clients which all synchronize with Evernote servers.</
 
 <p>Unfortunately, there is no native client for Linux. Evernote has a decent web client, though more limited in comparison to desktop clients, so the absence of Linux desktop client was a significant drawback but not an absolute deal-breaker. Besides, I had a Windows computer at work during that time.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Evernote_the-most-popular-note-taking-software.jpeg" alt="Screenshot of Evernote, the most popular note-taking software" /><figcaption class="aligncenter"> The web interface of Evernote</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Evernote_the-most-popular-note-taking-software.jpeg" alt="Screenshot of Evernote, the most popular note-taking software" /><figcaption class="aligncenter"> The web interface of Evernote</figcaption>
 </figure></div>
 <p>My impression about Evernote is that it is an excellent program for general-purpose note-taking. You can quickly make basic text formatting, insert tables, images, links and attach files.</p>
 
@@ -66,7 +66,7 @@ It has Windows/Mac/Mobile clients which all synchronize with Evernote servers.</
 
 <p>All the notes you create in Zim are saved as plain text and can be read by any text editor. This makes it very easy to read notes from any device as well as to share them. Synchronization can be made through any cloud service like <a href="https://db.tt/Wg5vivs" target="_blank">Dropbox</a>.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Zim_the-fastest-note-taking-software-Linux.jpeg" alt="Screenshot of Zim, the fastest note-taking software on Linux" /><figcaption class="aligncenter"> The interface of Zim on Linux</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Zim_the-fastest-note-taking-software-Linux.jpeg" alt="Screenshot of Zim, the fastest note-taking software on Linux" /><figcaption class="aligncenter"> The interface of Zim on Linux</figcaption>
 </figure></div>
 <p>There are no many options in Zim and this is rather a plus of this program. You can do the basic font formatting, insert links, tables, images and attach files. Lists are available in the bullet, numbered and checkbox styles.</p>
 
@@ -84,7 +84,7 @@ It has Windows/Mac/Mobile clients which all synchronize with Evernote servers.</
 
 <p>The amount of available features in this program exceeds far beyond my needs. But three of them make me love this program: 1) it is open-source and native in Linux; 2) it has code boxes with syntax highlights for almost all programming languages; 3) it is extremely efficient thanks to a powerful set of keyboard shortcuts.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Cherrytree-the-best-note-taking-software-on-linux.jpeg" alt="Screenshot of Cherrytree, the best note-taking software on Linux" /><figcaption class="aligncenter"> The interface of Cherrytree with code boxes</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Cherrytree-the-best-note-taking-software-on-linux.jpeg" alt="Screenshot of Cherrytree, the best note-taking software on Linux" /><figcaption class="aligncenter"> The interface of Cherrytree with code boxes</figcaption>
 </figure></div>
 <p>Cherrytree is also available for Windows. There is no native Mac client, but I have seen people running it on OS X with PlayOnMac.</p>
 
@@ -110,13 +110,13 @@ It has Windows/Mac/Mobile clients which all synchronize with Evernote servers.</
 
 <p>It is a suitable program if your notes contain only text because there is no way to use images, tables and code boxes.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Simplenote_the-simplest-note-taking-software.jpeg" alt="Screenshot of Simplenote, a text-only note-taking programs" /><figcaption class="aligncenter"> Simplenote - a text-only note-taking programs</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Simplenote_the-simplest-note-taking-software.jpeg" alt="Screenshot of Simplenote, a text-only note-taking programs" /><figcaption class="aligncenter"> Simplenote - a text-only note-taking programs</figcaption>
 </figure></div>
 <h3>Elephant</h3>
 
 <p><a href="http://elephant.mine.nu/" target="_blank">Elephant</a> is an open-source cross-platform application written in java. The note taking process is little different from other software I mentioned in this post. You need to use some inline html code to make styling for your notes. I do not think it is the most efficient way to make notes, but Elephant can be very powerful if you know some html.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Elephant_html-based-note-taking_program.jpeg" alt="Screenshot of Elephant, an html-based note-taking program" /><figcaption class="aligncenter"> Elephant - an html-based note-taking program</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/Elephant_html-based-note-taking_program.jpeg" alt="Screenshot of Elephant, an html-based note-taking program" /><figcaption class="aligncenter"> Elephant - an html-based note-taking program</figcaption>
 </figure></div>
 <h3>WizNote</h3>
 
@@ -126,7 +126,7 @@ It has Windows/Mac/Mobile clients which all synchronize with Evernote servers.</
 
 <p>WizNote is available for Windows, Linux, Mac, Android and iOS. Try it and maybe your experience will be more positive than mine.</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/WizNote_note-taking-program.jpeg" alt="Screenshot of WizNote, a note-taking program" /><figcaption class="aligncenter"> WizNote - a promising note-taking program</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-05-25-best-note-taking-software-linux/WizNote_note-taking-program.jpeg" alt="Screenshot of WizNote, a note-taking program" /><figcaption class="aligncenter"> WizNote - a promising note-taking program</figcaption>
 </figure></div>
 <hr/>
 

@@ -55,12 +55,12 @@ dev.off()
 
 <p>It produces a map of Europe with random points representing two tentative groups.</p>
 <div class="wp-block-image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Europe.jpeg" alt="A map of Europe plotted in R" class="wp-image-1598" /></figure>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Europe.jpeg" alt="A map of Europe plotted in R" class="wp-image-1598" /></figure>
 </div>
 
 <p>You can modify this code to make any map you need by providing your coordinates of the points and changing colors, lines etc. For example, I used this code with some post-editing in Inkscape to create a map for <a href="https://doi.org/10.1371/journal.pgen.1007949" target="_blank">our recent publication in PLOS Genetics</a>.</p>
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/journal.pgen.1007949.g001.jpeg" alt="The map of sampling points plotted in R, with the distribution ranges added in Inkscape." class="wp-image-1602" />
-<figcaption class="aligncenter">The map and sampling points are plotted in R, and the distribution ranges are added in Inkscape.</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/journal.pgen.1007949.g001.jpeg" alt="The map of sampling points plotted in R, with the distribution ranges added in Inkscape." class="wp-image-1602" />
+<figcaption class="caption">The map and sampling points are plotted in R, and the distribution ranges are added in Inkscape.</figcaption>
 </figure>
 
 <h2>Add rivers to a map in R</h2>
@@ -81,8 +81,8 @@ plot(riversData, col=waterColor, add=T) # plot rivers
 
 <p>This is the map of Europe with rivers I obtained.</p>
 <div class="wp-block-image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Europe_rivers.jpeg" alt="A map of Europe with major rivers plotted in R" class="wp-image-1606" />
-<figcaption class="aligncenter">Rivers are added using a shapefile and the <strong>rgdal</strong> R library</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Europe_rivers.jpeg" alt="A map of Europe with major rivers plotted in R" class="wp-image-1606" />
+<figcaption class="caption">Rivers are added using a shapefile and the <strong>rgdal</strong> R library</figcaption>
 </figure>
 </div>
 
@@ -121,8 +121,8 @@ dev.off()
 
 <p>Actually,  this is the code I used with some modification to make the rivers map with sampling locations for our upcoming publication. I also added the names of major rivers and migration arrows using Inkscape. You have seen the final image at the top of this post.</p>
 <div class="wp-block-image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Ukraine.jpeg" alt="A rivers map plot in R" class="wp-image-1608" />
-<figcaption class="aligncenter">Sampling locations on the rivers map of Eastern Europe produced with R.</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Ukraine.jpeg" alt="A rivers map plot in R" class="wp-image-1608" />
+<figcaption class="caption">Sampling locations on the rivers map of Eastern Europe produced with R.</figcaption>
 </figure>
 </div>
 

@@ -107,11 +107,11 @@ reads-to-VCF_wolf.sbatch</code></pre>
 
 <p>If everything worked fine, you will see this output:</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-sh-reads-to-VCF.jpeg" alt="genomic variant calling pipeline execution" /><figcaption class="aligncenter"> Execution of reads-to-VCF.sbatch</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-sh-reads-to-VCF.jpeg" alt="genomic variant calling pipeline execution" /><figcaption class="aligncenter"> Execution of reads-to-VCF.sbatch</figcaption>
 </figure></div>
 <p>If you check the submitted jobs (with <code>jobinfo</code>), you will see the job dependencies (in red):</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-jobinfo-1024x146.jpeg" alt="submitted jobs of the genomic variant calling pipeline" /><figcaption class="aligncenter"> Lits of submitted jobs (click to enlarge)</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-jobinfo-1024x146.jpeg" alt="submitted jobs of the genomic variant calling pipeline" /><figcaption class="aligncenter"> Lits of submitted jobs (click to enlarge)</figcaption>
 </figure></div>
 <p>Following the job IDs, you can see that, for instance, the job <em>WCRO84_mergeMarkDuplBQSR</em> won't start until the two mapping jobs <em>WCRO84_L005_map</em> and <em>WCRO84_L006_map</em> are not finished successfully. When all these jobs finish, you will get a set of <a href="https://gatkforums.broadinstitute.org/gatk/discussion/11004/gvcf-genomic-variant-call-format" target="_blank">gVCF</a> files, which you can merge and jointly genotype with <em>GVCF_all.sbatch</em>:</p>
 
@@ -254,7 +254,7 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 
 <p>As I have mentioned it in my <a href="http://evodify.com/gatk-the-best-practice-for-genotype-calling-in-a-non-model-organism/"> GATK: the best practice for non-model organisms</a>, the BQSR can actually hurt if your variant reference database is not good enough. So, check the plots in <em>WCRO84_merged_markDupl_BQSR.pdf</em> to make sure your recalibration worked correctly. Mine worked fine and it looked like this:</p>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-BQSR.jpeg" alt="Some of the BQSR plots" /><figcaption class="aligncenter"> Some of the BQSR plots</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-BQSR.jpeg" alt="Some of the BQSR plots" /><figcaption class="aligncenter"> Some of the BQSR plots</figcaption>
 </figure></div>
 <h4>3. Check mapping quality (Optional)</h4>
 
@@ -264,7 +264,7 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 
 <pre><code>qualimap bamqc -nt 20 --java-mem-size=4G -bam WCRO84_merged_markDupl_BQSR.bam -outdir WCRO84_qualimap</code></pre>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-qualimap.jpeg" alt="Qualimap plot showing coverage" /><figcaption class="aligncenter"> One of the Qualimap plots</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-08-30-genomic-variant-calling-pipeline/genomic-variant-calling-pipeline-qualimap.jpeg" alt="Qualimap plot showing coverage" /><figcaption class="aligncenter"> One of the Qualimap plots</figcaption>
 </figure></div>
 <p>The report will be in an HTML file which you can view in your browser. For really many samples, you can also batch-process the TXT files with results. For example, to extract the mean coverage information, run</p>
 

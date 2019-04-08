@@ -21,7 +21,7 @@ description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of
 <!--more-->
 
 <p>I used to log all my work steps in a text editor. It was a simple and reliable approach, but it was not the most efficient one. In particular, it was laborious to copy all commands I execute in the terminal to the text editor. Moreover, such log files were not user-friendly to share with my colleagues.</p>
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/log_workflow_in_txt.jpeg" alt="" class="wp-image-1510" />
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/log_workflow_in_txt.jpeg" alt="" class="wp-image-1510" />
 <figcaption class="aligncenter">Workflow in a txt file.</figcaption>
 </figure>
 
@@ -54,7 +54,7 @@ description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of
 <p><em><strong>Note:</strong> All these packages should be for the same Python version. So, keep track of whether you install these packages for Python 2 or Python 3.</em></p>
 
 <p>After these simple steps, I was able to execute Python, R, Bash in one Jupyter Notebook by indicating R and Bash cells with <code>%%R</code> and <code>%%bash</code>, <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank">Jupyter magic commands</a>.</p>
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/jupyter_notebooks_python-R-bash.jpeg" alt="" class="wp-image-1504" />
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/jupyter_notebooks_python-R-bash.jpeg" alt="" class="wp-image-1504" />
 <figcaption class="aligncenter">Python, R, Bash in one Jupyter Notebook</figcaption>
 </figure>
 
@@ -77,7 +77,7 @@ python -m bash_kernel.install</code></pre>
 IRkernel::installspec()</code></pre>
 
 <p>Now, you should be able to select a particular Jupyter kernel and create a Jupyter Notebook in either Python, Bash or R.</p>
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/jupyter_R_bash_kernels.jpeg" alt="" class="wp-image-1505" />
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/jupyter_R_bash_kernels.jpeg" alt="" class="wp-image-1505" />
 <figcaption class="aligncenter">Python, Bash, R Jupyter kernels.</figcaption>
 </figure>
 

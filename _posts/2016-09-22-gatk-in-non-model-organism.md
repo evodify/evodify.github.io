@@ -181,7 +181,7 @@ awk -F\0\/0: '!/^ *#/ {total += NF-1; count++} END { print total/count }' SNPs.v
 -o sorted_reads_duplMarked_readgroup_realigned_scaffold_1.g.vcf</code></pre>
 
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/haplotypeCallerAssembly.jpeg" alt="HaplotypeCaller re-assembly" /><figcaption class="aligncenter"> IGV: Original mapping (above) and HaplotypeCaller re-assembly (below)</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/haplotypeCallerAssembly.jpeg" alt="HaplotypeCaller re-assembly" /><figcaption class="aligncenter"> IGV: Original mapping (above) and HaplotypeCaller re-assembly (below)</figcaption>
 </figure>
 </div>
 
@@ -447,7 +447,7 @@ dev.off()
 write.table(qlist, "GVCFall.DP.percentiles.txt")
 </code></pre>
 <div class="image">
-<figure class="aligncenter"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/dp.jpeg" alt="Plot of DP  scores" /><figcaption class="aligncenter"> Example of the DP distributions</figcaption>
+<figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/dp.jpeg" alt="Plot of DP  scores" /><figcaption class="aligncenter"> Example of the DP distributions</figcaption>
 </figure></div>
 <p>You can view the content of <em>GVCFall.DP.percentiles.txt</em> and select the acceptable cut-off. I usually discard the genotypes below the 5th percentile and above the 99th percentile.</p>
 
