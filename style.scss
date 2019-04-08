@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
   font-weight: bold;
+  text-align: center;
 
   line-height: 1.7;
   margin: 1em 0 15px;
@@ -311,11 +312,19 @@ footer {
   }
 }
 
+// 404 page image centering
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+// image captions
+.captions{
+    font-size: 10pt;
+    text-align: center;
+    color: $gray;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
