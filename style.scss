@@ -121,15 +121,6 @@ img {
   color: $gray;
 }
 
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
-}
 
 // Nicolas Gallagher's micro clearfix hack
 // http://nicolasgallagher.com/micro-clearfix-hack/
@@ -327,6 +318,10 @@ footer {
     color: $gray;
 }
 
+.highlight{
+    font-size: 10pt;
+    margin: 5px 0 5px 0 !important;
+}
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
