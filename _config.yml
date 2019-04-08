@@ -19,14 +19,14 @@ avatar: /assets/avatar_Dmytro-Kryvokhyzha.jpeg
 footer-links:
   dribbble:
   email: dmytro.kryvokhyzha@evobio.eu
+  twitter: evodify
+  github: evodify
+  linkedin: evodify
+  rss: feed # just type anything here for a working RSS icon
   facebook:
   flickr:
-  github: evodify
   instagram:
-  linkedin: evodify
   pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: evodify
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
 
