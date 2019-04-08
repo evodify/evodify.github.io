@@ -591,12 +591,3 @@ python merge_SNP_wholeGenome_TabFiles.py -g whole_Genome.tab -s SNPs.tab -o merg
 <p>Now, it is very easy to write custom scripts to convert these genotype tables to any other format or analyze them directly.</p>
 
 <p>You can find many scripts to process such tab-delimited genotype calls in <a href="https://github.com/evodify/genotype-files-manipulations" target="_blank">my GitHub repository</a>.</p>
-
-<hr/>
-
-
-<p style="text-align: left;"><em>What is your genotyping pipeline? Please, leave a comment below.</em></p>
-
-<hr/>
-
-

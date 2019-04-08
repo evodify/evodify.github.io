@@ -123,6 +123,3 @@ dev.off()
 <h2> Conclusion</h2>
 
 <p>R is proven to be a universal tool for making great scientific illustrations for free. Making a a map with rivers is R is also simple and effective. You only need to find the right shapefile of rivers you want to plot. Moreover, you can use shapefiles of any other geospatial objects (roads, mountains, climate data etc) to add them to the map.</p>
-
-<p>Let me know if you have any questions or suggestions in the comment section below.</p>
-

@@ -88,9 +88,3 @@ The problem is that most software would use such heterozygous genotypes as uncer
 <p>I would like to say that, of course, there is software designed specifically to analyze genomic data in the VCF format (e.g. VCFtools) where genotypes are presented by two or more alleles. But people often convert VCF files to some other formats and use ambiguity characters to code heterozygous genotypes and this may lead to the biases I describe.</p>
 
 <p>Personally, I use custom python scripts to estimate <em>π</em>, <em>Dxy,</em> and other population genetic statistics, but this is a topic for another post.</p>
-
-<hr/>
-
-<p style="text-align: left;"><em>Please, let me know in the comments below if you also code heterozygous genotypes as ambiguity characters and what software you use to analyze such data.</em></p>
-
-<hr/>
