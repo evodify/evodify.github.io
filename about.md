@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 
-*Welcome to [Evodify.com](http://evodify.com) – my personal website where I share my research experience.*
+*Welcome to [Evodify.com](https://evodify.com) – my personal website where I share my research experience.*
 
 
 ## Me and my research interests
