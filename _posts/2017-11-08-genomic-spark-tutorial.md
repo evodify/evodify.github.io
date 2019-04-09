@@ -2,7 +2,7 @@
 layout: post
 title:  "Processing Genomic Data with Apache Spark (Big Data tutorial)"
 date:   2017-11-08 20:00:00 +0100
-categories: Analyses, Genomics
+categories: Pipelines
 tags: Big Data, Spark, Hail, genomics
 image: /assets/posts/2017-11-08-big-data-tutorial/SparkHailGenomics.jpeg
 _focus_key_word: Genomic Data Hail

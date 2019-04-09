@@ -2,7 +2,7 @@
 layout: post
 title: Python, R, Bash in one Jupyter Notebook
 date: 2018-12-20 15:26:46 +01:00
-categories: Pipelines, Software
+categories: Programming
 tags: Bash, Jupyter, pipeline, python, R
 image: /assets/posts/2018-12-20-python-r-bash-jupyter-notebook/R_Bash_in_Jupyter_notebooks.jpeg
 _focus_key_word: Python, R, Bash in one Jupyter Notebook
