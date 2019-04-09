@@ -2,6 +2,7 @@
 layout: page
 title: Disclaimer
 date: 2019-01-28 09:33:51 +01:00
+robots: noindex,nofollow
 ---
 
 <h2>Use at your own risk</h2>
