@@ -28,11 +28,11 @@ permalink: /cv/
 
 ## Research Experience
 
-Please, see my [Research](/research/) page for description of the projects I worked on.
+Please, see my [Research](/research/) page for the description of the projects I worked on.
 
 ## Skills
 * Design of experiments
-* NGS data processing (mapping, genotype calling, filtering etc.)
+* NGS data processing (mapping, genotype calling, filtering, etc.)
 * Population genetics analyses on genomic data
 * Gene expression analyses (RNA-Seq and microarray)
 * Functional analyses of genomic data
@@ -58,23 +58,23 @@ My PhD program included 20% of teaching. I taught the practical parts of the fol
 
 I also teach how to use Linux and open-source software on <a href="https://www.youtube.com/AverageLinuxUser" target="_blank">YouTube</a>. 
 
-## Internships and Trainings
+## Internship and Training
 
-**25 – 27 Mar, 2018** - <a href="https://lamastex.github.io/scalable-data-science/360-in-525/2018/05/" target="_blank">Population Genetics and Big Data workshop</a>, Uppsala, Sweden.
+**25 – 27 Mar 2018** - <a href="https://lamastex.github.io/scalable-data-science/360-in-525/2018/05/" target="_blank">Population Genetics and Big Data workshop</a>, Uppsala, Sweden.
 
 **25 – 27 Mar, 2019** – Workshop <a href="https://coderefinery.org/workshops/2019-03-25-stockholm/" target="_blank">Sustainable Software Development</a>, Stockholm, Sweden.
 
-**26 Nov, 2017 - Jan 5, 2018** - Course project during <a href="https://lamastex.github.io/scalable-data-science/sds/2/2/" target="_blank">Scalable Data Science</a> course, Uppsala, Sweden.
+**26 Nov 2017 - Jan 5, 2018** - Course project during <a href="https://lamastex.github.io/scalable-data-science/sds/2/2/" target="_blank">Scalable Data Science</a> course, Uppsala, Sweden.
 
-**13 Jan, 2017** - Workshop <a href="https://sites.google.com/site/toawkornot/" target="_blank">"To awk or not to..."</a>, Uppsala, Sweden.
+**13 Jan 2017** - Workshop <a href="https://sites.google.com/site/toawkornot/" target="_blank">"To awk or not to..."</a>, Uppsala, Sweden.
 
-**24 Oct - 4 Nov, 2016** - Course project during <a href="https://teknat.uu.se/digitalAssets/395/c_395062-l_1-k_bio_practical-python-programming-for-biology-and-genomics_uppdaterad.pdf" target="_blank">Practical python programming course</a>, Uppsala, Sweden.
+**24 Oct - 4 Nov 2016** - Course project during <a href="https://teknat.uu.se/digitalAssets/395/c_395062-l_1-k_bio_practical-python-programming-for-biology-and-genomics_uppdaterad.pdf" target="_blank">Practical python programming course</a>, Uppsala, Sweden.
 
-**19 – 28 June, 2015** – Research visit to <a href="https://wright.eeb.utoronto.ca/" target="_blank">Stephen Wright Lab</a>, University of Toronto, Toronto, Canada.
+**19 – 28 June 2015** – Research visit to <a href="https://wright.eeb.utoronto.ca/" target="_blank">Stephen Wright Lab</a>, University of Toronto, Toronto, Canada.
 
-**24 – 25 Mar, 2015** – Approximate Bayesian Computation by <a href="https://www.sib.swiss/daniel-wegmann-group" target="_blank">Daniel Wegmann</a>, Uppsala University, Sweden.
+**24 – 25 Mar 2015** – Approximate Bayesian Computation by <a href="https://www.sib.swiss/daniel-wegmann-group" target="_blank">Daniel Wegmann</a>, Uppsala University, Sweden.
 
-**16 – 27 Jan, 2012** – European course of Comparative Genomics, Ecole Normale Supérieure de Lyon, Lyon, France.
+**16 – 27 Jan 2012** – European course of Comparative Genomics, Ecole Normale Supérieure de Lyon, Lyon, France.
 
 ## Publications
 

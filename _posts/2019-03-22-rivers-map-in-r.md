@@ -6,7 +6,7 @@ categories: R
 tags: [illustration, maps, R]
 image: /assets/posts/2019-03-22-rivers-map-in-r/Cobitis_invasive_map_ed.jpeg
 _focus_key_word: map with rivers in R
-description: R is great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R using the simplest code possible.
+description: R is a great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R using the simplest code possible.
 ---
 
 <p>I recently needed to create a map for a publication where we study fish species. So, showing sampling locations on a map with rivers was a requirement. An obvious solution for that was of course to use R. And although making a map with rivers in R turned out to be easy, I spent half the day searching for a solution.</p>
@@ -37,8 +37,7 @@ par(mar=c(3, 3, 2, 2))
 waterColor <- 'cadetblue1'
 plot(newmap, xlim = c(0, 50), ylim = c(35, 70),
      asp = 1,lty=2, lwd=1,
-     bg=waterColor, col="#ffffff",
-     main = "Europe")
+     bg=waterColor, col="#ffffff", main = "Europe")
 map.axes()
 points(x=long1, y=lat1, pch= 15, col="black", cex=1.2)
 points(x=long2, y=lat2, pch= 17, col="red", cex=1.2)
@@ -52,7 +51,7 @@ dev.off()
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/map_Europe.jpeg" alt="A map of Europe plotted in R" class="wp-image-1598" /></figure>
 </div>
 
-<p>You can modify this code to make any map you need by providing your coordinates of the points and changing colors, lines etc. For example, I used this code with some post-editing in Inkscape to create a map for <a href="https://doi.org/10.1371/journal.pgen.1007949" target="_blank">our recent publication in PLOS Genetics</a>.</p>
+<p>You can modify this code to make any map you need by providing your coordinates of the points and changing colors, lines, etc. For example, I used this code with some post-editing in Inkscape to create a map for <a href="https://doi.org/10.1371/journal.pgen.1007949" target="_blank">our recent publication in PLOS Genetics</a>.</p>
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-03-22-rivers-map-in-r/journal.pgen.1007949.g001.jpeg" alt="The map of sampling points plotted in R, with the distribution ranges added in Inkscape." class="wp-image-1602" />
 <figcaption class="caption">The map and sampling points are plotted in R, and the distribution ranges are added in Inkscape.</figcaption>
 </figure>
@@ -122,4 +121,4 @@ dev.off()
 
 <h2> Conclusion</h2>
 
-<p>R is proven to be a universal tool for making great scientific illustrations for free. Making a a map with rivers is R is also simple and effective. You only need to find the right shapefile of rivers you want to plot. Moreover, you can use shapefiles of any other geospatial objects (roads, mountains, climate data etc) to add them to the map.</p>
+<p>R is proven to be a universal tool for making great scientific illustrations for free. Making a map with rivers is R is also simple and effective. You only need to find the right shapefile of rivers you want to plot. Moreover, you can use shapefiles of any other geospatial objects (roads, mountains, climate data, etc) to add them to the map.</p>

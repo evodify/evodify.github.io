@@ -13,7 +13,7 @@ date: 2019-01-20 14:24:09 +01:00
 
 <h2>Cookies</h2>
 
-<p>This website is static HTML and I try to avoid any functionality that requires <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank">cookies</a>. However, I use Google Analytics that require cookies. I also may embed or link to other websites that uses cookies.</p>
+<p>This website is static HTML and I try to avoid any functionality that requires <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank">cookies</a>. However, I may add some features that use cookies. I also use Google Analytics that require cookies. In some pages, I may embed or link to other websites that uses cookies.</p>
 
 <p>If you want to opt out from cookies, you need to delete cookies manually or set your browser to block cookies. Follow the privacy instructions provided in the help section of your browser.</p>
 

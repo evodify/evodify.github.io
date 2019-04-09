@@ -30,7 +30,7 @@ fastqc input.fq.gz
 <p>The output is in an HTML file with a graphical representation of various quality metrics. Here is a <a href="https://youtu.be/bz93ReOv87Y" target="_blank">video explaining the output</a>. Make sure that there is no major problem in your data.
 Some researchers trim low-quality sequence tails using tools like <a href="http://www.usadellab.org/cms/?page=trimmomatic" target="_blank">Trimmomatic</a>. I think that this step was useful in the past, but with the current state of sequence quality, it is not necessary anymore. Moreover, there is evidence that <a href="http://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-S8-S8" target="_blank">trimming introduces false variants</a>.</p>
 
-<h2>Align to the reference genome</h2>
+<h2>Map to the reference genome</h2>
 
 <p>GATK Best Practice recommends using <a href="http://bio-bwa.sourceforge.net/" target="_blank">BWA</a> aligner for DNA data. BWA is probably the best software in terms of accuracy and speed for mapping sequences with low divergence from a reference. In non-model organisms, the common problem is that the only reference genome available is a sister species that can be considerably divergent. So, one has to use an aligner that accounts for this divergence.</p>
 
@@ -39,7 +39,7 @@ Some researchers trim low-quality sequence tails using tools like <a href="http:
 <p>The first step is to prepare the reference genome:</p>
 
 ```bash
-stampy.py -G REF reference_genome.fasta.gz &amp;&amp; stampy.py -g REF -H REF
+stampy.py -G REF reference_genome.fasta.gz && stampy.py -g REF -H REF
 ```
 
 <p>Next, map reads to a reference with account for divergence (0.025 in this case):</p>
@@ -56,7 +56,7 @@ stampy.py -G REF reference_genome.fasta.gz &amp;&amp; stampy.py -g REF -H REF
 
 <h3>Convert SAM to BAM</h3>
 
-<p>The step above produces an aliment in a SAM format. SAM files are tab-delimited text files that are usually very large in size. To save space and make it easy for software to hand large aliments, SAM is usually converted to a binary format BAM. <a href="https://broadinstitute.github.io/picard/" target="_blank">Picard Tools</a> is a recommended software for the conversion as it also allows simultaneous sorting of aligned reads in a file:</p>
+<p>The step above produces an alignment in a SAM format. SAM files are tab-delimited text files that are usually very large in size. To save space and make it easy for software to hand large aliments, SAM is usually converted to a binary format BAM. <a href="https://broadinstitute.github.io/picard/" target="_blank">Picard Tools</a> is a recommended software for the conversion as it also allows simultaneous sorting of aligned reads in a file:</p>
 
 ```bash
 java -Xmx8g -jar picard.jar SortSam \
@@ -68,12 +68,12 @@ java -Xmx8g -jar picard.jar SortSam \
 <p>In some cases Picard Tools fails to perform the conversion. Using <a href="http://samtools.sourceforge.net/" target="_blank">SAMtools</a> is an alternative way to proceed then:</p>
 
 ```bash
-samtools view -bS -@ 8 SE14_stampy0.025_DNA.sam &gt; SE14_stampy0.025_DNA.bam
+samtools view -bS -@ 8 SE14_stampy0.025_DNA.sam > SE14_stampy0.025_DNA.bam
 samtools sort -@ 8 SE14_stampy0.025_DNA.bam SE14_stampy0.025_DNA_sorted
 samtools index SE14_stampy0.025_DNA_sorted.bam
 ```
 
-<p>After BAM files are obtained, SAM files can be deleted. <strong>Note! Before deleting any files, make sure that all conversions have been successful.</strong> Otherwise, you will have to repeat mapping step which is quite time consuming.</p>
+<p>After BAM files are obtained, SAM files can be deleted. <strong>Note! Before deleting any files, make sure that all conversions have been successful.</strong> Otherwise, you will have to repeat the mapping step which is quite time-consuming.</p>
 
 <h3>Check the mapping quality</h3>
 
@@ -83,7 +83,7 @@ samtools index SE14_stampy0.025_DNA_sorted.bam
 qualimap bamqc -nt 8 -bam file.bam -outdir results_folder
 ```
 
-<p><img class="aligncenter wp-image-1254" src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/Qualimap-genome-coverage-across-reference.jpeg" alt="Qualimap: coverage across reference" /></p>
+<p><img class="aligncenter wp-image-1254" src="{{ site.baseurl }}/assets/posts/2016-09-22-gatk-in-non-model-organism/Qualimap-genome-coverage-across-reference.jpeg" alt="Qualimap: coverage across the reference" /></p>
 
 
 Distributions of coverage, nucleotide content and mapping quality across the reference genome can help to identify problematic regions. For example, in the picture above per-centromeric regions have x100 higher coverage than the rest of the genome and thus interpretation of any finding in these regions should be done with caution.</p>
@@ -100,7 +100,7 @@ java -Xmx8g -jar picard.jar MarkDuplicates \
   MAX_FILE_HANDLES=15000 
 ```
 
-<p>MAX_FILE_HANDLES should be little smaller than the output of this command <code>ulimit -n</code></p>
+<p><code>MAX_FILE_HANDLES</code> should be little smaller than the output of this command <code>ulimit -n</code></p>
 
 <p>Marking duplicates make sense even if you used a PCR-free library preparation procedure because reads identified as duplicates are not removed and can be included in the subsequent analyses if needed (GATK option: <code>-drf DuplicateRead</code>).</p>
 
@@ -109,7 +109,13 @@ java -Xmx8g -jar picard.jar MarkDuplicates \
 <p>The GATK requires read group information in BAM files. It is used to differentiate samples and to detect artifacts associated with sequencing techniques. To add read groups, use <a href="https://broadinstitute.github.io/picard/command-line-overview.html" target="_blank">Picard Tools</a>:</p>
 
 ```bash
-java -Xmx4g -jar <code class="codebox">picard.jar</code> AddOrReplaceReadGroups I=sorted_reads_duplMarked.bam O=sorted_reads_duplMarked_readgroup.bam RGLB=library RGPL=illumina RGPU=barcode RGSM=sample
+java -Xmx4g -jar picard.jar AddOrReplaceReadGroups \
+I=sorted_reads_duplMarked.bam \
+O=sorted_reads_duplMarked_readgroup.bam \
+RGLB=library \
+RGPL=illumina \
+RGPU=barcode \
+RGSM=sample
 ```
 
 <p>Index the resulting BAM file:</p>
@@ -302,35 +308,35 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 library('gridExtra')
 library('ggplot2')
 
-VCFsnps &lt;- read.csv('GVCFall_SNPs.table', header = T, na.strings=c("","NA"), sep = "\t") 
-VCFindel &lt;- read.csv('GVCFall_INDELs.table', header = T, na.strings=c("","NA"), sep = "\t")
+VCFsnps <- read.csv('GVCFall_SNPs.table', header = T, na.strings=c("","NA"), sep = "\t") 
+VCFindel <- read.csv('GVCFall_INDELs.table', header = T, na.strings=c("","NA"), sep = "\t")
 dim(VCFsnps)
 dim(VCFindel)
-VCF &lt;- rbind(VCFsnps, VCFindel)
-VCF$Variant &lt;- factor(c(rep("SNPs", dim(VCFsnps)[1]), rep("Indels", dim(VCFindel)[1])))
+VCF <- rbind(VCFsnps, VCFindel)
+VCF$Variant <- factor(c(rep("SNPs", dim(VCFsnps)[1]), rep("Indels", dim(VCFindel)[1])))
 
-snps &lt;- '#A9E2E4'
-indels &lt;- '#F4CCCA'
+snps <- '#A9E2E4'
+indels <- '#F4CCCA'
 
-DP &lt;- ggplot(VCF, aes(x=DP, fill=Variant)) + geom_density(alpha=0.3) + 
+DP <- ggplot(VCF, aes(x=DP, fill=Variant)) + geom_density(alpha=0.3) + 
   geom_vline(xintercept=c(10,6200))
 
-QD &lt;- ggplot(VCF, aes(x=QD, fill=Variant)) + geom_density(alpha=.3) +
+QD <- ggplot(VCF, aes(x=QD, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=2, size=0.7)
 
-FS &lt;- ggplot(VCF, aes(x=FS, fill=Variant)) + geom_density(alpha=.3) +
+FS <- ggplot(VCF, aes(x=FS, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=c(60, 200), size=0.7) + ylim(0,0.1)
 
-MQ &lt;- ggplot(VCF, aes(x=MQ, fill=Variant)) + geom_density(alpha=.3) +
+MQ <- ggplot(VCF, aes(x=MQ, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=40, size=0.7)
 
-MQRankSum &lt;- ggplot(VCF, aes(x=MQRankSum, fill=Variant)) + geom_density(alpha=.3) +
+MQRankSum <- ggplot(VCF, aes(x=MQRankSum, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=-20, size=0.7)
 
-SOR &lt;- ggplot(VCF, aes(x=SOR, fill=Variant)) + geom_density(alpha=.3) +
+SOR <- ggplot(VCF, aes(x=SOR, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=c(4, 10), size=1, colour = c(snps,indels))
 
-ReadPosRankSum &lt;- ggplot(VCF, aes(x=ReadPosRankSum, fill=Variant)) + geom_density(alpha=.3) +
+ReadPosRankSum <- ggplot(VCF, aes(x=ReadPosRankSum, fill=Variant)) + geom_density(alpha=.3) +
   geom_vline(xintercept=c(-10,10,-20,20), size=1, colour = c(snps,snps,indels,indels)) + xlim(-30, 30)
 
 svg("Co_10accessions_FromStephen.svg", height=20, width=15)
@@ -362,11 +368,11 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall_SNPs.vcf \
- --filterExpression "QUAL &lt; 0 || MQ &lt; 30.00 || SOR &gt; 4.000 || QD &lt; 2.00 || FS &gt; 60.000 || MQRankSum &lt; -20.000 || ReadPosRankSum &lt; -10.000 || ReadPosRankSum &gt; 10.000" \ # you define what to remove here
+ --filterExpression "QUAL < 0 || MQ < 30.00 || SOR > 4.000 || QD < 2.00 || FS > 60.000 || MQRankSum < -20.000 || ReadPosRankSum < -10.000 || ReadPosRankSum > 10.000" \ # you define what to remove here
  --filterName "my_snp_filter" \
  -o GVCFall_SNPs_filter.vcf
 
-grep -E '^#|PASS' GVCFall_SNPs_filter.vcf &gt; GVCFall_SNPs_filterPASSED.vcf
+grep -E '^#|PASS' GVCFall_SNPs_filter.vcf > GVCFall_SNPs_filterPASSED.vcf
 ```
 
 <p>To filter Indels:</p>
@@ -376,11 +382,11 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall_INDELs.vcf \
- --filterExpression "QUAL &lt; 0 || MQ &lt; 30.00 || SOR &gt; 10.000 || QD &lt; 2.00 || FS &gt; 200.000 || ReadPosRankSum &lt; -20.000 || ReadPosRankSum &gt; 20.000" \ # you define what to remove here
+ --filterExpression "QUAL < 0 || MQ < 30.00 || SOR > 10.000 || QD < 2.00 || FS > 200.000 || ReadPosRankSum < -20.000 || ReadPosRankSum > 20.000" \ # you define what to remove here
  --filterName "my_indel_filter" \  
  -o GVCFall_INDELs_filter.vcf
 
-grep -E '^#|PASS' GVCFall_INDELs_filter.vcf &gt; GVCFall_INDELs_filterPASSED.vcf
+grep -E '^#|PASS' GVCFall_INDELs_filter.vcf > GVCFall_INDELs_filterPASSED.vcf
 ```
 
 <h3>Check the Variants filtering results</h3>
@@ -390,7 +396,7 @@ grep -E '^#|PASS' GVCFall_INDELs_filter.vcf &gt; GVCFall_INDELs_filterPASSED.vcf
 <p>This is the number of sites before filtering:</p>
 
 ```bash
-grep -c -v "^#" GVCFall_INDELs.vcf
+grep -vc "^#" GVCFall_INDELs.vcf
 grep -vc "^#" GVCFall_SNPs.vcf
 ```
 
@@ -398,7 +404,7 @@ grep -vc "^#" GVCFall_SNPs.vcf
 
 ```bash
 grep -vc "^#" GVCFall_SNPs_filterPASSED.vcf
-grep -c -v "^#" GVCFall_INDELs_filterPASSED.vcf
+grep -vc "^#" GVCFall_INDELs_filterPASSED.vcf
 ```
 
 <p>It is also important to check if any filers failed. I observed filters failing often.
@@ -407,25 +413,25 @@ You should get 0 for all filters when you run this R code:</p>
 
 ```bash
 # SNPs
-VCFsnps &lt;- read.csv('GVCFall_SNPs_filterPASSED.table', header = T, na.strings=c("","NA"), sep = "\t") 
+VCFsnps <- read.csv('GVCFall_SNPs_filterPASSED.table', header = T, na.strings=c("","NA"), sep = "\t") 
 head(VCFsnps)
-sum(na.omit(VCFsnps$QD) &lt; 2)
-sum(na.omit(VCFsnps$FS) &gt; 60)
-sum(na.omit(VCFsnps$MQ) &lt; 40)
-sum(na.omit(VCFsnps$MQRankSum) &lt; -20)
-sum(na.omit(VCFsnps$SOR) &gt; 4)
-sum(na.omit(VCFsnps$ReadPosRankSum) &lt; -10)
-sum(na.omit(VCFsnps$ReadPosRankSum) &gt; 10)
+sum(na.omit(VCFsnps$QD) < 2)
+sum(na.omit(VCFsnps$FS) > 60)
+sum(na.omit(VCFsnps$MQ) < 40)
+sum(na.omit(VCFsnps$MQRankSum) < -20)
+sum(na.omit(VCFsnps$SOR) > 4)
+sum(na.omit(VCFsnps$ReadPosRankSum) < -10)
+sum(na.omit(VCFsnps$ReadPosRankSum) > 10)
 
  # Indels
-VCFindel &lt;- read.csv('GVCFall_INDELs_filterPASSED.table', header = T, na.strings=c("","NA"), sep = "\t")
+VCFindel <- read.csv('GVCFall_INDELs_filterPASSED.table', header = T, na.strings=c("","NA"), sep = "\t")
 head(VCFindel30)
-sum(na.omit(VCFindel$QD) &lt; 2)
-sum(na.omit(VCFindel$FS) &gt; 200)
-sum(na.omit(VCFindel$MQ) &lt; 40)
-sum(na.omit(VCFindel$SOR) &gt; 10)
-sum(na.omit(VCFindel$ReadPosRankSum) &lt; -20)
-sum(na.omit(VCFindel$ReadPosRankSum) &gt; 20)
+sum(na.omit(VCFindel$QD) < 2)
+sum(na.omit(VCFindel$FS) > 200)
+sum(na.omit(VCFindel$MQ) < 40)
+sum(na.omit(VCFindel$SOR) > 10)
+sum(na.omit(VCFindel$ReadPosRankSum) < -20)
+sum(na.omit(VCFindel$ReadPosRankSum) > 20)
 ```
 
 <p>If some of the filters failed, try to change their order in <em>--filterExpression</em>.</p>
@@ -453,7 +459,7 @@ java -Xmx8g -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
 <p>The file GVCFall.DP.table is usually too big for R, so I split it by samples and keep only positions that have been genotyped (!="./."):</p>
 
 ```bash
-for ((i=3; i&lt;=21; i +=2)); do cut -f $i,$((i+1)) GVCFall.DP.table | awk '$1 != "./." {print $2}' &gt; $i.DP; done
+for ((i=3; i<=21; i +=2)); do cut -f $i,$((i+1)) GVCFall.DP.table | awk '$1 != "./." {print $2}' > $i.DP; done
 ```
 
 <p>where 3-21 is odd numbers for 10 samples. This numbering is required because every sample is represented by two columns (GT, DP).</p>
@@ -462,21 +468,21 @@ for ((i=3; i&lt;=21; i +=2)); do cut -f $i,$((i+1)) GVCFall.DP.table | awk '$1 !
 
 ```bash
 # define the file names list (10 samples here) 
-nameList &lt;- c()
+nameList <- c()
 for (i in 3:21) { # 21 - odd number for 10 samples 
-  if (i %% 2 ==1) nameList &lt;- append(nameList, paste(i, ".DP"))
+  if (i %% 2 ==1) nameList <- append(nameList, paste(i, ".DP"))
 }
 
-qlist &lt;- matrix(nrow = 10, ncol = 3) # define number of samples (10 samples here)
-qlist &lt;- data.frame(qlist, row.names=nameList)
-colnames(qlist)&lt;-c('5%', '10%', '99%')
+qlist <- matrix(nrow = 10, ncol = 3) # define number of samples (10 samples here)
+qlist <- data.frame(qlist, row.names=nameList)
+colnames(qlist)<-c('5%', '10%', '99%')
 
 jpeg("GVCFall.DP.jpeg", height=1600, width=1200)
 par(mar=c(5, 3, 3, 2), cex=1.5, mfrow=c(8,4)) # define number of plots for your sample
 for (i in 1:31) {
-  DP &lt;- read.table(nameList[i], header = T)
-  qlist[i,] &lt;- quantile(DP[,1], c(.05, .1, .99), na.rm=T)
-  d &lt;- density(DP[,1], from=0, to=100, bw=1, na.rm =T)
+  DP <- read.table(nameList[i], header = T)
+  qlist[i,] <- quantile(DP[,1], c(.05, .1, .99), na.rm=T)
+  d <- density(DP[,1], from=0, to=100, bw=1, na.rm =T)
   plot(d, xlim = c(0,100), main=nameList[i], col="blue", xlab = dim(DP)[1], lwd=2)
   abline(v=qlist[i,c(1,3)], col='red', lwd=3)
 }
@@ -498,7 +504,7 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall.vcf \
- -G_filter "DP &lt; 6 || DP &gt; 100" \
+ -G_filter "DP < 6 || DP > 100" \
  -G_filterName "DP_6-100" \
  -o GVCFall_DPfilter.vcf
 
@@ -506,7 +512,7 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall_SNPs_filterPASSED \
- -G_filter "DP &lt; 6 || DP &gt; 100" \
+ -G_filter "DP < 6 || DP > 100" \
  -G_filterName "DP_6-100" \
  -o GVCFall_SNPs_filterPASSED_DPfilter.vcf
 
@@ -514,7 +520,7 @@ java -jar ~/Programs/GATK/GenomeAnalysisTK.jar \
  -T VariantFiltration \
  -R reference_genome.fasta \
  -V GVCFall_Indels_filterPASSED.vcf \
- -G_filter "DP &lt; 6 || DP &gt; 100" \
+ -G_filter "DP < 6 || DP > 100" \
  -G_filterName "DP_6-100" \
  -o GVCFall_Indels_filterPASSED_DPfilter.vcf
 ```

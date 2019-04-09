@@ -9,13 +9,13 @@ _focus_key_word: genomic variant calling pipeline
 description: An automated genomic variant calling pipeline becomes essential when a project scales to hundreds of genomes. Here is my genomic variant calling pipeline.
 ---
 
-<p>As probably any beginner, I used to process my genomic data with manual interference at every step. So, I would submit mapping jobs for all samples on a computing cluster, when they all done I would submit mark duplicates jobs etc. Moreover, I would also manually write sbatch scripts (my cluster <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> uses the Slurm Workload Manager). It was not efficient.</p>
+<p>As probably any beginner, I used to process my genomic data with manual interference at every step. So, I would submit mapping jobs for all samples on a computing cluster, when they all done I would submit mark duplicates jobs, etc. Moreover, I would also manually write sbatch scripts (my cluster <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> uses the Slurm Workload Manager). It was not efficient.</p>
 
 <p>Well, I used replacements (with <code>sed</code>) and loops (with <code>for i in x; do ...</code>) to reduce the amount of work, but there were many manual steps. I managed to process 24-31 small <em>Capsella</em> genomes (~200Mb) this way during my PhD projects. Now, I work with the dog genome which is much bigger (~2.5Gb) and I also need to analyze many more samples (82 genomes at the moment). So, I had to write this genomic variant calling pipeline to make my workflow as automatic as possible.</p>
 
 <!--more-->
 
-<p>This genomic variant calling pipeline was written for the dog data, but you can modified it for any other organism with a reference genome (see below). If you work with non-model organisms, I recommend you also check my <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">GATK tutorial for non-model organisms</a>.</p>
+<p>This genomic variant calling pipeline was written for the dog data, but you can modify it for any other organism with a reference genome (see below). If you work with non-model organisms, I recommend you also check my <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">GATK tutorial for non-model organisms</a>.</p>
 
 <h2>Requirements</h2>
 
@@ -48,10 +48,10 @@ description: An automated genomic variant calling pipeline becomes essential whe
 
 <p>This genomic variant calling pipeline consists of two files <em>reads-to-VCF_dog.py</em>  (main script) and <em>sbatch.py</em> (all the functions) that can be downloaded from <a href="https://github.com/evodify/to-generate-sbatch" target="_blank">my Github repository</a>.</p>
 
-<p>To run it, you need a list of FASTQ files with R1 only names. You can obtained such a list by listing the content of the folder with your FASTQ files:</p>
+<p>To run it, you need a list of FASTQ files with R1 only names. You can obtain such a list by listing the content of the folder with your FASTQ files:</p>
 
 ```bash
-ls -l fastq/*.fastq.gz | grep R1 | sed 's/ \+/ /g' | cut -d " " -f 9 &gt; R1.txt
+ls -l fastq/*.fastq.gz | grep R1 | sed 's/ \+/ /g' | cut -d " " -f 9 > R1.txt
 ```
 
 <p>Next, you run the <em>reads-to-VCF.py</em> script using <em>R1.txt</em> as an input.</p>
@@ -67,15 +67,15 @@ python reads-to-VCF.py -i R1.txt -r canFam3.fa -p snic2017 -n 20 -t 5-00:00:00 -
 python reads-to-VCF.py -h
 ```
 
-<p>I only would like to mention that you can use either <code>BWA</code> or <code>stampy</code> aligners for the mapping step (option <code>-a</code>). In case of <code>stampy</code>, you can also specify the per base pair divergence form the reference (<code>-d</code>).</p>
+<p>I only would like to mention that you can use either <code>BWA</code> or <code>stampy</code> aligners for the mapping step (option <code>-a</code>). In case of <code>stampy</code>, you can also specify the per base pair divergence from the reference (<code>-d</code>).</p>
 
 <p>Among other options, <code>snic2017</code> is the project name that is needed for the Slurm on Uppmax, I am not sure if you need it in other systems.</p>
 
-<p>I also recommend to provide maximum available number of cores (<code>-n</code>) for parallel jobs, and maximum available RAM per core (<code>-m</code>).</p>
+<p>I also recommend providing the maximum available number of cores (<code>-n</code>) for parallel jobs, and maximum available RAM per core (<code>-m</code>).</p>
 
 <p>I also request 5 days (<code>-t</code>) for each main step to run on a cluster.</p>
 
-<p>For many intermediate steps, I make use of the temporary storage <code>$SNIC_TMP</code> (you need to add <code>\</code> before the <code>$</code> sign because it is special character). This helps to keep my account disk use low. Moreover, it makes the pipeline more efficient because <code>$SNIC_TMP</code> is located on the same node where the job is running. You need to provide your temporary directory with the option <code>-l</code>.</p>
+<p>For many intermediate steps, I make use of the temporary storage <code>$SNIC_TMP</code> (you need to add <code>\</code> before the <code>$</code> sign because it is a special character). This helps to keep my account disk use low. Moreover, it makes the pipeline more efficient because <code>$SNIC_TMP</code> is located on the same node where the job is running. You need to provide your temporary directory with the option <code>-l</code>.</p>
 
 <p>Assuming the content of <code>R1.txt</code> is the following</p>
 
@@ -151,16 +151,16 @@ ls -l *.gz *.bam
 
 <p>Generally, there should not be any problem and you will get your VCF file with as little effort as 4 commands.</p>
 
-<p>Note, this genomic variant calling pipeline was designed and tested on <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> with the Slurm Workload Manager, if you run it on another cluster, you may need to modify it. Below, I provide more details each step and describe the hardcoded parts.</p>
+<p>Note, this genomic variant calling pipeline was designed and tested on <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> with the Slurm Workload Manager, if you run it on another cluster, you may need to modify it. Below, I provide more details for each step and describe the hardcoded parts.</p>
 
 <h3>Description of each step</h3>
 
 <h4>1. Mapping to the reference</h4>
 
-<p>The very first step of this genomic variant calling pipeline is to map all reads to the reference genome. Many of my samples were sequenced on different lanes. So, to control for this factor and to make the mapping process faster, I perform mapping of each lane separately. An example command of the BWA mapping with subsequent sorting and converting to BAM by Samtools looks like this:</p>
+<p>The very first step of this genomic variant calling pipeline is to map all reads to the reference genome. Many of my samples were sequenced on different lanes. So, to control for this factor and to make the mapping process faster, I perform the mapping of each lane separately. An example command of the BWA mapping with subsequent sorting and converting to BAM by Samtools looks like this:</p>
 
 ```bash
-bwa mem -t 20 -M -R '@RG\tID:WCRO84_L005\tPL:illumina\tLB:WCRO84\tSM:WCRO84' canFam3.fa WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz | samtools sort -O bam -@ 20 -m 4G &gt; WCRO84_L005.bam
+bwa mem -t 20 -M -R '@RG\tID:WCRO84_L005\tPL:illumina\tLB:WCRO84\tSM:WCRO84' canFam3.fa WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz | samtools sort -O bam -@ 20 -m 4G > WCRO84_L005.bam
 ```
 
 <p>where <code>WCRO84</code> is the sample name, and <code>L005</code> is the lane number. These names are changed by the <em>reads-to-VCF.py</em> script. You can read about the options of BWA and Samtools in the documentation of these programs.</p>
@@ -171,7 +171,7 @@ bwa mem -t 20 -M -R '@RG\tID:WCRO84_L005\tPL:illumina\tLB:WCRO84\tSM:WCRO84' can
 
 ```bash
 stampy.py -g canFam3 -h canFam3 --substitutionrate=0.002 -t 20 -o $SNIC_TMP/WCRO84_L005_stampy.bam --readgroup=ID:WCRO84_L005  -M WCRO84_S23_L005_R1_test.fastq.gz WCRO84_S23_L005_R2_test.fastq.gz
-samtools sort -O bam -@ 20 -m 4G $SNIC_TMP/WCRO84_L005_stampy.bam &gt; $SNIC_TMP/WCRO84_L005.bam
+samtools sort -O bam -@ 20 -m 4G $SNIC_TMP/WCRO84_L005_stampy.bam > $SNIC_TMP/WCRO84_L005.bam
 
 java -Xmx4G -jar picard.jar AddOrReplaceReadGroups \
 I=$SNIC_TMP/WCRO84_S23_L005.bam \
@@ -183,9 +183,9 @@ RGPU=WCRO84_S23_L005 \
 RGSM=WCRO84
 ```
 
-<p>The last commands adds read-group tags. I was not able to past these tag correctly with <code>--read-group</code> option in stampy. So, I added this extra step.</p>
+<p>The last command adds read-group tags. I was not able to past these tags correctly with <code>--read-group</code> option in stampy. So, I added this extra step.</p>
 
-<p>Mapping with Stampy, is preferable if you <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">map reads that are divergent from the reference</a>. For example, I use Stampy to map wolf reads to the dog reference genome with the account for divergence from the reference (<code>-d 0.002</code>).</p>
+<p>Mapping with Stampy is preferable if you <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">map reads that are divergent from the reference</a>. For example, I use Stampy to map wolf reads to the dog reference genome with the account for divergence from the reference (<code>-d 0.002</code>).</p>
 
 <p>There are separate files generated for each mapping job. The example above would be named as <em>WCRO84_L005_map.sh</em>.</p>
 
@@ -198,12 +198,12 @@ RGSM=WCRO84
 <p>The BAM files of different lanes are then merged for each samples:</p>
 
 ```bash
-ls WCRO84_L00?.bam | sed 's/  / /g;s/ /\n/g' &gt; WCRO84_bam.list
+ls WCRO84_L00?.bam | sed 's/  / /g;s/ /\n/g' > WCRO84_bam.list
 samtools merge -b WCRO84_bam.list $SNIC_TMP/WCRO84_merged.bam
 xargs -a WCRO84_bam.list rm
 ```
 
-<p>The first line creates a list of BAM files to merge. The second line performs the merging. The last line removed the BAM files that have been merged to free some disk space. The file <em>WCRO84_bam.list</em> can be checked to make sure all the BAM files were included during the merging step.</p>
+<p>The first line creates a list of BAM files to merge. The second line performs merging. The last line removed the BAM files that have been merged to free some disk space. The file <em>WCRO84_bam.list</em> can be checked to make sure all the BAM files were included during the merging step.</p>
 
 <h5>Mark duplicates</h5>
 
@@ -237,9 +237,9 @@ wget ftp://ftp.ncbi.nih.gov/snp/organisms/archive/dog_9615/VCF/00-All.vcf.gz*
 <p>I also removed all filtered positions, because BQSR needs only the high confidence sites:</p>
 
 ```bash
-zcat 00-All.vcf | awk '{if (/^#/) {print $0} else {print "chr"$0}}' | bgzip &gt; 00-All_chrAll.vcf
-zcat dogs.557.publicSamples.ann.vcf.gz | awk '{if (/^#/) {print $0} else if ($7=="PASS") {print "chr"$0}}' | bgzip &gt; dogs.557.publicSamples.ann.chrAll.PASS.vcf
-tabix 00-All_chrAll.vcf &amp; tabix dogs.557.publicSamples.ann.chrAll.PASS.vcf
+zcat 00-All.vcf | awk '{if (/^#/) {print $0} else {print "chr"$0}}' | bgzip > 00-All_chrAll.vcf
+zcat dogs.557.publicSamples.ann.vcf.gz | awk '{if (/^#/) {print $0} else if ($7=="PASS") {print "chr"$0}}' | bgzip > dogs.557.publicSamples.ann.chrAll.PASS.vcf
+tabix 00-All_chrAll.vcf & tabix dogs.557.publicSamples.ann.chrAll.PASS.vcf
 
 ```
 
@@ -284,7 +284,7 @@ gatk --java-options "-Xmx4G"  AnalyzeCovariates \
 </figure></div>
 <h4>3. Check mapping quality (Optional)</h4>
 
-<p>This step is not essential for the genomic variant calling pipeline, but it useful to check the quality of your BAM files. With Qualima you get a lot of useful information such as coverage, number of mapped/unmapped reads, mapping quality etc. An example of the file name for this step is <em>WCRO84_qualimap.sh</em>.</p>
+<p>This step is not essential for the genomic variant calling pipeline, but it useful to check the quality of your BAM files. With Qualimap you get a lot of useful information such as coverage, number of mapped/unmapped reads, mapping quality, etc. An example of the file name for this step is <em>WCRO84_qualimap.sh</em>.</p>
 
 <p>The command is the following:</p>
 
@@ -300,7 +300,7 @@ qualimap bamqc -nt 20 --java-mem-size=4G -bam WCRO84_merged_markDupl_BQSR.bam -o
 grep "mean coverageData" */genome_results.txt
 ```
 
-<p>At this stage the work with BAM files is finished and the pipeline proceeds to the genotyping steps.</p>
+<p>At this stage, the work with BAM files is finished and the pipeline proceeds to the genotyping steps.</p>
 
 <h4>4. Call variants per-sample (gVCF)</h4>
 
@@ -319,7 +319,7 @@ mkdir WCRO84
 mv WCRO84_* WCRO84
 ```
 
-<p>This enables to generate intermediate files, which are then used for joint genotyping in an efficient way. <code>tabix</code> is necessary to index the compressed file for the GATK compatability in the next steps.</p>
+<p>This enables to generate intermediate files, which are then used for joint genotyping in an efficient way. <code>tabix</code> is necessary to index the compressed file for the GATK compatibility in the next steps.</p>
 
 <p>At this step, I also create sample specific directories and move all the files into the sample's own directory. This helps to keep the order when you work with many files.</p>
 
@@ -394,7 +394,7 @@ echo "WCRO86_qualimap.sh under the ID $WCRO86_qualimap has been submitted"
 
 <p><em>Again, I assume and describe a cluster system with the Slurm Workload Manager, if your cluster is different, you may need to modify this script.</em></p>
 
-<p>It works pretty simply. The script submits all mapping jobs (e.g. <code>WCRO84_L00?_map.sh</code>) as independent jobs, store their job ID in variables (e.g. <code>$WCRO84_L005, $WCRO84_L006</code>) and uses these IDs as dependencies for the subsequent <code>WCRO84_mergeMarkDuplBQSR.sh</code> job (<code>--dependency=afterok:</code>). In its turn, <code>WCRO84_gVCF.sh</code> uses the ID of <code>WCRO84_mergeMarkDuplBQSR.sh</code> as a dependency etc.</p>
+<p>It works pretty simply. The script submits all mapping jobs (e.g. <code>WCRO84_L00?_map.sh</code>) as independent jobs, store their job ID in variables (e.g. <code>$WCRO84_L005, $WCRO84_L006</code>) and uses these IDs as dependencies for the subsequent <code>WCRO84_mergeMarkDuplBQSR.sh</code> job (<code>--dependency=afterok:</code>). In its turn, <code>WCRO84_gVCF.sh</code> uses the ID of <code>WCRO84_mergeMarkDuplBQSR.sh</code> as a dependency, etc.</p>
 
 <h2>Hardcoded parts</h2>
 
@@ -408,7 +408,7 @@ python reads-to-VCF.py -h
 
 <p>I also need to explain here that the script <em>reads-to-VCF.py</em> depends on <a href="https://github.com/evodify/to-generate-sbatch/blob/master/sbatch.py" target="_blank">sbatch.py</a> module that is also located in <a href="https://github.com/evodify/to-generate-sbatch/blob/master/reads-to-VCF_dog.py" target="_blank">my Github repository</a>. I store all the functions in that module, so if you need to edit some hardcoded parts, you are most likely need to edit <em>sbatch.py</em>.</p>
 
-<p>1. You may need to modify the functions <code>writeMapBWAJob</code> and <code>writeMapStampyJob</code> if your FASTQ files don't follow this structure:</p>
+<p>1. You may need to modify the functions <code>writeMapBWAJob</code> and <code>writeMapStampyJob</code> if your FASTQ file names don't follow this structure:</p>
 
 ```bash
 WCRO84_S1_L005_R1_001.fastq.gz
@@ -420,10 +420,10 @@ WCRO84_S1_L005_R1_001.fastq.gz
 
 <p>3. Possibly, you also need to adjust <code>MAX_FILE_HANDLES_FOR_READ_ENDS_MAP</code> in the function <code>writeMarkDuplJob</code> according to your system. As a rule, it should be little smaller than the output of the <code>ulimit -n</code> command.</p>
 
-<p>4. <code>picard.jar</code> is assumed to be located in the working directory. You can either edit the code (functions <code>writeMapStampyJob</code> , <code>writeMarkDuplJob</code>) to speficy the full path to <code>picard.jar</code>, or copy <code>picard.jar</code> to your working directory before submitting the jobs.</p>
+<p>4. <code>picard.jar</code> is assumed to be located in the working directory. You can either edit the code (functions <code>writeMapStampyJob</code> , <code>writeMarkDuplJob</code>) to specify the full path to <code>picard.jar</code>, or copy <code>picard.jar</code> to your working directory before submitting the jobs.</p>
 
 <h2>Final thoughts</h2>
 
 <p>I hope you will use this genomic variant calling pipeline in your workflow. In my case of 82 dog samples with the mean coverage of x30, running the whole pipeline took little more than a week. Given that it is automatic and I was able to do some other work during this time, it is not a lot.</p>
 
-<p>I know that such a pipeline can be made even more efficient and reliable with <a href="https://www.nextflow.io/" target="_blank">Nextflow</a> and <a href="https://snakemake.readthedocs.io/en/stable/" target="_blank">SnakeMake</a>. But I found out about these workflow management system after I wrote this pipeline. Moreover, I first though to write this genomic variant calling pipeline in <a href="{{ site.baseurl }}/processing-genomic-data-apache-spark-big-data-tutorial/">Apache Spark</a>, but Spark is not mainstream yet and Spark version of the GATK is still in beta. So, I hope I will update this pipeline with to a more advanced framework in the future.</p>
+<p>I know that such a pipeline can be made even more efficient and reliable with <a href="https://www.nextflow.io/" target="_blank">Nextflow</a> and <a href="https://snakemake.readthedocs.io/en/stable/" target="_blank">SnakeMake</a>. But I found out about these workflow management systems after I wrote this pipeline. Moreover, I first thought to write this genomic variant calling pipeline in <a href="{{ site.baseurl }}/processing-genomic-data-apache-spark-big-data-tutorial/">Apache Spark</a>, but Spark is not mainstream yet and Spark version of the GATK is still in beta. So, I hope I will update this pipeline with a more advanced framework in the future.</p>

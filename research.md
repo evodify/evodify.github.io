@@ -16,7 +16,7 @@ permalink: /research/
 
 <img align="right" alt="Dog silhouette" src="{{ site.baseurl }}/assets/pages/dog.jpeg">
 
-A comparison of patterns of genetic variation between dogs and wolfs revealed that selection had targeted the genes responsible for starch digestion, glucose absorption, and the ability to store glucose as fat in dogs, indicating that dogs had experienced an adaptive shift from a protein to a more carbohydrate-based energy metabolism. Dogs also show the wide distribution for copy number variation of the gene coding for pancreatic amylase (*AMY2B*), the enzyme that breaks starch into maltose in the small intestine, while in wolf this gene is mostly present in one copy. This suggests that the efficacy of starch digestion may vary among dog breeds. Thus, dogs represent a unique model to study the genetic basis of metabolic adaptations during domestication. In my research, I aim to localize mutations that are likely to underlie these metabolic adaptations by analyzing large-scale population genomic and transcriptomics data.
+A comparison of patterns of genetic variation between dogs and wolfs revealed that selection had targeted the genes responsible for starch digestion, glucose absorption, and the ability to store glucose as fat in dogs, indicating that dogs had experienced an adaptive shift from a protein to more carbohydrate-based energy metabolism. Dogs also show the wide distribution for copy number variation of the gene coding for pancreatic amylase (*AMY2B*), the enzyme that breaks starch into maltose in the small intestine, while in wolf this gene is mostly present in one copy. This suggests that the efficacy of starch digestion may vary among dog breeds. Thus, dogs represent a unique model to study the genetic basis of metabolic adaptations during domestication. In my research, I aim to localize mutations that are likely to underlie these metabolic adaptations by analyzing large-scale population genomic and transcriptomics data.
 
 ## Allopolyploidy of *Capsella bursa-pastoris*
 
@@ -63,7 +63,7 @@ Surprisingly, the last extensive biological studies in this region are dated to 
 
 **Place**: Harvard University, USA.
 
-<img align="right" alt="Desitree of phylogentic signal along the genomes of Heliconius butterflies" src="{{ site.baseurl }}/assets/pages/Heliconius_50kb_Densitree.jpeg">
+<img align="right" alt="Desitree of phylogenetic signal along the genomes of Heliconius butterflies" src="{{ site.baseurl }}/assets/pages/Heliconius_50kb_Densitree.jpeg">
 
 Sequencing of whole genomes in non-model organisms provides new insights into the genomic architecture of speciation. There is particularly widespread interest in patterns of divergence with ongoing gene flow. Theory predicts that in the face of gene flow the differentiation between genomic regions under selection and the rest of the genome will be more pronounced than in the case of allopatric divergence. These regions of divergences are named "islands of speciation" and as speciation proceeds, these "islands" are expected to grow into "continents".
 
@@ -116,7 +116,7 @@ This was my thesis research project during my Master’s studies in Ukraine.
 
 Spined loaches of the genus *Cobitis* is a group of small bottom-dwelling fishes that possesses a unique ability to beget hybrid forms of different ploidy. Hybrids are usually tri- and tetraploid all-females which reproduce gynogenetically. Because of the need for sperm to activate egg development, these females live sympatrically with one or two parental species forming diploid-polyploid (unisexual-bisexual) complexes. These phenomena make spined loaches be an object of comprehensive investigations.
 
-In my thesis, I assessed the diversity of spined loaches and the hybrid complexes on the territory of Eastern Ukraine, which covers a substantial part of Ponto-Caspian refugia and is still insufficiently studied. I used morphological, cytometric, allozyme and PCR–RFLP analyses. My results demonstrated that Eastern Ukraine is the most diverse region in the distribution range of spined loaches. It is inhabited by three species (*Cobitis taenia* s.l., *Cobitis melanoleuca* and *Cobitis tanaitica*) and seven different hybrid forms. I also discovered a new hybrid complex that unlike all other known complexes exists without the participation of *Cobitis elangotoides* genome.
+In my thesis, I assessed the diversity of spined loaches and the hybrid complexes on the territory of Eastern Ukraine, which covers a substantial part of Ponto-Caspian refugia and is still insufficiently studied. I used morphological, cytometric, allozyme and PCR–RFLP analyses. My results demonstrated that Eastern Ukraine is the most diverse region in the distribution range of spined loaches. It is inhabited by three species (*Cobitis taenia* s.l., *Cobitis melanoleuca*, and *Cobitis tanaitica*) and seven different hybrid forms. I also discovered a new hybrid complex that unlike all other known complexes exists without the participation of *Cobitis elangotoides* genome.
 
 &nbsp;
 
