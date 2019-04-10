@@ -44,7 +44,8 @@ stampy.py -G REF reference_genome.fasta.gz && stampy.py -g REF -H REF
 
 <p>Next, map reads to a reference with account for divergence (0.025 in this case):</p>
 
-<pre class="codebox">stampy.py -t8 -g REF -h REF --substitutionrate=0.025 -o output.sam -M R1.fq.gz R2.fq.gz</pre>
+```stampy.py -t8 -g REF -h REF --substitutionrate=0.025 -o output.sam -M R1.fq.gz R2.fq.gz
+```
 
 <p>See <a href="http://www.well.ox.ac.uk/~gerton/README.txt" target="_blank">Stampy documentation</a> for details.</p>
 
