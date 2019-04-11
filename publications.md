@@ -12,14 +12,14 @@ If you cannot access some of these articles, please <a href="mailto:dmytro.kryvo
 You can view this list at <a href="https://scholar.google.se/citations?user=99unghgAAAAJ&hl=en" title="Google Scholar" target="_blank">Google Scholar</a> too.
 </div>
 
-**9.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2019. Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae). ***PLOS Genetics**, 15(2),* pp 1-34.
-<div style="text-align: right; margin-bottom: 30pt">
-<a href="https://www.scilifelab.se/news/evolution-of-common-weed" title="SciLifeLab" target="_blank">Featured on SciLifeLab</a>&nbsp;&nbsp;&nbsp;<a href="http://dx.plos.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Download</a>
-</div>
-
-**8.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2018. Towards the new normal: Transcriptomic and genomic changes in the two subgenomes of a 100,000 years old allopolyploid, *Capsella bursa-pastoris*. *(Manuscript)*.
+**9.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2019. Towards the new normal: Transcriptomic convergence and genomic legacy of the two subgenomes of an allopolyploid weed (*Capsella bursa-pastoris*). ***PLOS Genetics (Accepted)***. 
 <div style="text-align: right; margin-bottom: 30pt">
 <a href="https://www.biorxiv.org/content/early/2018/11/27/479048" title="bioRxiv" target="_blank">Download</a>
+</div>
+
+**8.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2019. Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae). ***PLOS Genetics**, 15(2),* pp 1-34.
+<div style="text-align: right; margin-bottom: 30pt">
+<a href="https://www.scilifelab.se/news/evolution-of-common-weed" title="SciLifeLab" target="_blank">Featured on SciLifeLab</a>&nbsp;&nbsp;&nbsp;<a href="http://dx.plos.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Download</a>
 </div>
 
 **7.** Cornille A, Salcedo A, Huang H, **Kryvokhyzha D**, Holm K, Ge XJ, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2018. Local adaptation and maladaptation during the worldwide range expansion of a self-fertilizing plant. *(Manuscript)*.
