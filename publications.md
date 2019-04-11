@@ -32,7 +32,7 @@ You can view this list at <a href="https://scholar.google.se/citations?user=99un
 
 ## 2014
 
-**3.** **Kryvokhyzha D**. 2014. <a href="http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-243477" title="Uppsala University" target="_blank">Whole genome resequencing of *Heliconius* butterflies revolutionizes our view of the level of admixture between species.</a> *M.Sc. Thesis*, Biology Education Centre, Uppsala University and Department of Organismic and Evolutionary Biology, Harvard University, 30 p.
+**3.** **Kryvokhyzha D**. 2014. <a href="http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-243477" title="Uppsala University" target="_blank">Whole genome resequencing of *Heliconius* butterflies revolutionizes our view of the level of admixture between species.</a> *M.Sc. Thesis*, Uppsala University and Harvard University, 30 p.
 
 ## 2009 
 
