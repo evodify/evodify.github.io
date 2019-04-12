@@ -6,7 +6,7 @@ categories: Programming
 tags: Bash, Jupyter, pipeline, python, R
 image: /assets/posts/2018-12-20-python-r-bash-jupyter-notebook/R_Bash_in_Jupyter_notebooks.jpeg
 alt: Python, R, Bash in one Jupyter Notebook
-description: Combining Python, R, Bash in one Jupyter Notebook makes tracking of the workflow easier, simplifies sharing and makes you more efficient and professional.
+excerpt: Combining Python, R, Bash in one Jupyter Notebook makes tracking of the workflow easier, simplifies sharing and makes you more efficient and professional.
 ---
 
 <h2>Why Jupyter Notebooks?</h2>

@@ -6,7 +6,7 @@ categories: Pipelines
 tags: dog, genomics, python, variant
 image: /assets/posts/2018-08-30-genomic-variant-calling-pipeline/Genomic-variant-calling-pipeline.jpeg
 alt: genomic variant calling pipeline
-description: An automated genomic variant calling pipeline becomes essential when a project scales to hundreds of genomes. Here is my genomic variant calling pipeline.
+excerpt: An automated genomic variant calling pipeline becomes essential when a project scales to hundreds of genomes. Here is my genomic variant calling pipeline.
 ---
 
 <p>As probably any beginner, I used to process my genomic data with manual interference at every step. So, I would submit mapping jobs for all samples on a computing cluster, when they all done I would submit mark duplicates jobs, etc. Moreover, I would also manually write sbatch scripts (my cluster <a href="http://www.uppmax.uu.se/" target="_blank">UPPMAX</a> uses the Slurm Workload Manager). It was not efficient.</p>

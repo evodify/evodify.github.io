@@ -6,7 +6,7 @@ categories: Programming
 tags: illustration, maps, R
 image: /assets/posts/2019-03-22-rivers-map-in-r/Cobitis_invasive_map_ed.jpeg
 alt: map with rivers in R
-description: R is a great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R using the simplest code possible.
+excerpt: R is a great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R using the simplest code possible.
 ---
 
 <p>I recently needed to create a map for a publication where we study fish species. So, showing sampling locations on a map with rivers was a requirement. An obvious solution for that was of course to use R. And although making a map with rivers in R turned out to be easy, I spent half the day searching for a solution.</p>
