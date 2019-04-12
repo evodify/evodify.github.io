@@ -404,7 +404,7 @@ python reads-to-VCF.py -h
 
 <p>However, a few parts are hardcoded and you may need to modify them.</p>
 
-<p>I also need to explain here that the script <em>reads-to-VCF.py</em> depends on <a href="https://github.com/evodify/to-generate-sbatch/blob/master/sbatch.py" target="_blank">sbatch.py</a> module that is also located in <a href="https://github.com/evodify/to-generate-sbatch/blob/master/reads-to-VCF_dog.py" target="_blank">my Github repository</a>. I store all the functions in that module, so if you need to edit some hardcoded parts, you are most likely need to edit <em>sbatch.py</em>.</p>
+<p>I also need to explain here that the script <em>reads-to-VCF.py</em> depends on <em>sbatch.py</em> module that is also located in <a href="https://github.com/evodify/to-generate-sbatch/" target="_blank">my Github repository</a>. I store all the functions in that module, so if you need to edit some hardcoded parts, you are most likely need to edit <em>sbatch.py</em>.</p>
 
 <p>1. You may need to modify the functions <code>writeMapBWAJob</code> and <code>writeMapStampyJob</code> if your FASTQ file names don't follow this structure:</p>
 
