@@ -2,6 +2,7 @@
 layout: page
 title: Publications
 permalink: /publications/
+excerpt: Papers, theses, and other publications by Dmytro Kryvokhyzha.
 --- 
 
 <div style="text-align: center; margin-bottom: 20pt; font-style: italic;">

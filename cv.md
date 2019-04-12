@@ -2,6 +2,7 @@
 layout: page
 title: CV
 permalink: /cv/
+excerpt: Curriculum Vitae of Dmytro Kryvokhyzha.
 --- 
 
 ## Work

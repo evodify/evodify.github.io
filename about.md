@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+excerpt: Dmytro Kryvokhyzha is a Bioinformatician & Evolutionary Biologist at Uppsala University. He studies genomics of diet adaptation in dogs.
 ---
 
 

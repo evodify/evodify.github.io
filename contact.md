@@ -2,6 +2,7 @@
 layout: page
 title: Contact me
 permalink: /contact/
+excerpt: Dmytro Kryvokhyzha contacts: email, address, social media.
 --- 
 
 ## Email

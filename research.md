@@ -2,6 +2,7 @@
 layout: page
 title: Research
 permalink: /research/
+excerpt: Research projects by Dmytro Kryvokhyzha: Diet adaptation in dogs, Allopolyploidy in Capsella, Pamir fish study, Hybridization in Heliconius, Gene expression in Cottus, Phylogeography of Mugilidae, Polyploid complexes in Cobitis.
 --- 
 
 ## Diet adaptation in dogs
