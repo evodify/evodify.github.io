@@ -7,6 +7,7 @@ tags: Big Data, Spark, Hail, genomics
 image: /assets/posts/2017-11-08-big-data-tutorial/SparkHailGenomics.jpeg
 alt: Genomic Data Hail
 excerpt: I show a simple Hail pipeline to filter a VCF file and build a PCA plot to explore the structure of the data in Databricks Platform.
+redirect_from: /processing-genomic-data-apache-spark-big-data-tutorial/
 ---
 
 The current scale of genomic data production requires scaling the processing tools to analyze all that data. Hail, an open-source framework built on top of Apache Spark, provides such tools. It is capable of processing gigabyte-scale data on a laptop or terabyte-scale data on a cluster. In this tutorial, I show a simple Hail pipeline to filter a VCF file and build a PCA plot to explore the structure of the data.>

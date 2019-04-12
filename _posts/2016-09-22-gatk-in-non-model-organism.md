@@ -7,6 +7,7 @@ tags: GATK, genomics, pipeline
 image: /assets/posts/2016-09-22-gatk-in-non-model-organism/GATK_best_practice_non-model.jpeg
 alt: genotype calling non-model organism
 excerpt: For genotype calling in non-model organisms, modifications of the GATK Best Practices are often essential. This post shows my approach to this issue.
+redirect_from: /gatk-the-best-practice-for-genotype-calling-in-a-non-model-organism/
 ---
 
 <p>The <a href="https://software.broadinstitute.org/gatk/" target="_blank">GATK</a> (<strong>G</strong>enome <strong>A</strong>nalysis <strong>T</strong>ool<strong>k</strong>it) is the most used software for genotype calling in high-throughput sequencing data in various organisms. Its <a href="https://software.broadinstitute.org/gatk/best-practices/" target="_blank">Best Practices</a> are great guides for various analyses of sequencing data in SAM/BAM/CRAM and VCF formats. However, the GATK was designed and primarily serves to analyze human genetic data and all its pipelines are optimized for this purpose. Using the same pipelines without any modifications on non-human data can lead to some inaccuracy. This is especially an issue when a reference genome is not the same species as analyzed samples.</p>
