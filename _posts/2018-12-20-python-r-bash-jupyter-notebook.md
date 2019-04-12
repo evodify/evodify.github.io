@@ -13,8 +13,6 @@ excerpt: Combining Python, R, Bash in one Jupyter Notebook makes tracking of the
 
 <p>If you read <a href="{{ site.baseurl }}/genomic-spark-tutorial/">my Big Data tutorial</a>, you are already familiar with Databricks notebooks. These notebooks allow combining code from many different programming languages (Scala, Python, etc.) in one notebook. I thought it would be great to set up a similar notebook environment locally on my computer to manage my workflows.</p>
 
-<!--more-->
-
 <p>I used to log all my work steps in a text editor. It was a simple and reliable approach, but it was not the most efficient one. In particular, it was laborious to copy all commands I execute in the terminal to the text editor. Moreover, such log files were not user-friendly to share with my colleagues.</p>
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2018-12-20-python-r-bash-jupyter-notebook/log_workflow_in_txt.jpeg" alt="" class="wp-image-1510" />
 <figcaption class="aligncenter">Workflow in a txt file.</figcaption>

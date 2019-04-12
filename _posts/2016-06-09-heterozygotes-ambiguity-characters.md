@@ -19,8 +19,6 @@ The problem is that most software would use such heterozygous genotypes as uncer
 
 <p>It worked well in the early DNA sequencing era when scientist studied short haploid DNA sequences, and there is still no alternative today. All software uses this coding system.</p>
 
-<!--more-->
-
 <p><a href="{{ site.baseurl }}/assets/posts/2016-06-09-heterozygotes-ambiguity-characters/IUPAC-nucleotide-code.jpeg"><img class="aligncenter wp-image-1076" src="{{ site.baseurl }}/assets/posts/2016-06-09-heterozygotes-ambiguity-characters/IUPAC-nucleotide-code.jpeg" alt="Table with IUPAC nucleotide code" /></a></p>
 
 <h2>Coding heterozygotes in the next-generation sequencing data</h2>

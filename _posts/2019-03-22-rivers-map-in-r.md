@@ -13,8 +13,6 @@ excerpt: R is a great tool to make maps including maps with rivers. I would like
 
 <p>I use R to create maps for <a href="{{ site.baseurl }}/publications/">all my publications</a>. It is a free, simple, and precise way to plot points on a nice-looking map. If I need to add more things to the map, I save it in SVG format and edit it in <a href="https://inkscape.org/" target="_blank">Inkscape</a>, an open-source editor for vector graphics.</p>
 
-<!--more-->
-
 <h2>Make a map plot in R</h2>
 
 <p>In my view, the best way to create maps and plot sampling locations in R is to use the <a href="https://cran.r-project.org/web/packages/maps/index.html" target="_blank">maps</a> library. It produces clean and informative maps.</p>

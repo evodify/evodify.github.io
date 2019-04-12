@@ -14,8 +14,6 @@ redirect_from: /gatk-the-best-practice-for-genotype-calling-in-a-non-model-organ
 
 <p>Here, I describe my GATK pipeline of genotype calling on whole genome sequencing data of <em>Capsella bursa-pastoris</em>, a non-model organism with the reference genome available only for a sister species. Although it is a particular study case, I believe that the explanation of my modifications can help other researchers to adopt this pipeline to their non-model organisms.</p>
 
-<!--more-->
-
 <p><strong>Update: this pipeline can be more automated.</strong> For details read <a href="{{ site.baseurl }}/genomic-variant-calling-pipeline/">this post</a>.</p>
 
 <h2>Check sequences quality</h2>

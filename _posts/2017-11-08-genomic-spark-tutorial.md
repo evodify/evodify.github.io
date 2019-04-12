@@ -14,8 +14,6 @@ The current scale of genomic data production requires scaling the processing too
 
 I prepared this tutorial for the course <a href="https://lamastex.github.io/scalable-data-science/sds/2/2/" target="_blank" rel="noopener">Scalable Data Science</a>, which I attended as a student.
 
-<!--more-->
-
 <strong>Below I provide a Databricks notebook and a video where I explain this notebook. </strong>
 
 <a href="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html" target="_blank">Open this notebook in a full-width view in a new tab.</a>
