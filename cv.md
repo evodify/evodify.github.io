@@ -92,7 +92,8 @@ Please, see my [Publications](/publications/) page for the list of papers.
 **2013** –  <a href="https://www.smbe.org/smbe/AWARDS/AnnualMeetingTravelAwards/YoungInvestigatorTravelAward.aspx
 " title="SMBE" target="_blank">SMBE Travel Grant Award</a> to attend the SMBE Annual Conference in Chicago, USA.
 
-**2013** – National Geographic Society’s Global Exploration Fund for the project <a href="https://www.nationalgeographic.org/grants/where-we-work/D972CB07" title="National Geographic" target="_blank">Hidden biodiversity on the Roof of the World</a>, an expedition to the Pamir Mountains (Tajikistan, Uzbekistan, Kyrgyzstan).
+**2013** – <a href="https://www.nationalgeographic.org/funding-opportunities/grants/what-we-fund/" title="National Geographic" target="_blank">National Geographic Society’s Global Exploration Fund</a> for the project "Hidden biodiversity on the Roof of the World", an expedition to the Pamir Mountains (Tajikistan, Uzbekistan, Kyrgyzstan).
+
 
 **2011** – Erasmus Mundus Scholarship for Master's studies (<a href="http://www.evobio.eu/" target="_blank">2-years MEME program</a>).
 
