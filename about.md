@@ -10,7 +10,7 @@ permalink: /about/
 
 ## Me and my research interests
 
-<img align="right" alt="Portrait of Dmytro Kryvokhyzha" src="{{ site.baseurl }}/assets/pages/about_Dmytro-Kryvokhyzha.jpeg">
+<figure style="float: right;"><img alt="Portrait of Dmytro Kryvokhyzha" src="{{ site.baseurl }}/assets/pages/about_Dmytro-Kryvokhyzha.jpeg"></figure>
 
 My name is Dmytro Kryvokhyzha. Yes… I know… my last name is complicated. Almost no one can pronounce it correctly 🙂 .
 

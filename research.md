@@ -14,7 +14,7 @@ permalink: /research/
 
 **Place**: Uppsala University, Sweden.
 
-<img align="right" alt="Dog silhouette" src="{{ site.baseurl }}/assets/pages/dog.jpeg">
+<figure style="float: right;"><img alt="Dog silhouette" src="{{ site.baseurl }}/assets/pages/dog.jpeg"></figure>
 
 A comparison of patterns of genetic variation between dogs and wolfs revealed that selection had targeted the genes responsible for starch digestion, glucose absorption, and the ability to store glucose as fat in dogs, indicating that dogs had experienced an adaptive shift from a protein to more carbohydrate-based energy metabolism. Dogs also show the wide distribution for copy number variation of the gene coding for pancreatic amylase (*AMY2B*), the enzyme that breaks starch into maltose in the small intestine, while in wolf this gene is mostly present in one copy. This suggests that the efficacy of starch digestion may vary among dog breeds. Thus, dogs represent a unique model to study the genetic basis of metabolic adaptations during domestication. In my research, I aim to localize mutations that are likely to underlie these metabolic adaptations by analyzing large-scale population genomic and transcriptomics data.
 
@@ -31,7 +31,7 @@ Karl Holm, Pascal Milesi.
 
 **Place**: Uppsala University, Sweden.
 
-<img align="right" alt="Shepherd's Purse *Capsella_bursa-pastoris* growing in a pot" src="{{ site.baseurl }}/assets/pages/Capsella_bursa-pastoris-in-a-pot.jpeg">
+<figure style="float: right;"><img alt="Shepherd's Purse *Capsella_bursa-pastoris* growing in a pot" src="{{ site.baseurl }}/assets/pages/Capsella_bursa-pastoris-in-a-pot.jpeg"></figure>
 
 The occurrence of polyploidy in land plant evolution is a common phenomenon. Although the role of polyploidy in evolution is still debated, it is often associated with increased adaptability. Shepherd’s purse (*Capsella_bursa-pastoris*) is a case in point of this phenomenon. It is a tetraploid selfing weed that originated very recently through hybridization between *Capsella grandiflora* (outcrosser) and *Capsella orientalis* (selfer). Unlike its parental species which have very restricted distribution range, C. bursa-pastoris occurs worldwide. Most likely such colonization success is attributed to its allotetraploid origin. In my thesis, I tried to understand how polyploidy and hybrid nature confer such colonization ability on *C. bursa-pastoris*.
 
@@ -46,7 +46,7 @@ To do that, I performed comparative genomic analyses using both whole-genome DNA
 
 **Collaborators**: Glib Mazepa, <a href="https://www.zfmk.de/en/zfmk/matthias-geiger" target="_blank">Matthias Geiger</a>, <a href="https://www.zfmk.de/en/zfmk/fabian-herder" target="_blank">Fabian Herder</a>, and others.
 
-<img align="right" alt="Triplophysa stoliczkai and Triplophysa lacusnigri from Pamir" src="{{ site.baseurl }}/assets/pages/Triplophysa_stoliczkai_lacusnigri_Pamir.jpeg">
+<figure style="float: right;"><img alt="Triplophysa stoliczkai and Triplophysa lacusnigri from Pamir" src="{{ site.baseurl }}/assets/pages/Triplophysa_stoliczkai_lacusnigri_Pamir.jpeg"></figure>
 
 The Roof of the World is a metaphoric name of the Pamir mountains in Central Asia. This highland region uplifted relatively recently (12-15 Mya) and it continues to uprise (in last 100,000 years the elevation of the area increased in approximately 1 km). The growth of mountain ridges partitioned the original species ranges by geographic barriers and thus promoted allopatric speciation. The Central Asian mountains belong to one of the 34 world’s biodiversity hotspots.
 
@@ -63,7 +63,7 @@ Surprisingly, the last extensive biological studies in this region are dated to 
 
 **Place**: Harvard University, USA.
 
-<img align="right" alt="Desitree of phylogenetic signal along the genomes of Heliconius butterflies" src="{{ site.baseurl }}/assets/pages/Heliconius_50kb_Densitree.jpeg">
+<figure style="float: right;"><img alt="Desitree of phylogenetic signal along the genomes of Heliconius butterflies" src="{{ site.baseurl }}/assets/pages/Heliconius_50kb_Densitree.jpeg"></figure>
 
 Sequencing of whole genomes in non-model organisms provides new insights into the genomic architecture of speciation. There is particularly widespread interest in patterns of divergence with ongoing gene flow. Theory predicts that in the face of gene flow the differentiation between genomic regions under selection and the rest of the genome will be more pronounced than in the case of allopatric divergence. These regions of divergences are named "islands of speciation" and as speciation proceeds, these "islands" are expected to grow into "continents".
 
@@ -81,7 +81,7 @@ You can read more about the results of this project in my <a href="http://urn.kb
 
 **Place**: Max Planck Institute for Evolutionary Biology, Germany.
 
-<img align="right" alt="Gene expression heatmap of the candidate genes in different organs of a hybrid sculpin Cottus" src="{{ site.baseurl }}/assets/pages/Cottus-gene-expression-heatmap.jpeg">
+<figure style="float: right;"><img alt="Gene expression heatmap of the candidate genes in different organs of a hybrid sculpin Cottus" src="{{ site.baseurl }}/assets/pages/Cottus-gene-expression-heatmap.jpeg"></figure>
 
 Hybridization causes rapid genetic changes that may generate phenotypic novelty and facilitate abrupt speciation. A recent spread of invasive sculpins, a natural hybrid between *Cottus perifretum* and *Cottus rhenanus*, into the main stream of the Rhine River where parental species do not occur is a good model to study the onset of hybrid speciation. A previous study of whole-body gene expression profiles of these fishes revealed that hybrid individuals are distinguished by a number of transgressively up-regulated genes. I tested whether this up-regulation was associated with any particular organ/tissue using the microarray analysis. My results indicated that this up-regulation was rather caused by multiple evolutionary modifications in different organs/tissues.
 
@@ -97,7 +97,7 @@ This was my 3-months research training project during the Master’s studies
 
 **Place**: IRD, University of Montpellier II, France.
 
-<img align="right" alt="Phylogenetic tree of COI of some Indo-Pacific Mugilidae fishes" src="{{ site.baseurl }}/assets/pages/Phylogeny-of-some-Indo-Pacific-Mugilidae-fishes.jpeg">
+<figure style="float: right;"><img alt="Phylogenetic tree of COI of some Indo-Pacific Mugilidae fishes" src="{{ site.baseurl }}/assets/pages/Phylogeny-of-some-Indo-Pacific-Mugilidae-fishes.jpeg"></figure>
 
 Biogeographic barriers of the Indo-Pacific region are thought to contribute to the isolation and diversification of sea-basin populations. I compared phylogeographic patterns from mitochondrial COI sequences among several Mugilidae species that are widely distributed in the Indo-Pacific Ocean to find major biogeographic barriers. I identified that some species/phylogenetic lineages demonstrated phylogeographic structures that reflected either Indo-Pacific or mid-Indian barriers, whereas other species showed large-scale genetic homogeneity. I also provided evidence that the family Mugilidae comprises cryptic species and several polyphyletic or paraphyletic genera.
 
@@ -112,7 +112,7 @@ This was my thesis research project during my Master’s studies in Ukraine.
 
 **Place**: V. N. Karazin Kharkiv National University, Ukraine, and Institute of Animal Physiology and Genetics, Czech Republic.
 
-<img align="right" alt="Spined loach Cobitis and erythrocyte sizes of different ploidy" src="{{ site.baseurl }}/assets/pages/Cobitis-2-3n_erythrocytes.jpeg">
+<figure style="float: right;"><img alt="Spined loach Cobitis and erythrocyte sizes of different ploidy" src="{{ site.baseurl }}/assets/pages/Cobitis-2-3n_erythrocytes.jpeg"></figure>
 
 Spined loaches of the genus *Cobitis* is a group of small bottom-dwelling fishes that possesses a unique ability to beget hybrid forms of different ploidy. Hybrids are usually tri- and tetraploid all-females which reproduce gynogenetically. Because of the need for sperm to activate egg development, these females live sympatrically with one or two parental species forming diploid-polyploid (unisexual-bisexual) complexes. These phenomena make spined loaches be an object of comprehensive investigations.
 
