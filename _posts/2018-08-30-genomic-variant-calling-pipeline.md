@@ -5,7 +5,7 @@ date: 2018-08-30 15:36:50 +02:00
 categories: Pipelines
 tags: dog, genomics, python, variant
 image: /assets/posts/2018-08-30-genomic-variant-calling-pipeline/Genomic-variant-calling-pipeline.jpeg
-_focus_key_word: genomic variant calling pipeline
+alt: genomic variant calling pipeline
 description: An automated genomic variant calling pipeline becomes essential when a project scales to hundreds of genomes. Here is my genomic variant calling pipeline.
 ---
 

@@ -5,7 +5,7 @@ date:   2017-11-08 20:00:00 +0100
 categories: Pipelines
 tags: Big Data, Spark, Hail, genomics
 image: /assets/posts/2017-11-08-big-data-tutorial/SparkHailGenomics.jpeg
-_focus_key_word: Genomic Data Hail
+alt: Genomic Data Hail
 description: I show a simple Hail pipeline to filter a VCF file and build a PCA plot to explore the structure of the data in Databricks Platform.
 ---
 

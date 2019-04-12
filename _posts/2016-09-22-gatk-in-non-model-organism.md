@@ -5,7 +5,7 @@ date: 2016-09-22 22:33:26 +02:00
 categories: Pipelines
 tags: GATK, genomics, pipeline
 image: /assets/posts/2016-09-22-gatk-in-non-model-organism/GATK_best_practice_non-model.jpeg
-_focus_key_word: genotype calling non-model organism
+alt: genotype calling non-model organism
 description: For genotype calling in non-model organisms, modifications of the GATK Best Practices are often essential. This post shows my approach to this issue.
 ---
 

@@ -5,7 +5,7 @@ date: 2019-03-22 15:47:36 +01:00
 categories: Programming
 tags: illustration, maps, R
 image: /assets/posts/2019-03-22-rivers-map-in-r/Cobitis_invasive_map_ed.jpeg
-_focus_key_word: map with rivers in R
+alt: map with rivers in R
 description: R is a great tool to make maps including maps with rivers. I would like to share how I created a map with rivers in R using the simplest code possible.
 ---
 

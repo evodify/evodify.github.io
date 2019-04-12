@@ -5,7 +5,7 @@ date: 2016-06-09 15:14:36 +01:00
 categories: Genomics
 tags: genotyping, programs
 image: /assets/posts/2016-06-09-heterozygotes-ambiguity-characters/Alignment_with_ambiguty_characters.jpeg
-_focus_key_word: heterozygotes as ambiguity characters
+alt: heterozygotes as ambiguity characters
 description: Ambiguity characters are often used to code heterozygotes. However, using heterozygotes as ambiguity characters may bias many estimates.
 ---
 
