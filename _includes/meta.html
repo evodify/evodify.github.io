@@ -19,4 +19,13 @@
     {% if page.title %}
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="twitter:title" content="{{ page.title }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {% endif %}
+    
+    {% if page.image %}
+    <meta property="og:image" content="{{ page.image }}" />
+    <meta name="twitter:image" content="{{ page.image }}" />
+    {% else %}
+    <meta property="og:image" content="{{ site.image }}" />
+    <meta name="twitter:image" content="{{ site.image }}" />
     {% endif %}

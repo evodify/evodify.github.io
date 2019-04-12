@@ -16,6 +16,9 @@ description: > # this means to ignore newlines until "avatar:"
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: /assets/avatar_Dmytro-Kryvokhyzha.jpeg
 
+# URL of the website thumbnail
+image: /assets/screenshot.png
+
 #
 # Flags below are optional
 #
