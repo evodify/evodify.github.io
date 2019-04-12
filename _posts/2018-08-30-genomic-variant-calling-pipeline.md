@@ -13,15 +13,13 @@ excerpt: An automated genomic variant calling pipeline becomes essential when a 
 
 <p>Well, I used replacements (with <code>sed</code>) and loops (with <code>for i in x; do ...</code>) to reduce the amount of work, but there were many manual steps. I managed to process 24-31 small <em>Capsella</em> genomes (~200Mb) this way during my PhD projects. Now, I work with the dog genome which is much bigger (~2.5Gb) and I also need to analyze many more samples (82 genomes at the moment). So, I had to write this genomic variant calling pipeline to make my workflow as automatic as possible.</p>
 
-<!--more-->
-
 <p>This genomic variant calling pipeline was written for the dog data, but you can modify it for any other organism with a reference genome (see below). If you work with non-model organisms, I recommend you also check my <a href="{{ site.baseurl }}/gatk-in-non-model-organism/">GATK tutorial for non-model organisms</a>.</p>
 
 <h2>Requirements</h2>
 
 <p>For this genomic variant calling pipeline you would need the following software installed:</p>
 <ul>
-<li><a href="http://bio-bwa.sourceforge.net/" target="_blank">BWA</a> or <a href="http://www.well.ox.ac.uk/project-stampy" target="_blank">Stampy</a> - mapping.</li>
+<li><a href="http://bio-bwa.sourceforge.net/" target="_blank">BWA</a> or <a href="https://genome.cshlp.org/content/21/6/936" target="_blank">Stampy</a> - mapping.</li>
 <li><a href="http://samtools.sourceforge.net/" target="_blank">Samtools</a> - SAM/BAM files manipulation.</li>
 <li><a href="https://broadinstitute.github.io/picard/">Picard</a> - mark duplicates.</li>
 <li><a href="http://qualimap.bioinfo.cipf.es/" target="_blank">QualiMap</a> (optional) - check the mapping quality.</li>

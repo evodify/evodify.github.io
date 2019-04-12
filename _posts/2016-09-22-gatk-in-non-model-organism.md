@@ -34,7 +34,7 @@ Some researchers trim low-quality sequence tails using tools like <a href="http:
 
 <p>GATK Best Practice recommends using <a href="http://bio-bwa.sourceforge.net/" target="_blank">BWA</a> aligner for DNA data. BWA is probably the best software in terms of accuracy and speed for mapping sequences with low divergence from a reference. In non-model organisms, the common problem is that the only reference genome available is a sister species that can be considerably divergent. So, one has to use an aligner that accounts for this divergence.</p>
 
-<p>There is a nice <a href="http://www.heliconius.org/2013/aligning-heliconius-short-read-sequences/" target="_blank">blog-post </a> comparing different aligners for mapping divergent sequence reads in <em>Heliconius.</em> As the author of this post, I also prefer to use <a href="http://www.well.ox.ac.uk/project-stampy" target="_blank">Stampy</a>. Stampy produces reasonably good results with default settings, however, the accuracy can be improved if the divergence from the reference is correctly specified with option --substitutionrate.</p>
+<p>There is a nice <a href="http://www.heliconius.org/2013/aligning-heliconius-short-read-sequences/" target="_blank">blog-post </a> comparing different aligners for mapping divergent sequence reads in <em>Heliconius.</em> As the author of this post, I also prefer to use <a href="https://genome.cshlp.org/content/21/6/936" target="_blank">Stampy</a>. Stampy produces reasonably good results with default settings, however, the accuracy can be improved if the divergence from the reference is correctly specified with option --substitutionrate.</p>
 
 <p>The first step is to prepare the reference genome:</p>
 

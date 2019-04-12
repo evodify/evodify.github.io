@@ -15,13 +15,13 @@ excerpt: Dmytro Kryvokhyzha is a Bioinformatician & Evolutionary Biologist at Up
 
 My name is Dmytro Kryvokhyzha. Yes… I know… my last name is complicated. Almost no one can pronounce it correctly 🙂 .
 
-I did my PhD on genome evolution and adaptation in the allotetraploid weed *Capsella bursa-pastoris* in <a href="https://lascouxlab.wordpress.com/" target="_blank">Martin Lascoux group</a>. Currently, I work as a postdoc in <a href="https://www.imbim.uu.se/forskargrupper/genetik-och-genomik/axelsson-erik/" target="_blank">Erik Axelsson group</a> and I look for genomic changes associated with diet adaptation in dogs. During my research career, I also studied diploid-polyploid complexes of spined loaches *Cobitis*, phylogeography of Indo-Pacific Mugilidae, hybrid speciation in invasive sculpins *Cottus*, and speciation with gene flow in *Heliconius* butterflies. You can read more about these projects [here](/projects).
+I did my PhD on genome evolution and adaptation in the allotetraploid weed *Capsella bursa-pastoris* in <a href="https://lascouxlab.wordpress.com/" target="_blank">Martin Lascoux group</a>. Currently, I work as a postdoc in <a href="https://www.imbim.uu.se/forskargrupper/genetik-och-genomik/axelsson-erik/" target="_blank">Erik Axelsson group</a> and I look for genomic changes associated with diet adaptation in dogs. During my research career, I also studied diploid-polyploid complexes of spined loaches *Cobitis*, phylogeography of Indo-Pacific Mugilidae, hybrid speciation in invasive sculpins *Cottus*, and speciation with gene flow in *Heliconius* butterflies. You can read more about these projects [here](/research).
 
 In my research, I mostly sit in front of the computer and I apply population genetic analyses on genomic data with the help of bioinformatics tools. Although I mostly study genomic data, when possible I also try to integrate information on the levels of genome, transcriptome, and phenotype.
 
 Recently, my attention has also been drawn to [Big Data analytics](). With the current pace of data production, distributed computer systems are essential to collect, organize and analyze large sets. I have always been fascinated by how computers do the work for you and I try to learn more about how we can use the power of computing systems to understand large data-sets.
 
-If you would like more information, please have a look at my [publications](/publications), [research projects](/research), [blog-posts](/blog), and of course, feel free to get in touch through my [contact page](/contact).
+If you would like more information, please have a look at my [publications](/publications), [research projects](/research), [blog-posts](/), and of course, feel free to get in touch through my [contact page](/contact).
 
 ## Why Evodify.com?
 
