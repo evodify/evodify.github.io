@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link rel="canonical" href="{{ site.url }}{{ page.url | remove:'index.html' | strip_slash }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | remove:'index.html' | remove:'index.php' }}">
 
     <title>{% if page.title %}{{ page.title }} - {{ site.name }} {% else %}{{ site.name }} - {{ site.slogan }} {% endif %}</title>
 
