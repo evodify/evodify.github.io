@@ -56,6 +56,7 @@ h2 {
   font-size: 24px;
 }
 
+
 h3 {
   font-size: 20px;
 }
@@ -339,6 +340,19 @@ footer {
     font-size: 10pt;
     margin: 5px 0 5px 0 !important;
 }
+
+
+.index-page-titles {
+    font-size: 30px;
+    a {
+        color: inherit;
+        
+        &:hover, &:active {
+        color: $blue;
+        }
+    }
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
