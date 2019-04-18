@@ -25,19 +25,20 @@ However, for my current dog projects, I choose to use <a href="https://github.co
 
 The whole pipeline consists of STAR 2-pass alignment and reads counting with HTSeq:
 
-1. [Index the reference genome](#1.-Index-the-reference-genome)
+1. [Index the reference genome](#1-index-the-reference-genome)
 
-2. [Map reads to the reference genome (2-pass mode)](#2.-Run-the-mapping)
 
-    2.1. [Standard STAR mapping.](#2.1-Pass1-STAR-mapping)
+2. [Map reads to the reference genome (2-pass mode)](#2-run-the-mapping)
 
-    2.2. [Collect the junctions information from all samples.](#2.2-Filter-and-collect-the-splicing-information)
+    2.1. [Standard STAR mapping.](#21-pass1-star-mapping)
 
-    2.3. [Use new junctions from all samples for the 2nd pass mapping.](#2.3.-Pass2-STAR-mapping)
+    2.2. [Collect the junctions information from all samples.](#22-filter-and-collect-the-splicing-information)
 
-3. [Count the number of reads mapped to each gene](#3.-Counting-the-number-of-reads-per-gene.).
+    2.3. [Use new junctions from all samples for the 2nd pass mapping.](#23-pass2-star-mapping)
 
-All these STAR mapping steps can be automated with Snakemake as [you will see below](#Snakemake-STAR-pipeline).
+3. [Count the number of reads mapped to each gene](#3-counting-the-number-of-reads-per-gene).
+
+All these STAR mapping steps can be automated with Snakemake as [you will see below](#snakemake-star-pipeline).
 
 
 ### 1. Index the reference genome
