@@ -90,3 +90,6 @@ IRkernel::installspec()
 
 <p>This way you can use Jupyter Notebooks to log and execute your Python, R, Bash together in one single notebook as well as to create a well-annotated dedicated Python, R, Bash pipelines.</p>
 
+
+*If you have any questions or suggestions, feel free to [email me](mailto:dmytro.kryvokhyzha@evobio.eu)*.
+

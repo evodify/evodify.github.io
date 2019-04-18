@@ -29,3 +29,6 @@ I prepared this tutorial for the course <a href="https://lamastex.github.io/scal
 Watch the lecture where I presented this notebook!
 
 <iframe width="750" height="422" src="https://www.youtube.com/embed/qMGKAERggU8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*If you have any questions or suggestions, feel free to [email me](mailto:dmytro.kryvokhyzha@evobio.eu)*.
+

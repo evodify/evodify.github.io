@@ -425,3 +425,6 @@ WCRO84_S1_L005_R1_001.fastq.gz
 <p>I hope you will use this genomic variant calling pipeline in your workflow. In my case of 82 dog samples with the mean coverage of x30, running the whole pipeline took little more than a week. Given that it is automatic and I was able to do some other work during this time, it is not a lot.</p>
 
 <p>I know that such a pipeline can be made even more efficient and reliable with <a href="https://www.nextflow.io/" target="_blank">Nextflow</a> and <a href="https://snakemake.readthedocs.io/en/stable/" target="_blank">SnakeMake</a>. But I found out about these workflow management systems after I wrote this pipeline. Moreover, I first thought to write this genomic variant calling pipeline in <a href="{{ site.baseurl }}/processing-genomic-data-apache-spark-big-data-tutorial/">Apache Spark</a>, but Spark is not mainstream yet and Spark version of the GATK is still in beta. So, I hope I will update this pipeline with a more advanced framework in the future.</p>
+
+*If you have any questions or suggestions, feel free to [email me](mailto:dmytro.kryvokhyzha@evobio.eu)*.
+
