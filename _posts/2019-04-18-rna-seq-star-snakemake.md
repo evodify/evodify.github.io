@@ -282,6 +282,8 @@ Read the comments to find the line you need to change to adjust this Snakemake p
 
 Also, depending on your file location and Snakemake version, Snakemake may have problems finding files without the absolute path in file names. For example, instead of relative path `fastq/{sample}/{sample}_L001_R1.fastq.gz` you may need to use the absolute path `/home/dmytro/RNA-Seq/fastq/{sample}/{sample}_L001_R1.fastq.gz`
 
+### Run Snakemake on a Slurm cluster (Uppmax)
+
 I executed this `Snakemake` file on our Slurm cluster (<a href="http://www.uppmax.uu.se/" target="_blank">Uppmax</a>). To do that I created a Snakemake cluster config file [cluster.yaml](/assets/posts/2019-04-18-rna-seq-star-snakemake/cluster.yaml):
 
 ```bash
