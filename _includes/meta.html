@@ -1,13 +1,28 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta property="og:locale" content='en_US'>
 
+    {% if page.title %}
+    <meta property="og:type" content="article">
+    <meta property='og:title' content='{{ page.title }}'>
+    <meta property='twitter:title' content='{{ page.title }}'>
+    <meta name='twitter:card' content='summary_large_image'>
+    {% else %}
+    <meta property="og:type" content="website">
+    <meta property='og:title' content='{{ site.name }} - {{ site.slogan }}'>
+    <meta property='twitter:title' content='{{ site.name }} - {{ site.slogan }}'>
+    <meta name='twitter:card' content='summary_large_image'>
+    {% endif %}
+    
     {% if page.excerpt %}
     <meta name='description' content='{{ page.excerpt| strip_html }}'>
     <meta property='og:description' content='{{ page.excerpt| strip_html }}'>
+    <meta name="twitter:description" content='{{ page.excerpt| strip_html }}'>
     {% else %}
     <meta name='description' content='{{ site.description }}'>
     <meta property='og:description' content='{{ site.description }}'>
+    <meta name="twitter:description" content='{{ site.description }}'>
     {% endif %}
     
     {% if page.robots %}
@@ -15,17 +30,10 @@
     {% endif %}
     
     <meta name='author' content='{{ site.name }}'>
+    <meta property="og:site_name" content="{{ site.name }} - {{ site.slogan }}">
+    <meta name="twitter:site" content="@{{ site.twitter }}">
+    <meta name="twitter:creator" content="@{{ site.twitter }}">
 
-    {% if page.title %}
-    <meta property='og:title' content='{{ page.title }}'>
-    <meta property='twitter:title' content='{{ page.title }}'>
-    <meta name='twitter:card' content='summary_large_image'>
-    {% else %}
-    <meta property='og:title' content='{{ site.name }} - {{ site.slogan }}'>
-    <meta property='twitter:title' content='{{ site.name }} - {{ site.slogan }}'>
-    <meta name='twitter:card' content='summary_large_image'>
-    {% endif %}
-    
     {% if page.url %}
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
     {% else %}
@@ -35,7 +43,11 @@
     {% if page.image %}
     <meta property='og:image' content='{{ site.url }}{{ page.image }}'>
     <meta name='twitter:image' content='{{ site.url }}{{ page.image }}'>
+    <meta property="og:image:width" content="740">
+    <meta property="og:image:height" content="405">
     {% else %}
     <meta property='og:image' content='{{ site.url }}{{ site.image }}'>
     <meta name='twitter:image' content='{{ site.url }}{{ site.image }}'>
     {% endif %}
+    
+   
