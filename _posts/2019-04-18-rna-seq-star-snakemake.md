@@ -21,7 +21,7 @@ For example, I used <a href="https://dx.doi.org/10.1101%2Fgr.111120.110" target=
 
 
 
-However, for my current dog projects, I choose to use <a href="https://github.com/alexdobin/STAR" target="_blank">STAR aligner</a>. It is a splicing aware aligner, and what is particularly important for large projects, it is one of the fastest aligners. I also use the multi-sample 2-pass mapping mode that better maps spliced reads (See STAR documentation). 
+However, for my current dog projects, I choose to use <a href="https://github.com/alexdobin/STAR" target="_blank">STAR aligner</a>. It is a splicing aware aligner, and what is particularly important for large projects, it is one of the fastest aligners. I also use STAR in the multi-sample 2-pass mapping mode that better maps spliced reads (See STAR documentation). 
 
 The whole pipeline consists of STAR 2-pass alignment and reads counting with HTSeq:
 
@@ -58,7 +58,7 @@ STAR --runThreadN 20 \
 --sjdbOverhang 100
 ```
 
-I think these options are self-explanatory. `--runThreadN` indicates the number of cores to be used. `--sjdbOverhang` can be adjusted as ReadLength-1 but 100 is recommended in the STAR documentation as a generally good value. `canFam3` is the reference name for both FASTA and GTF file. You need to change this name for your reference in all commands below.
+I think these options are self-explanatory. `--runThreadN` indicates the number of cores to be used. `--sjdbOverhang` can be specified as ReadLength-1. You can also 100 which is recommended as a generally good value in the STAR documentation. `canFam3` is the reference name for both FASTA and GTF file. You need to change this name for your reference in all commands below.
 
 If you have only GFF annotation, you can convert GFF to GTF with <a href="http://cole-trapnell-lab.github.io/cufflinks/file_formats/" target="_blank">Cufflinks</a>:
 
@@ -69,7 +69,7 @@ gffread canFam3.1.92.gff3 -T -o canFam3.gtf
 
 ### 2. Run the mapping
 
-You can run the [standard 1-pass STAR mapping](#2.1.-Pass1-STAR-mapping) and the results should be good overall. However, given that STAR is very fast, running the 2-pass mode does not take too long but it can improve the mapping to novel junctions. Basically, you run the 1-pass STAR mapping to discover junctions information, then you collect and filter that information from all samples and run the 2-pass using that information.
+You can run the [standard 1-pass STAR mapping](#21-pass1-star-mapping) and the results should be good overall. However, given that STAR is very fast, running the 2-pass mode does not take too long and it can improve the mapping to novel junctions. Basically, you run the 1-pass STAR mapping to discover junctions information, then you collect and filter that information from all samples and run the 2-pass using that information.
 
 
 #### 2.1. Pass1 STAR mapping
@@ -86,9 +86,9 @@ STAR --runThreadN 20 \
 --readFilesCommand zcat  \
 --outSAMtype BAM Unsorted
 ```
-Again, most of the options are self-explanatory. `--readFilesCommand zcat` is needed to extract *gz* compressed reads. `--outSAMtype` will output an unsorted BAM instead of a default SAM. This saves disk space. If you have your sample sequences in several lanes, you can list these files with comma separation in `--readFilesIn`.
+Again, most of the options are self-explanatory. `--readFilesCommand zcat` is needed to extract *gz* compressed reads. `--outSAMtype` will output an unsorted BAM instead of a default SAM. This saves disk space. If you have your sample sequences in several lanes, you can list these files with comma separation in `--readFilesIn` as I did above.
 
-This command will produce several output files, among which we are mostly interested in the splice junction information file `SJ.out.tab`, which will be used in the next step. So. I discard the alignment because it takes disk space.
+This command will produce several output files, among which we are mostly interested in the splice junction information file `SJ.out.tab` that will be used in the next step. So. I discard the alignment BAM file because it takes too much disk space.
 
 ```bash
 rm Sample1_pass1/Aligned.out.bam
@@ -114,7 +114,7 @@ I think it is really difficult to verify splicing information. So, this filterin
 
 #### 2.3 Pass2 STAR mapping
 
-Now, we just execute the same mapping command as at [step 2.1](#2.1-Pass1-STAR-mapping) but also include the information on the discovered splicing (`--sjdbFileChrStartEnd`). I also prefer to add read group information (`--outSAMattrRGline`) at this step. It is not necessary for reads counting but it may be useful in the future if I decide to use these STAR generated BAM files for other analyses.
+Now, we just execute almost the same mapping command as at [step 2.1](#21-pass1-star-mapping) but include add the information on the discovered splicing (`--sjdbFileChrStartEnd`). I also prefer to add read group information (`--outSAMattrRGline`) at this step. It is not necessary for reads counting but it may be useful in the future if I decide to use these STAR generated BAM files for other analyses.
 
 ```bash
 mkdir Sample1pass2
@@ -132,7 +132,7 @@ STAR --runThreadN 20 \
 
 ### 3. Counting the number of reads per gene.
 
-You can count the number of reads per gene on the fly during the STAR mapping if you provide it the option `--quantMode GeneCounts`. However, I prefer to count reads with `htseq-count` and change its default parameters to use `-m union`. You can see what the option `-m union` mean in the image below.
+You can count the number of reads per gene on the fly during the STAR mapping if you provide it the option `--quantMode GeneCounts`. However, I prefer to count reads with `htseq-count` and use the option `-m union` to deal with overlapping features. You can see what the option `-m union` mean in the image below.
 
 <figure class="caption"><img src="{{ site.baseurl }}/assets/posts/2019-04-18-rna-seq-star-snakemake/htseq-count_union_option.jpeg" alt="Count reads with htseq-count and the option union" />
 <figcaption class="caption">Different ways to counts non-uniquely mapped reads with htseq-count ( <a href="https://htseq.readthedocs.io/en/release_0.11.1/count.html" target="_blank">source</a>).</figcaption>
@@ -278,7 +278,7 @@ rule htseq:
             'grep ENS {output[0]} | sed "s/gene://g" > {output[1]}  '
 ```
 
-Read the comments to find the line you need to change to adjust this Snakemake pipeline for your data.
+Read the comments within the code to find the line you need to change to adjust this Snakemake pipeline for your data.
 
 Also, depending on your file location and Snakemake version, Snakemake may have problems finding files without the absolute path in file names. For example, instead of relative path `fastq/{sample}/{sample}_L001_R1.fastq.gz` you may need to use the absolute path `/home/dmytro/RNA-Seq/fastq/{sample}/{sample}_L001_R1.fastq.gz`
 
@@ -310,14 +310,14 @@ htseq:
 
 ```
 
-This config file is used during job submission with `--cluster-config cluster.yaml`. 
+This config file is used during Snakemake job submission with `--cluster-config cluster.yaml`. 
 
 I first run this pipeline in a dry mode with the `--dryrun` option:
 
 ```bash
 snakemake -s Snakefile -j 100 --dryrun --cluster-config cluster.yaml --cluster "sbatch -A {cluster.account} -t {cluster.time} -p {cluster.partition} -n {cluster.n}"
 ```
-If everything is fine, you can run this command in a regular mode. However, I prefer to create a sbatch file (see below) and submit this command as a job which in turn will submit all other jobs as defined in the `Snakemake` file.
+If everything works fine in a dry mode, you can run this command in a regular mode from a login node of the server. However, I prefer to create a sbatch file (see below) and submit this command as a job which in turn will submit all other jobs as defined in the `Snakemake` file.
 
 ```bash
 #!/bin/bash -l
@@ -335,7 +335,7 @@ snakemake -s Snakefile -j 100 --cluster-config cluster.yaml --cluster "sbatch -A
 
 ## Conclusion
 
-Snakemake is a great tool and I am very happy that I finally started using it. A combination of STAR speed and Snakemake workflow efficiency makes RNA-Seq mapping pipeline truly fast, robust, and error-safe. This pipeline has already saved me some time with my pilot RNA-Seq experiment and it will save even more time when new RNA-Seq data will arrive.
+Snakemake is a great tool and I am very happy that I have finally started using it. A combination of STAR speed and Snakemake workflow efficiency makes RNA-Seq mapping pipeline truly fast, robust, and error-safe. This pipeline has already saved me some time with my pilot RNA-Seq experiment and it will save even more time when my new RNA-Seq data will arrive.
 
 I hope I will also update [my genotype calling pipeline](https://evodify.com/genomic-variant-calling-pipeline/) with Snakemake workflow soon.
 
