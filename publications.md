@@ -15,9 +15,9 @@ You can view this list at <a href="https://scholar.google.se/citations?user=99un
 
 ## 2019
 
-**9.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2019. <a href="https://www.biorxiv.org/content/early/2018/11/27/479048" title="bioRxiv" target="_blank">Towards the new normal: Transcriptomic convergence and genomic legacy of the two subgenomes of an allopolyploid weed (*Capsella bursa-pastoris*).</a> *PLOS Genetics (Accepted)*. 
+**9.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1008131" title="PLOS Genetics" target="_blank">Towards the new normal: Transcriptomic convergence and genomic legacy of the two subgenomes of an allopolyploid weed (*Capsella bursa-pastoris*).</a> *PLOS Genetics*, 15(5), pp 1-30.
 
-**8.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2019. <a href="http://dx.plos.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae).</a> *PLOS Genetics*, 15(2), pp 1-34.
+**8.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae).</a> *PLOS Genetics*, 15(2), pp 1-34.
 
 ## 2018
 
