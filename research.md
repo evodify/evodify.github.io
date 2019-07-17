@@ -106,7 +106,8 @@ Biogeographic barriers of the Indo-Pacific region are thought to contribute to t
 
 This was my thesis research project during my Master’s studies in Ukraine.
 
-2008 – 2010
+**2008 – 2010**
+
 **Supervisor**: <a href="http://zoology.univer.kharkov.ua/Personal/gennadiy.htm" target="_blank">Gennadiy A. Shandikov</a>.
 
 **Collaborators**: Karel Janko and Lukas Choleva.
