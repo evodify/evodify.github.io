@@ -58,8 +58,6 @@ My PhD program included 20% of teaching. I taught the practical parts of the fol
 * R project
 * Evolutionary Processes
 
-I also teach how to use Linux and open-source software on <a href="https://www.youtube.com/AverageLinuxUser" target="_blank">YouTube</a>. 
-
 ## Internship and Training
 
 **25 – 27 Mar, 2019** – <a href="https://coderefinery.org/workshops/2019-03-25-stockholm/" target="_blank">Sustainable Software Development</a>, Stockholm, Sweden.
@@ -103,4 +101,3 @@ Please, see my [Publications](/publications/) page for the list of papers.
 
 * Long distance running
 * <a href="https://1x.com/member/kryvokhyzhad" target="_blank">Wildlife photography</a>
-* <a href="https://www.youtube.com/AverageLinuxUser" target="_blank">YouTube channel</a>

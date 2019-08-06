@@ -35,9 +35,6 @@ Unfortunately, I am not able to work on this website as much as I originally wan
 
 To relieve my mind from science, I like spending time with my family, doing sports, and <a href="https://1x.com/member/kryvokhyzhad" target="_blank">photographing nature</a>.
 
-
-I also have a strong passion for open-source software and Linux OS. I make Linux video tutorials and publish them on <a href="https://www.youtube.com/AverageLinuxUser" target="_blank">my YouTube channel</a>. Check it out!
-
 ## Stay in touch
 
 If you are interested in my research, feel free to connect with me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, <a href="https://uppsala.academia.edu/DKryvokhyzha" target="_blank">Github</a>, <a href="https://www.researchgate.net/profile/Dmytro_Kryvokhyzha" target="_blank">Researchgate</a>, and <a href="https://se.linkedin.com/in/evodify" target="_blank">LinkedIn</a>. You can also [reach me by email](mailto:dmytro.kryvokhyzha@evobio.eu).
