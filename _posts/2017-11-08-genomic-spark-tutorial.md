@@ -18,7 +18,11 @@ I prepared this tutorial for the course <a href="https://lamastex.github.io/scal
 
 <a href="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html" target="_blank">Open this notebook in a full-width view in a new tab.</a>
 
-<center><iframe src="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html" width="750" height="1000" frameborder="0" align="aligncenter"></iframe></center>
+<div class="embed-container" style="padding-bottom: 100%">
+  <iframe
+      src="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html" width="750" height="1000" frameborder="0" align="aligncenter">
+  </iframe>
+</div> 
 
 &nbsp;
 
@@ -28,7 +32,14 @@ I prepared this tutorial for the course <a href="https://lamastex.github.io/scal
 
 Watch the lecture where I presented this notebook!
 
-<iframe width="750" height="422" src="https://www.youtube.com/embed/qMGKAERggU8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="embed-container">
+  <iframe
+      src="https://www.youtube.com/embed/qMGKAERggU8"
+      width="720"
+      height="480"
+      allowfullscreen>
+  </iframe>
+</div> 
 
 *If you have any questions or suggestions, feel free to [email me](mailto:dmytro.kryvokhyzha@evobio.eu)*.
 
