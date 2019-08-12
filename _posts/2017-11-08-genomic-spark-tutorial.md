@@ -20,7 +20,9 @@ I prepared this tutorial for the course <a href="https://lamastex.github.io/scal
 
 <div class="embed-container" style="padding-bottom: 100%">
   <iframe
-      src="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html" width="750" height="1000" frameborder="0" align="aligncenter">
+      src="{{ site.baseurl }}/assets/posts/2017-11-08-big-data-tutorial/GenomicsSpark.html"
+      width="750"
+      height="1000">
   </iframe>
 </div> 
 
