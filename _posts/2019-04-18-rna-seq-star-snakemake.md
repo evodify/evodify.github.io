@@ -9,8 +9,6 @@ _focus_key_word: STAR mapping with Snakemake
 excerpt: "STAR mapping with Snakemake can save you a lot of time. STAR is a fast RNA-Seq aligner, whereas Snakemake provides automatic, reproducible, and scalable pipelining."
 ---
 
-<a href="https" target="_blank"> </a>
-
 I have described my pipelines for genotype calling in both [non-model](https://evodify.com/gatk-in-non-model-organism/) and [model organisms](https://evodify.com/genomic-variant-calling-pipeline/). I also showed how one can automate a genotype calling pipeline with [automatically generated sbatch scripts that handle dependencies between jobs for the Slurm Workload Manager](https://evodify.com/genomic-variant-calling-pipeline/). I used a python script for that but I mentioned that probably it was not the most efficient way and using Nextflow or **Snakemake would probably be a better option**. I finally got my hands on Snakemake when I was working on my RNA-Seq mapping pipeline. You can read the description of this pipeline below and **you can also get my Snakemake file** at the end of this post to run this pipeline with your data.
 
 
