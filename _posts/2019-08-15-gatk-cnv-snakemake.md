@@ -58,8 +58,8 @@ gatk --java-options "-Xmx8G" CollectReadCounts \
 -R canFam3.fa \
 -imr OVERLAPPING_ONLY \
 -L interval_chr35.interval_list \
--I samle1.bam \
--O samle1_chr35.hdf5
+-I sample1.bam \
+-O sample1_chr35.hdf5
 ```
 `OVERLAPPING_ONLY` prevents the merging of abutting intervals as recommended by the GATK team.
 
@@ -91,8 +91,8 @@ Annotated intervals are then filtered based on tunable thresholds:
 gatk --java-options "-Xmx8G" FilterIntervals \
 -L interval_chr35.interval_list \
 --annotated-intervals annotated_intervals_chr35.tsv \
--I samle1_chr35.hdf5 \
--I samle2_chr35.hdf5 \
+-I sample1_chr35.hdf5 \
+-I sample2_chr35.hdf5 \
 --minimum-gc-content 0.1 \
 --maximum-gc-content 0.9 \
 --minimum-mappability 0.9 \
@@ -115,8 +115,8 @@ This step is needed to generate global baseline coverage and noise data for the 
 ```
 gatk --java-options "-Xmx8G" DetermineGermlineContigPloidy \
 -L interval_chr35.interval_list \
--I samle1_chr35.hdf5 \
--I samle2_chr35.hdf5 \
+-I sample1_chr35.hdf5 \
+-I sample2_chr35.hdf5 \
 --contig-ploidy-priors ploidy_priors.tsv \
 --output-prefix  dog \
 --interval-merging-rule OVERLAPPING_ONLY \
@@ -155,8 +155,8 @@ This step detects both rare and common CNVs on a scattered shard:
 gatk --java-options "-Xmx8G" GermlineCNVCaller  \
 --run-mode COHORT \
 -L scatter_chr35/fragment/scattered.interval_list \
--I samle1_chr35.hdf5 \
--I samle2_chr35.hdf5 \
+-I sample1_chr35.hdf5 \
+-I sample2_chr35.hdf5 \
 --contig-ploidy-calls ploidy-calls_chr35/dogs-calls \
 --annotated-intervals annotated_intervals_chr35.tsv \
 --output-prefix fragment \
@@ -170,19 +170,25 @@ To increase the sensitivity of calls, you need to fine-tune different parameters
 
 ### Call copy number segments
 
-This step collects the results from scattered shards and calls copy number state per-interval and per-segment in the VCF format:
+This step collects the results from scattered shards and calls copy number state per sample for intervals and segments in the VCF format:
 
 ```
 gatk --java-options "-Xmx8G" PostprocessGermlineCNVCalls \
---model-shard-path {params.modelfiles} \
---calls-shard-path {params.callsfiles} \
---sequence-dictionary {input.dict} \
+--model-shard-path cohort-calls_chr35/frag_temp_0001_of_3-model \
+--model-shard-path cohort-calls_chr35/frag_temp_0002_of_3-model \
+--model-shard-path cohort-calls_chr35/frag_temp_0003_of_3-model \
+--calls-shard-path cohort-calls_chr35/frag_temp_0001_of_3-calls \
+--calls-shard-path cohort-calls_chr35/frag_temp_0002_of_3-calls \
+--calls-shard-path cohort-calls_chr35/frag_temp_0003_of_3-calls \
+--sequence-dictionary '/path/to/reference/canFam3.dict' \
 --allosomal-contig chrX \
---contig-ploidy-calls {input.ploidy}/dogs-calls \
+--contig-ploidy-calls ploidy-calls_chr35/dogs-calls \
 --sample-index 0 \
---output-genotyped-intervals  {output.intervals} \
---output-genotyped-segments  {output.segments}
+--output-genotyped-intervals  chr35_sample1_intervals_cohort.vcf.gz \
+--output-genotyped-segments  chr35_sample1_segments_cohort.vcf.gz
 ```
+
+You need to provide a sample index with `--sample-index`. The first sample in your input list has index 0, the second one is 1, etc.
 
 Here is an example of genotyped-segments in VCF:
 
@@ -207,11 +213,14 @@ CHRN = list(range(1, 39))
 CHRN.append('X')
 CHR = CHRN
 REF = '/path/to/reference/canFam3.fa'
+DICT = '/path/to/reference/canFam3.dict'
+MAP = 'canFam3_mappability_150.merged.bed.gz'
+SEGDUP = 'segmental_duplication.bed.gz'
 
 rule all:
     input:
-        expand('chr{j}_intervals_cohort.vcf.gz', j=CHR),
-        expand('chr{j}_segments_cohort.vcf.gz', j=CHR)
+        expand('chr{j}_{sample}_intervals_cohort.vcf.gz', j=CHR, sample=SAMPLES),
+        expand('chr{j}_{sample}_segments_cohort.vcf.gz', j=CHR, sample=SAMPLES)
 
 rule collect_counts:
     input:
@@ -235,7 +244,8 @@ rule count_reads:
         ref = REF,
         bam = '{sample}_merged_markDupl_BQSR.bam',
         interval = 'interval_chr{j}.interval_list'
-    output: '{sample}_chr{j}.hdf5'
+    output:
+        '{sample}_chr{j}.hdf5'
     shell:
         '''
         gatk --java-options "-Xmx8G" CollectReadCounts \
@@ -250,9 +260,10 @@ rule annotate:
     input:
         ref = REF,
         interval = 'interval_chr{j}.interval_list',
-        mappability = 'canFam3_mappability_150.merged.bed.gz',
-        segduplication = 'segmental_duplication.bed.gz'
-    output: 'annotated_intervals_chr{j}.tsv'
+        mappability = MAP,
+        segduplication = SEGDUP
+    output:
+        'annotated_intervals_chr{j}.tsv'
     shell:
         '''
         gatk --java-options "-Xmx8G" AnnotateIntervals \
@@ -269,7 +280,8 @@ rule filter_intervals:
         interval = 'interval_chr{j}.interval_list',
         annotated = 'annotated_intervals_chr{j}.tsv',
         samples = expand('{sample}_{chromosome}.hdf5', sample=SAMPLES, chromosome='chr{j}'),
-    output: 'gcfiltered_chr{j}.interval_list'
+    output:
+        'gcfiltered_chr{j}.interval_list'
     params:
         files = lambda wildcards, input: ' -I '.join(input.samples)
     shell:
@@ -290,7 +302,8 @@ rule determine_ploidy:
     params:
         prefix = 'dogs',
         files = lambda wildcards, input: ' -I '.join(input.samples)
-    output: 'ploidy-calls_chr{j}'
+    output:
+        'ploidy-calls_chr{j}'
     shell:
         '''
         gatk --java-options "-Xmx8G" DetermineGermlineContigPloidy \
@@ -345,16 +358,21 @@ rule cnvcall:
         -O {params.outdir}
         '''
 
+def sampleindex(sample):
+    index = SAMPLES.index(sample)
+    return index
+
 rule process_cnvcalls:
     input:
         model = dynamic("cohort-calls_chr{j}/frag_{fragment}-model"),
         calls = dynamic("cohort-calls_chr{j}/frag_{fragment}-calls"),
-        dict  = '/mnt/data400/reference/canFam3.dict',
+        dict  = DICT,
         ploidy = 'ploidy-calls_chr{j}'
     output:
-        intervals = 'chr{j}_intervals_cohort.vcf.gz',
-        segments = 'chr{j}_segments_cohort.vcf.gz'
+        intervals = 'chr{j}_{sample}_intervals_cohort.vcf.gz',
+        segments = 'chr{j}_{sample}_segments_cohort.vcf.gz'
     params:
+        index = lambda wildcards: sampleindex(wildcards.sample),
         modelfiles = lambda wildcards, input: " --model-shard-path ".join(input.model),
         callsfiles = lambda wildcards, input: " --calls-shard-path ".join(input.calls)
     shell:
@@ -365,7 +383,7 @@ rule process_cnvcalls:
         --sequence-dictionary {input.dict} \
         --allosomal-contig chrX \
         --contig-ploidy-calls {input.ploidy}/dogs-calls \
-        --sample-index 0 \
+        --sample-index {params.index} \
         --output-genotyped-intervals  {output.intervals} \
         --output-genotyped-segments  {output.segments}
         '''
