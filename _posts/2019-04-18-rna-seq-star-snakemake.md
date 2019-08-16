@@ -175,7 +175,7 @@ ENSCAFG00000000005     23       67       49
 
 ## Snakemake STAR pipeline
 
-All the commands above (except the last one that can be run locally) can be put together into a [Snakemake file](/assets/posts/2019-04-18-rna-seq-star-snakemake/Snakemake):
+All the commands above (except the last one that can be run locally) can be put together into a [Snakemake file](/assets/posts/2019-04-18-rna-seq-star-snakemake/Snakefile):
 
 ```bash
 SAMPLES = ['sample1', 'sample2', 'sample2'] # provide your sample list here
