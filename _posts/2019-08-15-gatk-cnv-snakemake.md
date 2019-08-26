@@ -20,7 +20,7 @@ You will need **GATK 4** in GATK **Conda environment** and **Snakemake 4**.
 ### GATK Python environment
 
 I run this pipeline with **GATK 4.1.2.0**. To call CNVs with GATK 4, you need to load a Python environment with *gcnvkernel* module. I use [Conda installation](https://software.broadinstitute.org/gatk/documentation/article?id=12836){:target="_blank"} for that:
-```
+```bash
 conda env create -f /path/to/gatk/gatkcondaenv.yml
 conda init bash # restart shell to take effect
 conda activate gatk
@@ -37,7 +37,7 @@ These steps are described here only for a quick reference. For a detailed descri
 ### Bin intervals
 
 [PreprocessIntervals](https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_hellbender_tools_copynumber_PreprocessIntervals.php){:target="_blank"} takes a reference fasta file as input and creates a binned interval lists. If you want to process only a subset of the genome, specify it with the option `-L`:
-```
+```bash
 gatk --java-options "-Xmx8G" PreprocessIntervals \
 -R canFam3.fa \
 --padding 0 \
@@ -53,7 +53,7 @@ Bin size should negatively correlate with coverage, e.g. higher coverage data ca
 
 This step counts reads overlapping each interval. It takes the interval list from the previous step and a BAM file as input and outputs a read counts table. The output can be in a human-readable TSV format (option `--format TSV`) or HDF5 (default) which is faster to process by GATK. 
 
-```
+```bash
 gatk --java-options "-Xmx8G" CollectReadCounts \
 -R canFam3.fa \
 -imr OVERLAPPING_ONLY \
@@ -68,7 +68,7 @@ gatk --java-options "-Xmx8G" CollectReadCounts \
 This step helps to remove problematic regions in the cohort calling mode. However, the pipeline should work fine without any interval filtering.
 
 You can annotate intervals with GC content, mappability, and segmental duplication information:
-```
+```bash
 gatk --java-options "-Xmx8G" AnnotateIntervals \
 -R canFam3.fa  \
 -L interval_chr35.interval_list \
@@ -87,7 +87,7 @@ To **obtain segmental duplication** information, I tried to run [SEDEF](https://
 So, I annotated my data only with GC content and mappability.
 
 Annotated intervals are then filtered based on tunable thresholds:
-```
+```bash
 gatk --java-options "-Xmx8G" FilterIntervals \
 -L interval_chr35.interval_list \
 --annotated-intervals annotated_intervals_chr35.tsv \
@@ -112,7 +112,7 @@ gatk --java-options "-Xmx8G" FilterIntervals \
 
 This step is needed to generate global baseline coverage and noise data for the subsequent steps:
 
-```
+```bash
 gatk --java-options "-Xmx8G" DetermineGermlineContigPloidy \
 -L interval_chr35.interval_list \
 -I sample1_chr35.hdf5 \
@@ -136,7 +136,7 @@ If you have the information on the sex of your sample, it is advised to compare 
 GATK 4 utilizes a [new approach for parallelization](https://software.broadinstitute.org/gatk/documentation/article?id=11059){:target="_blank"} of processes that requires scattering your data. This step does exactly that. It splits the interval list into shards which can be processed in parallel. The results of these scattered processes are collected at the later step.
 
 To scatter the intervals into ~5K intervals, run:
-```
+```bash
 mkdir -p scatter_chr35
 gatk --java-options "-Xmx8G" IntervalListTools \
 --INPUT interval_chr35.interval_list \
@@ -151,7 +151,7 @@ It is recommended to have at least ~10–50Mbp genomic coverage per scatter. So,
 
 This step detects both rare and common CNVs on a scattered shard:
 
-```
+```bash
 gatk --java-options "-Xmx8G" GermlineCNVCaller  \
 --run-mode COHORT \
 -L scatter_chr35/fragment/scattered.interval_list \
@@ -172,7 +172,7 @@ To increase the sensitivity of calls, you need to fine-tune different parameters
 
 This step collects the results from scattered shards and calls copy number state per sample for intervals and segments in the VCF format:
 
-```
+```bash
 gatk --java-options "-Xmx8G" PostprocessGermlineCNVCalls \
 --model-shard-path cohort-calls_chr35/frag_temp_0001_of_3-model \
 --model-shard-path cohort-calls_chr35/frag_temp_0002_of_3-model \
@@ -207,7 +207,7 @@ All the commands above can be executed as a distributed pipeline with Snakemake.
 
 You can adapt the code below for your needs. Just change the list of input file names and chromosomes numbers. 
 
-```
+```python
 SAMPLES, = glob_wildcards('/path/to/BAMs/{sample}_merged_markDupl_BQSR.bam')
 CHRN = list(range(1, 39))
 CHRN.append('X')

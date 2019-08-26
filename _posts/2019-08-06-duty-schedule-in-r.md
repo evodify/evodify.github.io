@@ -19,32 +19,32 @@ The duty assumes one person cleans the **kitchen** for a week and another person
 
 First, you need to **load the list** of people, and extract the names:
 
-```
+```r
 d <- read.table("people-list.csv", sep = "\t", header = T, stringsAsFactors = F)
 names <- d$Name
 ```
 
 Then, **randomly pick** a few people (in my case it was 9) who will be assigned to the kitchen duty:
 
-```
+```r
 Kitchen <- sample(names, 9)
 ```
 
 Do the same to assign the fika duty but make sure people from the kitchen duty list are **excluded**:
-```
+```r
 Fika <- sample(names[!(names %in% Kitchen)], 9)
 ```
 
 After the people lists are created, generate the **start and end dates** as well as **week numbers** for these lists:
 
-```
+```r
 start <- seq(as.Date("19/08/19", format = "%d/%m/%y"), by = "week", length.out = 9)
 end <- seq(as.Date("23/08/19", format = "%d/%m/%y"), by = "week", length.out = 9)
 week <- strftime(start, format = "%V")
 ```
 
 In the end, merge these list into a **table**:
-```
+```r
 dd <- data.frame(Kitchen, Fika, start, end, week)
 write.table(dd, "kitchen-schedule_week34-42.csv", sep = "\t", row.names = F)
 ```
@@ -54,12 +54,13 @@ Everything seems to be done. One could just load this table into a spreadsheet e
 
 Instead of manually formatting the obtained table in a spreadsheet editor, you can add a few more lines R code and get a **print-ready table**:
 
-```
+```r
 library(gridExtra)
 library(grid)
 
 pdf("kitchen-schedule_week34-42.pdf", width=11.69, height=8.27)
-g <- tableGrob(dd, rows = NULL, theme = ttheme_default(base_size = 16, padding = unit(c(20, 12), "mm")))
+g <- tableGrob(dd, rows = NULL, theme = ttheme_default(base_size = 16,
+               padding = unit(c(20, 12), "mm")))
 grid.newpage()
 grid.draw(g)
 dev.off()
@@ -73,9 +74,10 @@ In the end, you will obtain a PDF page of **A4 size** with this kind of table:
 
 Next time you generate a schedule table, you just need to **exclude** the people who were assigned some **duties before**:
 
-```
+```r
 d <- read.table("people-list.csv", sep = "\t", header = T, stringsAsFactors = F)
-toexlcude <- read.table('kitchen-schedule_week34-42.csv', header = T, sep = "\t", stringsAsFactors = F)
+toexlcude <- read.table('kitchen-schedule_week34-42.csv',
+                        header = T, sep = "\t", stringsAsFactors = F)
 
 names <- d$Name[!(d$Name %in% c(toexlcude$Kitchen, toexlcude$Fika))]
 ```
@@ -87,14 +89,15 @@ The rest of the code is the same as above. If you have several duty lists with t
 
 All the code put together:
 
-```
+```r
 library(gridExtra)
 library(grid)
 
 d <- read.table("people-list.csv", sep = "\t", header = T, stringsAsFactors = F)
 
 if(file.exists('previous_kitchen-schedule.csv')){
-  toexlcude <- read.table('previous_kitchen-schedule.csv', header = T, sep = "\t", stringsAsFactors = F)
+  toexlcude <- read.table('previous_kitchen-schedule.csv',
+                          header = T, sep = "\t", stringsAsFactors = F)
   names <- d$Name[!(d$Name %in% c(toexlcude$Kitchen, toexlcude$Fika))]
 }else{
   names <- d$Name
@@ -112,7 +115,8 @@ write.table(dd, "kitchen-schedule_week43-51.csv", sep = "\t", row.names = F)
 sample(d$Name, 1)
 
 pdf("kitchen-schedule_week43-51.pdf", width=11.69, height=8.27)
-g <- tableGrob(dd, rows = NULL, theme = ttheme_default(base_size = 16, padding = unit(c(20, 12), "mm")))
+g <- tableGrob(dd, rows = NULL, theme = ttheme_default(base_size = 16,
+               padding = unit(c(20, 12), "mm")))
 grid.newpage()
 grid.draw(g)
 dev.off()

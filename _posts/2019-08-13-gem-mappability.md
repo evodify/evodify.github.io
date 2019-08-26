@@ -22,7 +22,7 @@ Extract the downloaded archive and make all files in the *bin* folder executable
 ## Estimate GEM mappability
 
 To get mappability in GEM format run these commands:
-```
+```bash
 gem-indexer -T 10 -i canFam3.fa -o canFam3_gem_index
 gem-mappability -T 10 -I canFam3_gem_index.gem -l 150 -o canFam3_mappability_150
 ```
@@ -34,7 +34,7 @@ I used a 150bp kmer size because my data was generated with 150bp read length. A
 GEM mappability file may not be suitable input for many programs. For example, [GATK](https://software.broadinstitute.org/gatk/){:target="_blank"} takes mappability data in a BED file. BED files are also easy to convert to many other formats. 
 
 I found this [Github repository](https://github.com/xuefzhao/Reference.Mappability){:target="_blank"} that shows how to convert GEM mappability to BED format:
-```
+```bash
 gem-2-wig -I canFam3_gem_index.gem -i canFam3_mappability_150.mappability -o canFam3_mappability_150
 wigToBigWig canFam3_mappability_150.wig canFam3_mappability_150.sizes canFam3_mappability_150.bw
 bigWigToBedGraph canFam3_mappability_150.bw  canFam3_mappability_150.bedGraph
@@ -48,7 +48,7 @@ In these commands:
 ## Merge overlapping intervals in BED
 
 Some programs including GATK require overlapping mappability intervals to be merged. You can achieve that with my [python script](https://github.com/evodify/genotype-files-manipulations/blob/master/combine_overlapping_BEDintervals.py){:target="_blank"}:
-```
+```bash
 python ~/git/genotype-files-manipulations/combine_overlapping_BEDintervals.py -i canFam3_mappability_150.bed -o canFam3_mappability_150.merged.bed -v 0
 ```
 where `-v` defines the overhang size between intervals.
@@ -57,7 +57,7 @@ where `-v` defines the overhang size between intervals.
 
 Since I mentioned GATK many times across this post, I also add these two commands to compress and index mappability data for GATK:
 
-```
+```bash
 bgzip canFam3_mappability_150.merged.bed
 gatk IndexFeatureFile -F canFam3_mappability_150.merged.bed.gz
 ```

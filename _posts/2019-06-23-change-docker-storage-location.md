@@ -20,31 +20,31 @@ These two solutions could have worked in the past as you may often find them onl
 ### 1. Symlink
 
 The first obvious idea was to symlink the default storage location to another partition: 
-```
+```bash
 sudo ln -s /mnt/newlocation /var/lib/docker
 ```
 
 ### 2. DOCKER_OPTS
 
 Another often posted solution is to stop Docker:
-```
+```bash
 sudo systemctl stop docker
 ```
 
 Edit the `/etc/default/docker` file by adding the new location with the `-g` in the `DOCKER_OPTS` line:
-```
+```bash
 DOCKER_OPTS="-dns 8.8.8.8 -dns 8.8.4.4 -g /mnt/newlocation"
 ```
 
 Then start Docker again:
-```
+```bash
 sudo systemctl start docker
 ```
 
 After that Docker should use `/mnt/newlocation` as a new storage location.
 
 **UPDATE**: It seems **DOCKER_OPTS** solution may work if you add the `$DOCKER_OPTS` variable to the *systemd* script `/lib/systemd/system/docker.service`:
-```
+```bash
 ExecStart=/usr/bin/dockerd -H fd:// $DOCKER_OPTS
 ```
 However, I have not tested it because the solution I describe below is simpler and probably more correct.
@@ -55,7 +55,7 @@ Luckily, the right way to change Docker storage location was not more complicate
 
 You need to create a JSON file `/etc/docker/daemon.json` with the content pointing to the new storage location:
 
-```
+```bash
 {
 "data-root": "/mnt/newlocation"
 }
@@ -65,16 +65,16 @@ You can read more about `daemon.json` in [Docker docs](https://docs.docker.com/c
 
 Then, restart Docker or reboot the system:
 
-```
+```bash
 sudo systemctl restart docker
 ```
 
 If you get any error during the restart, pay attention to spaces in `daemon.json`. JSON files are sensitive to indentation and an extra or lacking space may cause an error. If Docker restarts fine, this new setting will make Docker place all new containers to the new location. However, old containers will stay in `/etc/default/docker`. I recommend removing all old containers:
-```
+```bash
 docker system prune -a
 ```
 And downloaded them again:
-```
+```bash
 docker pull <container-name>
 ```
 

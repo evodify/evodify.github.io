@@ -20,7 +20,7 @@ You probably better focus on `checkpoint` because this is a more up-to-date solu
 [Checkpoint](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#data-dependent-conditional-execution){:target="_blank"} function was introduced in Snakemake 5 and it will completely replace `dynamic()` in Snakemake 6. So, if you have not tried it, it is time to learn it.
 
 Here is a dummy code that shows how `checkpoint` works:
-```
+```python
 rule final_output:
     input:
         'scatter_copy_head_collect/all.txt'
@@ -61,10 +61,14 @@ rule scatter_copy_head:
         echo "_head" >> {output.txt}
         '''
 
-# collect the results of processing unknown number of files and merge them together into one file:
+# collect the results of processing unknown number of files
+# and merge them together into one file:
 
 def aggregate_input(wildcards):
-    '''aggregate the file names of the random number of files generated at the scatter step'''
+    '''
+    aggregate the file names of the random number of files
+    generated at the scatter step
+    '''
     checkpoint_output = checkpoints.scatter.get(**wildcards).output[0]
     return expand('scatter_copy_head/{i}_head.txt',
            i=glob_wildcards(os.path.join(checkpoint_output, '{i}.txt')).i)
@@ -91,7 +95,7 @@ Explore the outputs, to understand how this pipeline works:
 
 This is the same pipeline as above but it utilizes `dynamic()` instead of `checkpoint`:
 
-```
+```python
 rule final_output:
     input:
         'scatter_copy_head_collect/all.txt'
