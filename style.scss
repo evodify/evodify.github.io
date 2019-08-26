@@ -367,6 +367,18 @@ footer {
   height: 100%;
 }
 
+.bottompagination .navigation {
+    display: block;
+    padding: 35px 0 0 0;
+    text-align: center;
+    color: #999;
+    border-top: 1px solid #ddd;
+}
+
+.bottompagination .navigation i {
+    display: inline-block;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";

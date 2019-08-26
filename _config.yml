@@ -77,6 +77,10 @@ kramdown:
     # Use existing pygments syntax highlighting css
     css_class: 'highlight'
 
+# Pagination 
+paginate: 5
+paginate_path: /page:num/
+      
 # Set the Sass partials directory, as we're using @imports
 sass:
   style: :expanded # You might prefer to minify using :compressed
@@ -86,6 +90,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-redirect-from
+  - jekyll-paginate
 
 include: ["_pages"]
 # Exclude these files from your production _site
