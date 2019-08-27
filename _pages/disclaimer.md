@@ -1,7 +1,8 @@
 ---
 layout: page
 title: Disclaimer
-date: 2019-01-28 09:33:51 +01:00
+date: 2019-01-28
+permalink: /disclaimer/
 robots: noindex,nofollow
 ---
 

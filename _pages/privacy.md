@@ -1,7 +1,8 @@
 ---
 layout: page
 title: Privacy Policy
-date: 2019-01-20 14:24:09 +01:00
+date: 2019-01-20
+permalink: /privacy/
 robots: noindex,nofollow
 ---
 
