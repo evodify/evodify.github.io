@@ -367,6 +367,18 @@ footer {
   height: 100%;
 }
 
+pre.highlight {
+  background-color: #eaf0f3;
+  padding: 7px 7px 10px 10px;
+  border: 1px solid #ddd;
+  overflow: auto;
+}
+
+code {
+  font-family:'Bitstream Vera Sans Mono','Courier', monospace;
+  background-color: #eaf0f3;
+}
+
 .bottompagination .navigation {
     display: block;
     padding: 35px 0 0 0;
