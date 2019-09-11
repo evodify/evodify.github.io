@@ -196,21 +196,17 @@ dd <- d[,-c(1:3)]
 group <- factor(c("red", "black", "blue", "red", "black", "blue", "red", "blue"))
 
 getVst <- function(dat, groups, comparison) {
-  Vst_all <- c()
   groupLevels <- levels(groups)
   dat1 <- na.omit(dat[groups==groupLevels[groupLevels==comparison[1]]])
   dat2 <- na.omit(dat[groups==groupLevels[groupLevels==comparison[2]]])
   Vtotal <- var(c(dat1, dat2))
-  Vgroup <- ((var(dat1)*length(dat1)) + 
-             (var(dat2)*length(dat2))) /
+  Vgroup <- ((var(dat1)*length(dat1)) + (var(dat2)*length(dat2))) /
              (length(dat1)+length(dat2))
   Vst <- c((Vtotal-Vgroup) / Vtotal)
   if (Vst == "NaN"){
-    Vst_all <- append(Vst_all, 0)
-  } else {
-    Vst_all <- append(Vst_all, Vst)
+    Vst <- 0
   }
-  return(Vst_all)
+  return(Vst)
 }
 
 d$Vst_red_black <- apply(dd, 1, function(x) getVst(x, group, c("red", "black")))
