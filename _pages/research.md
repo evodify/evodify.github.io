@@ -7,7 +7,7 @@ excerpt: "Research projects by Dmytro Kryvokhyzha: Diet adaptation in dogs, Allo
 
 ## Diet adaptation in dogs
 
-*This is my current postdoc project.*
+*Current postdoc project.*
 
 **2018 – present**
 
@@ -21,7 +21,7 @@ A comparison of patterns of genetic variation between dogs and wolfs revealed th
 
 ## Allopolyploidy of *Capsella bursa-pastoris*
 
-*This was my PhD thesis project.*
+*PhD thesis.*
 
 **2013 – 2018**
 
@@ -41,7 +41,7 @@ To do that, I performed comparative genomic analyses using both whole-genome DNA
 
 ## Fishes of the Roof of the World
 
-*This is my side project which started as an ambition to get the National Geographic grant.*
+*Side project that started as an ambition to get the National Geographic grant.*
 
 **2013 – present**
 
@@ -56,7 +56,7 @@ Surprisingly, the last extensive biological studies in this region are dated to 
 
 ## Speciation with gene flow in *Heliconius* butterflies
 
-*This was my Master’s thesis research project.*
+*Master’s thesis project.*
 
 **2013 – 2014** 
 
@@ -74,7 +74,7 @@ You can read more about the results of this project in my <a href="http://urn.kb
 
 ## Gene expression in different organs of hybrid sculpins
 
-*This was my 6-months research training project during the Master’s studies*
+*6-months research training project during Master’s studies*
 
 **Sep 2012 – Feb 2013**
 
@@ -90,7 +90,7 @@ For a technical aspect, I also verified the performance of a probe-specific micr
 
 ## Phylogeography of Indo-Pacific Mugilidae
 
-This was my 3-months research training project during the Master’s studies
+*3-months research training during Master’s studies*
 
 **Apr – Jun 2012**
 
@@ -104,7 +104,7 @@ Biogeographic barriers of the Indo-Pacific region are thought to contribute to t
 
 ## Diploid-polyploid complexes of spined loaches
 
-This was my thesis research project during my Master’s studies in Ukraine.
+*Master's thesis project during my studies in Ukraine.*
 
 **2008 – 2010**
 

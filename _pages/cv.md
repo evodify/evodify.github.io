@@ -7,7 +7,7 @@ excerpt: Curriculum Vitae of Dmytro Kryvokhyzha.
 
 ## Work
 
-**2018 – present** – postdoctoral researcher, Department of Medical Biochemistry and Microbiology, Comparative Genetics and Functional Genomics, Uppsala University, Sweden.
+**2018 – present** – **postdoctoral researcher**, Department of Medical Biochemistry and Microbiology, Comparative Genetics and Functional Genomics, Uppsala University, Sweden.
 
 ## Education
 
@@ -29,11 +29,10 @@ excerpt: Curriculum Vitae of Dmytro Kryvokhyzha.
 
 ## Skills
 * Design of experiments
-* Population genetics analyses on genomic data
-* Gene expression analyses (RNA-Seq and microarray)
-* Functional analyses of genomic data
+* Analysis of large scale genomic and transcriptomic data
 * Programming in Python, R, awk, Shell, Scala
 * Git version control
+* Data management
 * Snakemake workflow management
 * R Markdown and Jupyter Notebooks 
 * Proficient in Linux OS
