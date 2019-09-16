@@ -178,22 +178,24 @@ ENSCAFG00000000005     23       67       49
 All the commands above (except the last one that can be run locally) can be put together into a [Snakemake file](/assets/posts/2019-04-18-rna-seq-star-snakemake/Snakefile):
 
 ```bash
-SAMPLES = ['sample1', 'sample2', 'sample2'] # provide your sample list here
+SAMPLES, = glob_wildcards('/path/to/fastq/{sample}_L001_R1.fastq.gz') 
 
 rule allout:
         input:
-            'canFam3STAR/SAindex', # provide your reference folder here
+            directory('canFam3STAR'),
             expand('{sample}_pass1/SJ.out.tab', sample=SAMPLES),
-            'SJ',
+            directory('SJ'),
             expand('SJ/{sample}_pass1SJ.filtered.tab', sample=SAMPLES),
             expand('{sample}_pass2/Aligned.sortedByCoord.out.bam', sample=SAMPLES),
-            expand('{sample}_HTSeq_union_gff3_no_gene_ID.log', sample=SAMPLES), expand('{sample}_HTSeq.csv', sample=SAMPLES)
+            expand('{sample}_HTSeq_union_gff3_no_gene_ID.log', sample=SAMPLES),
+            expand('{sample}_HTSeq.csv', sample=SAMPLES)
             
 rule index:
         input:
             fa = 'canFam3.fa', # provide your reference FASTA file
             gtf = 'canFam3.gtf' # provide your GTF file
-        output: 'canFam3STAR/SAindex' # you can also rename the index folder
+        output:
+            directory('canFam3STAR') # you can rename the index folder
         threads: 20 # set the maximum number of available cores
         shell:
             'mkdir {output} && '
@@ -210,30 +212,36 @@ rule pass1:
             R1L2 = 'fastq/{sample}/{sample}_L002_R1.fastq.gz', # note each sample has 4 fastq files ~ 2 lanes per file
             R2L1 = 'fastq/{sample}/{sample}_L001_R2.fastq.gz',
             R2L2 = 'fastq/{sample}/{sample}_L002_R2.fastq.gz',
+            refdir = directory('canFam3STAR')
         params:
-            refdir = 'canFam3STAR',
             outdir = '{sample}_pass1',
             rmbam = '{sample}_pass1/Aligned.out.bam'
-        output: '{sample}_pass1/SJ.out.tab'
+        output:
+            '{sample}_pass1/SJ.out.tab'
         threads: 20 # set the maximum number of available cores
         shell:
             'rm -rf {params.outdir} &&' # be careful with this. I don't know why, but Snakemake had problems without this cleaning.
             'mkdir {params.outdir} && ' # snakemake had problems finding output files with --outFileNamePrefix, so I used this approach instead
             'cd {params.outdir} && '
             'STAR --runThreadN {threads} '
-            '--genomeDir {params.refdir} '
+            '--genomeDir {input.refdir} '
             '--readFilesIn {input.R1L1},{input.R1L2} {input.R2L1},{input.R2L2} '
             '--readFilesCommand zcat '
             '--outSAMtype BAM Unsorted && rm {params.rmbam} && cd ..'
             
 rule SJdir:
-        output: directory('SJ')
+        output:
+            directory('SJ')
         threads: 1
-        shell: 'mkdir {output}'
+        shell:
+            'mkdir {output}'
 
 rule filter:
-        input:'{sample}_pass1/SJ.out.tab', 'SJ'
-        output: 'SJ/{sample}_pass1SJ.filtered.tab'
+        input:
+            '{sample}_pass1/SJ.out.tab',
+            directory('SJ')
+        output:
+            'SJ/{sample}_pass1SJ.filtered.tab'
         threads: 1
         shell:
             '''awk "{ { if (\$7 >= 3) print \$0 } }" {input[0]} > {input[0]}.filtered && '''
@@ -245,19 +253,20 @@ rule pass2:
             R1L2 = 'fastq/{sample}/{sample}_L002_R1.fastq.gz',
             R2L1 = 'fastq/{sample}/{sample}_L001_R2.fastq.gz',
             R2L2 = 'fastq/{sample}/{sample}_L002_R2.fastq.gz',
-            SJfiles = 'SJ/{sample}_pass1SJ.filtered.tab'
+            SJfiles = 'SJ/{sample}_pass1SJ.filtered.tab',
+            refdir = directory('canFam3STAR')
         params:
-            refdir = 'canFam3STAR',
             outdir = '{sample}_pass2',
             id = '{sample}'
-        output: '{sample}_pass2/Aligned.sortedByCoord.out.bam'
+        output:
+            '{sample}_pass2/Aligned.sortedByCoord.out.bam'
         threads: 20 # set the maximum number of available cores
         shell:
             'rm -rf {params.outdir} &&' # be careful with this. I don't know why, but Snakemake had problems without this cleaning.
             'mkdir {params.outdir} && '
             'cd {params.outdir} && '
             'STAR --runThreadN {threads} '
-            '--genomeDir {params.refdir} '
+            '--genomeDir {input.refdir} '
             '--readFilesIn {input.R1L1},{input.R1L2} {input.R2L1},{input.R2L2} '
             '--readFilesCommand zcat '
             '--outSAMtype BAM SortedByCoordinate '
@@ -269,16 +278,18 @@ rule htseq:
         input:
             bam = '{sample}_pass2/Aligned.sortedByCoord.out.bam',
             gff = 'canFam3.gff3'
-        output: '{sample}_HTSeq_union_gff3_no_gene_ID.log', '{sample}_HTSeq.csv'
+        output:
+            '{sample}_HTSeq_union_gff3_no_gene_ID.log',
+            '{sample}_HTSeq.csv'
         threads: 1
         shell:
             'htseq-count -m union -s no -t gene -i ID -r pos -f bam {input.bam} {input.gff} &> {output[0]} && '
-            'grep ENS {output[0]} | sed "s/gene://g" > {output[1]}  '
+            'grep ENS {output[0]} | sed "s/gene://g" > {output[1]}'
 ```
 
 Read the comments within the code to find the line you need to change to adjust this Snakemake pipeline for your data.
 
-Also, depending on your file location and Snakemake version, Snakemake may have problems finding files without the absolute path in file names. For example, instead of relative path `fastq/{sample}/{sample}_L001_R1.fastq.gz` you may need to use the absolute path `/home/dmytro/RNA-Seq/fastq/{sample}/{sample}_L001_R1.fastq.gz`
+Also, depending on your file location and Snakemake version, Snakemake may have problems finding files without the absolute path in file names. For example, instead of relative path `fastq/{sample}_L001_R1.fastq.gz` you may need to use the absolute path `/home/username/RNA-Seq/fastq/{sample}_L001_R1.fastq.gz`
 
 ### Run Snakemake on a Slurm cluster (Uppmax)
 
