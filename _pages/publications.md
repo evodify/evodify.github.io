@@ -15,13 +15,16 @@ You can view this list at <a href="https://scholar.google.se/citations?user=99un
 
 ## 2019
 
-**9.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1008131" title="PLOS Genetics" target="_blank">Towards the new normal: Transcriptomic convergence and genomic legacy of the two subgenomes of an allopolyploid weed (*Capsella bursa-pastoris*).</a> *PLOS Genetics*, 15(5), pp 1-30.
+**10.** **Kryvokhyzha D**, Milesi P, Duan T, Orsucci M, Wright S, Glémin S, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1008131" title="PLOS Genetics" target="_blank">Towards the new normal: Transcriptomic convergence and genomic legacy of the two subgenomes of an allopolyploid weed (*Capsella bursa-pastoris*).</a> *PLOS Genetics*, 15(5), pp 1-30.
 
-**8.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae).</a> *PLOS Genetics*, 15(2), pp 1-34.
+**9.** **Kryvokhyzha D**, Salcedo A, Eriksson MC, Duan T, Tawari N, Chen J, Guerrina M, Kreiner JM, Kent TV, Lagercrantz U, Stinchcombe JR, Glémin S, Wright SI, and Lascoux M. 2019. <a href="https://doi.org/10.1371/journal.pgen.1007949" title="PLOS Genetics" target="_blank">Parental legacy, demography, and introgression influenced the evolution of the two subgenomes of the tetraploid weed *Capsella bursa-pastoris* (Brassicaceae).</a> *PLOS Genetics*, 15(2), pp 1-34.
+
+**8.** Dufresnes C, Mazepa G, Jablonski D, Oliveira R, Wenseleers T, Shabanov D,  Auer M, Ernst R, Koch C, Ramirez-Chaves H, Mulder K, Simonov E, Tiutenko A, **Kryvokhyzha D**, Wennekes P, Zinenko O, Korshunov O, Al-Johany A, Peregontsev E, Masroor R, Betto-Colliard C, Denoel M, Borkin L, Skorinov D, Pasynkova R, Mazanaeva L, Rosanov J, Dubey S, Litvinchuk S. 2019. <a href="https://doi.org/10.1016/j.ympev.2019.106615" title="Molecular Phylogenetics and Evolution" target="_blank">Fifteen shades of green: The evolution of *Bufotes* toads revisited.</a> *Molecular Phylogenetics and Evolution*.
+
 
 ## 2018
 
-**7.** Cornille A, Salcedo A, Huang H, **Kryvokhyzha D**, Holm K, Ge XJ, Stinchcombe JR, Glemin S, Wright SI, and Lascoux M. 2018. <a href="https://www.biorxiv.org/content/early/2018/04/25/308619" title="bioRxiv" target="_blank">Local adaptation and maladaptation during the worldwide range expansion of a self-fertilizing plant.</a> *(Manuscript)*.
+**7.** Cornille A, Salcedo A, Huang H, **Kryvokhyzha D**, Holm K, Ge XJ, Stinchcombe JR, Glémin S, Wright SI, and Lascoux M. 2018. <a href="https://www.biorxiv.org/content/early/2018/04/25/308619" title="bioRxiv" target="_blank">Local adaptation and maladaptation during the worldwide range expansion of a self-fertilizing plant.</a> *(Manuscript)*.
 
 **6.** **Kryvokhyzha D**. 2018. <a href="http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-341709" title="Uppsala University" target="_blank">Genome evolution and adaptation of a successful allopolyploid, *Capsella bursa-pastoris*.</a> *Ph.D. Thesis*, Uppsala: Acta Universitatis Upsaliensis, 51 p.
 
