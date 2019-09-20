@@ -57,7 +57,9 @@ My PhD program included 20% of teaching. I taught the practical parts of the fol
 * R project
 * Evolutionary Processes
 
-## Internship and Training
+## Internship, Training, Seminars
+
+**19 Sep 2019** - <a href="https://www.scilifelab.se/events/reproducibility" target="_blank">Reproducibility and Data Reuse in Life Science</a>, Uppsala, Sweden.
 
 **25 – 27 Mar, 2019** – <a href="https://coderefinery.org/workshops/2019-03-25-stockholm/" target="_blank">Sustainable Software Development</a>, Stockholm, Sweden.
 
