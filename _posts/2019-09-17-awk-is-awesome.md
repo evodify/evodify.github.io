@@ -152,12 +152,12 @@ awk -f summarizeTAB.awk geno.tab
 ![output of the summarizeTAB.awk script](/assets/posts/2019-09-17-awk-is-awesome/8-summarizeTAB.awk.jpg)
 
 
-## AWK vs *Python*
+## *AWK* vs *Python*
 
 The *AWK* code is usually shorter and works faster than Python. I do not have a dramatic example when my *AWK* code is substantially  shorter than the equivalent *Python* code. But there are [great examples from other *AWK* users](https://sites.google.com/site/toawkornot/python-vs-awk){:target="_blank"}.
 
 
-## Be careful with AWK
+## Be careful with *AWK*
 
 There is one key point you need to keep in mind when you work with AWK. It doesn't throw an error when it encounters something unusual. Instead, *AWK* tried to guess how to handle it and proceeds silently. This can put you in danger.
 
