@@ -1,0 +1,179 @@
+---
+title: "R loops are slow"
+author: "Dmytro Kryvokhyzha"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Create a test matrix
+```{r test-matrix}
+set.seed(123)
+m <- matrix(runif(1000000, max = 100), ncol = 100)
+```
+
+Let's test a trivial loop that cal culculates row means:
+```{r simple-loop}
+loopmean <- function(x){
+  v <- c()
+  for (i in c(1:dim(x)[1])){
+    v[i] <- mean(x[i,])
+  }
+  return(v)
+}
+system.time(loopmeanD <- loopmean(m))
+```
+
+Adding additonal characters inside the loop slows it down:
+```{r loop-brackets}
+loopmeanBrackets <- function(x){
+  v <- c()
+  for (i in c(1:dim(x)[1])){
+    v[i] <- mean(((((((((((((((((x[i,])))))))))))))))))
+  }
+  return(v)
+}
+system.time(loopmeanBracketsD <- loopmeanBrackets(m))
+identical(loopmeanD, loopmeanBracketsD)
+```
+
+Processing by columns is little faster:
+```{r simple-loop-column}
+loopmeanColumn <- function(x){
+  v <- c()
+  for (i in (1:dim(x)[2])){
+    v[i] <- mean(x[,i])
+  }
+  return(v)
+}
+tm <- t(m)
+system.time(loopmeanColumnD <- loopmeanColumn(tm))
+identical(loopmeanD, loopmeanColumnD)
+```
+
+Processing is faster when you allocate the memory for the output object.
+```{r loop-vertor}
+# Vector
+vertorloopmean <- function(x){
+  v <- vector(length = dim(x)[1])
+  for (i in c(1:dim(x)[1])){
+    v[i] <- mean(x[i,])
+  }
+  return(v)
+}
+system.time(vertorloopmeanD <- vertorloopmean(m))
+identical(loopmeanD, vertorloopmeanD)
+```
+
+Usually `apply` is faster than `for` loops:
+```{r apply-row}
+applymean <- function(x){
+  v <- apply(m, 1, mean)
+  return(v)
+}
+system.time(applymeanD <- apply(m, 1, mean))
+identical(loopmeanD, applymeanD)
+```
+
+`apply` by columns is also faster:
+```{r apply-column}
+applymeanColumn <- function(x){
+  v <- apply(tm, 2, mean)
+  return(v)
+}
+system.time(applymeanColumnD <- applymeanColumn(m))
+identical(loopmeanD, applymeanColumnD)
+```
+
+You can compile *R* function to byte code to make it little faster:
+```{r compiled-loop}
+library(compiler)
+
+loopmeanCompiled <- cmpfun(loopmean)
+loopmeanCompiledT <- system.time(loopmeanCompiledD <- loopmeanCompiled(m))
+loopmeanCompiledT
+identical(loopmeanD, loopmeanCompiledD)
+```
+
+But it is always better to use the built-in functions:
+```{r rowMean}
+system.time(rowMeanD <- rowMeans(m))
+identical(loopmeanD, rowMeanD)
+```
+
+If you know `C++`, you can use in inside *R* with [*Rcpp* library](https://cran.r-project.org/web/packages/Rcpp/index.html):
+
+```{Rcpp rcpp-for-loop}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+//[[Rcpp::export]]
+NumericVector cRowMeans(NumericMatrix x) {
+ int nrows = x.nrow();   
+ NumericVector v(nrows);
+ for (int i = 0; i < nrows; i++){
+   v[i] = mean(x.row(i));
+ }
+ return v;
+}
+```
+
+It improves the performance damatically:
+```{r Rcpp_loop}
+system.time(cRowMeansD <- cRowMeans(m))
+identical(loopmeanD, cRowMeansD)
+```
+
+
+But it is the fastest to use the built-in function that call *C* code directly.
+```{r loopParallel, message=FALSE}
+library(doParallel)
+registerDoParallel(cores=12)
+loopParallelT <- system.time(loopParallelD <- foreach(i=1:dim(m)[1], .combine=c) %dopar% mean(m[i,]))
+loopParallelT
+identical(loopmeanD, loopParallelD)
+```
+
+
+## Benchmark everything
+```{r benchmark-loops}
+library(microbenchmark)
+mbm <- microbenchmark("LoopRowExtraBrackets" = loopmeanBrackets(m),
+                      "ApplyRow" = applymean(m),
+                      "ApplyColumn" = applymeanColumn(tm),
+                      "LoopRow" = loopmean(m),
+                      "LoopRowCompiled" = loopmeanCompiled(m),
+                      "LoopColumn" = loopmeanColumn(tm),
+                      "LoopRowToVector" = vertorloopmean(m),
+                      "RowLoopC"= cRowMeans(m),
+                      "Built-in_rowMeans" = rowMeans(m),
+                      check = 'equal', times=100)
+
+mbm
+```
+
+Visualize
+```{r benchmark-plot, message=FALSE, fig.width=8, fig.height=5}
+library(ggplot2)
+autoplot(mbm)
+```
+
+Alternative benchmark:
+```{r benchmark-loops-alternative}
+library(rbenchmark)
+bm <- benchmark("LoopRowExtraBrackets" = loopmeanBrackets(m),
+                "ApplyRow" = applymean(m),
+                "ApplyColumn" = applymeanColumn(tm),
+                "LoopRowCompiled" = loopmeanCompiled(m),
+                "LoopRow" = loopmean(m),
+                "LoopColumn" = loopmeanColumn(tm),
+                "LoopRowToVector" = vertorloopmean(m),
+                "Built-in_rowMeans" = rowMeans(m),
+                columns=c("test", "elapsed", "relative", "user.self", "sys.self"),
+                order="relative", replications=100)
+bm
+#sbarplot(bm$user.self, names.arg = bm$test)
+```
