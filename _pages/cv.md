@@ -30,16 +30,17 @@ excerpt: Curriculum Vitae of Dmytro Kryvokhyzha.
 ## Skills
 * Design of experiments
 * Analysis of large scale genomic and transcriptomic data
-* Programming in Python, R, awk, Shell, Scala
+* Programming in Python, R, awk, Shell
 * Git version control
-* Data management
 * Snakemake workflow management
-* R Markdown and Jupyter Notebooks 
+* R Markdown and Jupyter Notebooks
+* Conda and Docker environment management
+* Data management
 * Proficient in Linux OS
 * LaTeX writing 
 * Scientific writing
 * Public speaking
-* Online and offline teaching
+* Teaching
 
 
 ## Research Experience
