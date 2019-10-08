@@ -31,8 +31,9 @@ checkpoint scatter:
         directory('scatter')
     shell:
         '''
+        mkdir {output}
         N=$(( $RANDOM % 10))
-        for j in $(seq 1 $N); do echo -n $j > scatter/$j.txt; done
+        for j in $(seq 1 $N); do echo -n $j > {output}/$j.txt; done
         '''
 
 # process these unknown number of files
