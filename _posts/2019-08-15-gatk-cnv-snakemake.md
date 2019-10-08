@@ -324,7 +324,7 @@ rule scattering:
         'scatter_chr{j}'
     shell:
         '''
-        mkdir -p {params}
+        mkdir -p {params} # needed because Snakemake fails creating this directory automatically
         gatk --java-options "-Xmx8G" IntervalListTools \
         --INPUT {input.interval} \
         --SUBDIVISION_MODE INTERVAL_COUNT \
