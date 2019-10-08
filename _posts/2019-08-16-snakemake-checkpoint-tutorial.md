@@ -31,7 +31,6 @@ checkpoint scatter:
         directory('scatter')
     shell:
         '''
-        mkdir -p scatter
         N=$(( $RANDOM % 10))
         for j in $(seq 1 $N); do echo -n $j > scatter/$j.txt; done
         '''
@@ -44,7 +43,6 @@ rule scatter_copy:
         txt = 'scatter/{i}.txt',
     shell:
         '''
-        mkdir -p scatter_copy
         cp -f {input.txt} {output.txt}
         echo -n "_copy" >> {output.txt}
         '''
@@ -56,7 +54,6 @@ rule scatter_copy_head:
         txt = 'scatter_copy/{i}_copy.txt',
     shell:
         '''
-        mkdir -p scatter_copy_head
         cp -f {input.txt} {output.txt}
         echo "_head" >> {output.txt}
         '''
@@ -80,7 +77,6 @@ rule scatter_copy_head_collect:
         aggregate_input
     shell:
         '''
-        mkdir -p scatter_copy_head_collect
         cat {input} > {output.combined}
         '''
 ```
@@ -106,7 +102,6 @@ rule scatter:
         dynamic('scatter/{i}.txt')
     shell:
         '''
-        mkdir -p scatter
         N=$(( $RANDOM % 10))
         for j in $(seq 1 $N); do echo -n $j > scatter/$j.txt; done
         '''
@@ -119,7 +114,6 @@ rule scatter_copy:
         txt = 'scatter/{i}.txt',
     shell:
         '''
-        mkdir -p scatter_copy
         cp -f {input.txt} {output.txt}
         echo -n "_copy" >> {output.txt}
         '''
@@ -132,7 +126,6 @@ rule scatter_copy_head:
         txt = 'scatter_copy/{i}_copy.txt',
     shell:
         '''
-        mkdir -p scatter_copy_head
         cp -f {input.txt} {output.txt}
         echo "_head" >> {output.txt}
         '''
@@ -147,7 +140,6 @@ rule scatter_copy_head_collect:
         gathered = lambda wildcards, input: ' '.join(input.indivfiles)
     shell:
         '''
-        mkdir -p scatter_copy_head_collect
         cat {params.gathered} > {output.combined}
         '''
 ```
