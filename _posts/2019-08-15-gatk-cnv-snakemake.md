@@ -209,7 +209,7 @@ You can adapt the code below for your needs. Just change the list of input file 
 
 ```python
 SAMPLES, = glob_wildcards('/path/to/BAMs/{sample}_merged_markDupl_BQSR.bam')
-CHRN = list(range(1, 38))
+CHRN = list(range(1, 39))
 CHRN.append('X')
 CHR = CHRN
 REF = '/path/to/reference/canFam3.fa'
