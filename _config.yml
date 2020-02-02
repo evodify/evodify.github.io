@@ -6,12 +6,12 @@
 name: Dmytro Kryvokhyzha
 
 # Short description (displayed in the header)
-slogan: Bioinformatician & Evolutionary Biologist
+slogan: Bioinformatics & Genomics Scientist
 
 # Longer description:
 description: > # this means to ignore newlines until "avatar:"
-    I am a Bioinformatician and Evolutionary Biologist at Uppsala University. 
-    I analyze genomic and transcriptomic data, and have a passion for Data Science.
+    Bioinformatics and Genomics Scientist at Uppsala University.
+    Analyze large scale genomic and transcriptomic data, and have a passion for Data Science.
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: /assets/avatar_Dmytro-Kryvokhyzha.jpeg
