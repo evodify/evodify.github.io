@@ -6,7 +6,7 @@ excerpt: Papers, theses, and other publications by Dmytro Kryvokhyzha.
 --- 
 
 <div style="text-align: center; margin-bottom: 20pt; font-style: italic;">
-If you cannot access some of these articles, please <a href="mailto:dmytro.kryvokhyzha@evobio.eu" title="Contact">drop me an email</a> and I will send you a PDF.
+If you cannot access some of these articles, please <a href="mailto:dmytro.kryvokhyzha@evobio.eu" title="Contact">drop me an email</a>.
 </div>
 
 <div style="text-align: center; margin-bottom: 30pt; font-style: italic;">
