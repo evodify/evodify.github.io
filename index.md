@@ -1,7 +1,6 @@
 ---
 layout: page
 title: About
-permalink: /about/
 excerpt: Dmytro Kryvokhyzha is a Bioinformatics and Genomics Scientist at Uppsala University. He works with large scale genomic and transcriptomic data, and has a passion for Data Science.
 ---
 
