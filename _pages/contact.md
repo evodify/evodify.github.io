@@ -11,7 +11,7 @@ Feel free to write me at [dmytro.kryvokhyzha@evobio.eu](mailto:dmytro.kryvokhyzh
 
 ## Social media
 
-You can also write me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, <a href="https://www.researchgate.net/profile/Dmytro_Kryvokhyzha" target="_blank">Researchgate</a>, and <a href="https://se.linkedin.com/in/evodify" target="_blank">LinkedIn</a>.
+You can also write me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, and <a href="https://linkedin.com/in/evodify" target="_blank">LinkedIn</a>.
 
 
 ## Address
