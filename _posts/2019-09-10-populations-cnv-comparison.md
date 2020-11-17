@@ -11,7 +11,7 @@ excerpt: "Guide on how to process Copy Number Variants generated with GATK 4 to 
 
 I showed how to efficiently [genotype Copy Number Variants with GATK and Snakemake](https://evodify.com/gatk-cnv-snakemake/). As a continuation of the Copy Number Variation topic, I will share how I compared the Copy Number Variation along the genome between three different populations. If you also analyze the population genomic data, I hope you will find this post useful.
 
-Although the [GATK Copy Number Variants (CNVs) calling pipeline]((https://evodify.com/gatk-cnv-snakemake/)) utilizes the population variation during the CNVs calling in the cohort mode, it produces separate VCF files for each sample. The CNVs in such VCF files look similar to this:
+Although the [GATK Copy Number Variants (CNVs) calling pipeline](https://evodify.com/gatk-cnv-snakemake/) utilizes the population variation during the CNVs calling in the cohort mode, it produces separate VCF files for each sample. The CNVs in such VCF files look similar to this:
 
 ```bash
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  sample1
