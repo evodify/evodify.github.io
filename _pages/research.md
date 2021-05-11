@@ -7,9 +7,7 @@ excerpt: "Research projects by Dmytro Kryvokhyzha: Diet adaptation in dogs, Allo
 
 ## Diet adaptation in dogs
 
-*Current postdoc project.*
-
-**2018 – present**
+**2018 – 2020**
 
 **Supervisor**: <a href="https://www.imbim.uu.se/forskargrupper/genetik-och-genomik/axelsson-erik/" target="_blank">Erik Axelsson</a>
 
