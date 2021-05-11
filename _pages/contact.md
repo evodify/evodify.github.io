@@ -13,17 +13,18 @@ Feel free to write me at [dmytro.kryvokhyzha@evobio.eu](mailto:dmytro.kryvokhyzh
 
 You can also write me on <a href="https://twitter.com/evodify" target="_blank">Twitter</a>, and <a href="https://linkedin.com/in/evodify" target="_blank">LinkedIn</a>.
 
-
 ## Address
 
 Dmytro Kryvokhyzha
 
-Department of Medical Biochemistry and Microbiology
+Bioinformatician, Head of the Bioinformatics Unit
 
-Uppsala biomedicinska centrum (BMC), D11:319d
+Faculty of Medicine / Dept Clinical Sciences
 
-Box 582
+Lund University Diabetes Centre, CRC, SUS Malmö
 
-751 23 Uppsala
+Jan Waldenströms gata 35
+
+SE-214 28 Malmö
 
 Sweden
