@@ -180,7 +180,7 @@ So, you need to be aware of this behavior of *AWK* when you have a mixture of da
 
 ## Where to learn AWK
 
-If you want to learn AWK, I recommend the course ["To awk or not to..."](https://sites.google.com/site/toawkornot/){:target="_blank"}. It was fantastic when I took it in 2017, and it has improved since then.
+If you want to learn AWK, I recommend the course ["To awk or not to..."](https://pmitev.github.io/to-awk-or-not/){:target="_blank"}. It was fantastic when I took it in 2017, and it has improved since then.
 
 I also often visit [this *AWK* page](http://www.grymoire.com/Unix/Awk.html){:target="_blank"}, for quick reference on the functions.
 
