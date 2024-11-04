@@ -1,21 +1,19 @@
 ---
 layout: page
 title: About
-excerpt: Dmytro Kryvokhyzha is a Bioinformatics and Genomics Scientist at Uppsala University. He works with next-generation sequencing data, and has a passion for Data Science.
+excerpt: Dmytro Kryvokhyzha is a Bioinformatics Scientist at Lund University Diabetes Center (LUDC). He is also the Head of the LUDC Bioinformatics Unit.
 ---
 
 <figure style="float: right; padding: 5px"><img alt="Portrait of Dmytro Kryvokhyzha" src="{{ site.baseurl }}/assets/pages/about_Dmytro-Kryvokhyzha.jpeg"></figure>
 
-I am driven by solving biological and medical problems with computational tools.
+I am passionate about addressing complex biological and medical challenges through computational solutions.
 
-I always wanted to become a biologist and I also learned programming as a hobby. When bioinformatics became a thing, I was lucky to combine my two interests and turn into a bioinformatician.
+My background combines a lifelong passion for biology and a hobbyist's interest in programming, which ultimately allowed me to thrive in the evolving field of bioinformatics.
 
-I have 8+ years of experience in the development of pipelines for next-generation sequencing data analyses. I program in [Python](https://www.python.org/){:target="_blank"}, [R](https://www.r-project.org/){:target="_blank"}, and [Bash](https://www.gnu.org/software/bash/){:target="_blank"}. To make my projects reproducible and scalable, I use [Git](https://git-scm.com/){:target="_blank"} for version control, [Snakemake](https://snakemake.readthedocs.io){:target="_blank"} for pipelines, [Conda](https://docs.conda.io/){:target="_blank"} for virtual environments, [R Markdown](https://rmarkdown.rstudio.com/){:target="_blank"} for explanation and communication.
+With over a decade of experience, I specialize in creating robust pipelines for large-scale bioinformatics analysis, utilizing R, Python, and Bash. I emphasize reproducibility and efficiency in every project by incorporating tools like Git for version control, Snakemake/Netflow for workflow management, Conda/Docker for environment control, and R Markdown for clear and effective communication.
 
-I am very interested in Big Data analyses. Genomic data is Big Data in a sense but current approaches to processing genomic data are lagging behind the industry standards. I believe that analyzing genomic data in Apache Spark is the future and such projects as [ADAM](https://github.com/bigdatagenomics/adam){:target="_blank"}, [Hail](https://hail.is/){:target="_blank"}, [VariantSpark](https://github.com/aehrc/VariantSpark){:target="_blank"} will advance genomic analyses.
+In my current role, I lead bioinformatics analysis development at the [Lund University Diabetes Center (LUDC)](https://www.ludc.lu.se/resources/ludc-bioinformatics-unit){:target="\_blank"}, where I am dedicated to advancing research in diabetes and related areas.
 
-Currently, I leverage my passion and expertise by leading the development of [bioinformatics analyses at Lund University Diabetes Center (LUDC)](https://www.ludc.lu.se/resources/ludc-bioinformatics-unit){:target="\_blank"}.
+For more information, you can explore my [Google Scholar](https://scholar.google.se/citations?user=99unghgAAAAJ&hl=en){:target="\_blank"}, [GitHub](https://github.com/evodify){:target="_blank"}, and [blog posts](/blog). 
 
-If you would like more information, please have a look at my [Google Scholar](https://scholar.google.se/citations?user=99unghgAAAAJ&hl=en){:target="\_blank"}, [GitHub](https://github.com/evodify){:target="_blank"}, and [blog-posts](/blog).
-
-You are welcome to connect with me on [Twitter](https://twitter.com/evodify){:target="_blank"}, [LinkedIn](https://linkedin.com/in/evodify){:target="_blank"}, and [reach me by email](mailto:dmytro.kryvokhyzha@evobio.eu).
+I'm also available on [LinkedIn](https://linkedin.com/in/evodify){:target="_blank"} or [by email](mailto:dmytro.kryvokhyzha@evobio.eu) — please feel free to connect!
